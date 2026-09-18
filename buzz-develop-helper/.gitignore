@@ -1,0 +1,10 @@
+config/local.json
+upstream/develop-helper
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
+!.env.example
+.venv/
+node_modules/
