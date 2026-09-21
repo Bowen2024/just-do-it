@@ -10,9 +10,9 @@ import re
 import shutil
 import subprocess
 import sys
-import tempfile
 
 from check_foundation import check, configured_directory, read_json
+from project_state import atomic_replace, exclusive_lock, project_state_lock
 
 VERSION = "0.2.0"
 STEPS = ("local_files", "local_git", "github_repository", "remote_link",
@@ -33,6 +33,8 @@ node_modules/
 storage/
 Storage/
 .project-init.lock
+.project-state.lock
+.project-state-transaction.json
 """
 
 
@@ -172,55 +174,36 @@ def inspect(foundation, project_id):
 
 
 def update_metadata(target, data):
-    # Called only under the project-specific exclusive lock; no shared temp filename.
-    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=target,
-                                     prefix=".project-meta-", delete=False) as stream:
-        temporary = Path(stream.name)
-        try:
-            stream.write(json_text(data))
-            stream.flush()
-            os.fsync(stream.fileno())
-        except BaseException:
-            temporary.unlink(missing_ok=True)
-            raise
-    try:
-        os.replace(temporary, target / "project.json")
-    finally:
-        temporary.unlink(missing_ok=True)
+    # Called only while holding the shared project-state lock.
+    atomic_replace(target / "project.json", json_text(data).encode("utf-8"))
 
 
 def init_git(foundation, project_id):
     _, target = context(foundation, project_id)
     load_project(target, project_id)
     lock = target / ".project-init.lock"
-    try:
-        descriptor = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-    except FileExistsError as error:
-        raise ValueError("初始化锁已存在；核对在途操作，不自动删除锁") from error
-    os.close(descriptor)
-    try:
-        data = load_project(target, project_id)
-        repo = repository_root(target)
-        git_dir = target / ".git"
-        if git_dir.is_symlink() or (git_dir.exists() and not git_dir.is_dir()):
-            raise ValueError("不接管链接或 worktree 形式的 Git 元数据")
-        if repo is not None and repo != target:
-            raise ValueError("实际 Git 根不匹配")
-        if repo is None:
-            if git_dir.exists():
-                raise ValueError("存在不完整 Git 元数据；先人工核对，不重新初始化")
-            result = git(target, "init", "--template=", "-b", "main")
-            if result.returncode != 0:
-                data["initialization"]["local_git"] = {
-                    "status": "failed", "detail": "Git 初始化失败；保留已有内容，核对后重试"}
-                update_metadata(target, data)
-                raise ValueError("Git 初始化失败；未提交或推送")
-        if repository_root(target) != target:
-            raise ValueError("Git 初始化后根目录核对失败")
-        data["initialization"]["local_git"] = {"status": "succeeded", "detail": ".git"}
-        update_metadata(target, data)
-    finally:
-        lock.unlink()
+    with project_state_lock(target, "project-init-git"):
+        with exclusive_lock(lock, "初始化锁已存在；核对在途操作，不自动删除锁"):
+            data = load_project(target, project_id)
+            repo = repository_root(target)
+            git_dir = target / ".git"
+            if git_dir.is_symlink() or (git_dir.exists() and not git_dir.is_dir()):
+                raise ValueError("不接管链接或 worktree 形式的 Git 元数据")
+            if repo is not None and repo != target:
+                raise ValueError("实际 Git 根不匹配")
+            if repo is None:
+                if git_dir.exists():
+                    raise ValueError("存在不完整 Git 元数据；先人工核对，不重新初始化")
+                result = git(target, "init", "--template=", "-b", "main")
+                if result.returncode != 0:
+                    data["initialization"]["local_git"] = {
+                        "status": "failed", "detail": "Git 初始化失败；保留已有内容，核对后重试"}
+                    update_metadata(target, data)
+                    raise ValueError("Git 初始化失败；未提交或推送")
+            if repository_root(target) != target:
+                raise ValueError("Git 初始化后根目录核对失败")
+            data["initialization"]["local_git"] = {"status": "succeeded", "detail": ".git"}
+            update_metadata(target, data)
     return inspect(foundation, project_id)
 
 

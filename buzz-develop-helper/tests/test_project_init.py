@@ -78,6 +78,8 @@ class ProjectTests(unittest.TestCase):
         self.assertEqual(project.git(target, "diff", "--cached", "--name-only").stdout, "")
         for path in ("materials/customer.txt", ".env", "secret.key", "node_modules/a.js"):
             self.assertEqual(project.git(target, "check-ignore", path).returncode, 0)
+        for path in (".project-state.lock", ".project-state-transaction.json"):
+            self.assertEqual(project.git(target, "check-ignore", path).returncode, 0)
 
     def test_git_failure_is_recorded_and_retry_preserves_readme(self):
         self.create()

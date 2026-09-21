@@ -9,6 +9,7 @@ import sys
 import tempfile
 
 from project_init import context as project_context, load_project
+from project_state import exclusive_lock, project_state_lock
 
 LIMIT = 128 * 1024
 SOURCE_DOCUMENTS = ("project.json", "README.md")
@@ -71,50 +72,46 @@ def save_draft(foundation, project_id, body, expected):
     load_project(root, project_id)
     target = safe_path(root, "docs/requirements.md")
     lock = root / ".requirements.lock"
-    try:
-        fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-    except FileExistsError as error:
-        raise ValueError("需求写入锁已存在；先核对在途操作") from error
-    os.close(fd)
-    temporary = None
-    try:
-        previous = read_document(root, "docs/requirements.md")
-        if previous["sha256"] != expected:
-            raise ValueError("需求版本冲突；重新读取，不覆盖新版本")
-        sources = {name: read_document(root, name)["sha256"] for name in SOURCE_DOCUMENTS}
-        validate_source_digests(body, sources)
-        rendered = "---\nstatus: Draft\napproval_verified: false\n---\n\n" + body.strip() + "\n"
-        raw = rendered.encode("utf-8")
-        if digest(raw) == previous["sha256"]:
-            return {"path": str(target), "sha256": digest(raw), "status": "Draft", "changed": False,
-                    "source_sha256": sources}
-        docs = safe_path(root, "docs")
-        docs.mkdir(exist_ok=True)
-        if previous["content"] is not None:
-            history = safe_path(root, "docs/requirements-history")
-            history.mkdir(exist_ok=True)
-            archive = safe_path(root, f"docs/requirements-history/{previous['sha256']}.md")
-            if archive.exists():
-                archived = read_document(root, archive.relative_to(root).as_posix())
-                if archived["sha256"] != previous["sha256"]:
-                    raise ValueError("历史版本冲突")
-            else:
-                with archive.open("x", encoding="utf-8") as stream:
-                    stream.write(previous["content"])
-        with tempfile.NamedTemporaryFile(mode="wb", dir=docs, prefix=".requirements-", delete=False) as stream:
-            temporary = Path(stream.name)
-            stream.write(raw)
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temporary, target)
-        temporary = None
-        return {"path": str(target), "sha256": digest(raw), "status": "Draft", "changed": True,
-                "approval_verified": False, "index_update_required": True,
-                "source_sha256": sources}
-    finally:
-        if temporary is not None:
-            temporary.unlink(missing_ok=True)
-        lock.unlink()
+    with project_state_lock(root, "requirements-save"):
+        with exclusive_lock(lock, "需求写入锁已存在；先核对在途操作"):
+            temporary = None
+            try:
+                previous = read_document(root, "docs/requirements.md")
+                if previous["sha256"] != expected:
+                    raise ValueError("需求版本冲突；重新读取，不覆盖新版本")
+                sources = {name: read_document(root, name)["sha256"] for name in SOURCE_DOCUMENTS}
+                validate_source_digests(body, sources)
+                rendered = "---\nstatus: Draft\napproval_verified: false\n---\n\n" + body.strip() + "\n"
+                raw = rendered.encode("utf-8")
+                if digest(raw) == previous["sha256"]:
+                    return {"path": str(target), "sha256": digest(raw), "status": "Draft", "changed": False,
+                            "source_sha256": sources}
+                docs = safe_path(root, "docs")
+                docs.mkdir(exist_ok=True)
+                if previous["content"] is not None:
+                    history = safe_path(root, "docs/requirements-history")
+                    history.mkdir(exist_ok=True)
+                    archive = safe_path(root, f"docs/requirements-history/{previous['sha256']}.md")
+                    if archive.exists():
+                        archived = read_document(root, archive.relative_to(root).as_posix())
+                        if archived["sha256"] != previous["sha256"]:
+                            raise ValueError("历史版本冲突")
+                    else:
+                        with archive.open("x", encoding="utf-8") as stream:
+                            stream.write(previous["content"])
+                with tempfile.NamedTemporaryFile(mode="wb", dir=docs, prefix=".requirements-", delete=False) as stream:
+                    temporary = Path(stream.name)
+                    stream.write(raw)
+                    stream.flush()
+                    os.fsync(stream.fileno())
+                os.replace(temporary, target)
+                temporary = None
+                return {"path": str(target), "sha256": digest(raw), "status": "Draft", "changed": True,
+                        "approval_verified": False, "index_update_required": True,
+                        "source_sha256": sources}
+            finally:
+                if temporary is not None:
+                    temporary.unlink(missing_ok=True)
 
 
 def main():

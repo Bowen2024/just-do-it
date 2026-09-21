@@ -1,6 +1,6 @@
 # Buzz × Develop Helper 融合基础
 
-阶段：融合基础、本地项目初始化及需求草案工具已实现并通过 39 项测试。单元 02 需求能力已完成范围内建设与 Buzz 回归：角色自动管理 A/R 并隐藏内部保存参数，保存工具校验来源 SHA，`just-start` 已验证三版 Draft、历史保留和文件恢复。当前 v0.3 仍未正式批准；项目成果索引、正式确认、跨角色共享与运行时全局权限属于后续建设。
+阶段：融合基础、本地项目初始化、需求草案工具、成果索引、当前会话确认、固定快照、交接/回执内核，以及宿主事件信封验签与角色工具裁剪已实现并通过 80 项测试。单元 02 需求能力已完成范围内建设与 Buzz 回归；单元 05 的融合层可信上下文接收端已实现。Buzz ACP 源码已签发逐事件信封并挂载独立协作 MCP，但当前安装的 Buzz 与 first-mate 尚未启用这些字段。真实业务确认未接入，`just-start` v0.3 仍未正式批准且业务索引未修改。
 
 ## 目录
 
@@ -10,10 +10,19 @@
 - `scripts/check_foundation.py`：Python 标准库只读检查工具，无网络、无上游脚本执行、无文件写入。
 - `scripts/project_init.py`：本地项目预览、创建、检查和独立 Git 初始化；写入必须显式指定 `--apply`，不提交、不推送、不调用 GitHub API。
 - `scripts/requirements.py`：需求背景读取、带摘要校验的 Draft 保存及旧稿保留，不执行模型调用或正式确认。
+- `scripts/artifacts.py`：成果索引完整性核对与登记预览；无 `--apply`，不写项目、不读取确认事件、不启动下游。
+- `scripts/project_state.py`：需求保存、Git 初始化元数据和成果登记共用的项目状态锁、原子文件替换与持久事务日志辅助。
+- `scripts/main_artifacts.py`：无 CLI 的 Main-only 成果登记与恢复内核；校验项目授权 capability、预览摘要前提和中断日志，不确认、不交接、不执行 Git。
+- `scripts/collaboration.py`：只读核对确认记录、固定快照、registry 引用和交接状态，不发送或启动下游。
+- `scripts/main_collaboration.py`：无 CLI 的当前会话确认、快照、交接准备、发送依据、接收回执与事务恢复内核。
+- `scripts/trusted_context.py`：验证 Buzz 宿主签发的短期事件信封，并把 live turn 固定为不可变上下文；不提供生产签名入口。
+- `scripts/host_tools.py`：按宿主角色裁剪工具面，把可信上下文接到现有登记、确认、交接和回执内核；身份字段不来自工具请求。
+- `scripts/collab_invoke.py`：仅由 `buzz-acp collab-mcp` 调用；从宿主 turn 文件和进程私有 env 验签后分派工具，不接受模型传入的身份字段。
 - `adapters/`、`capabilities/`：接入与能力边界说明；用户已据此人工创建需求角色，但文件本身不负责自动安装或证明完整运行通过。
 
 需求 Agent 接入见 [人工配置卡](adapters/requirements-buzz.md)，权威方法见 [需求角色规则](capabilities/requirements.md)。用户选择复用 Buzz 现有设置；已观察 Honey 为 Codex + gpt-5.6-sol，配置卡不修改原开发角色，不复制凭据。完整设计及实测边界见 `../fusion-design/02-需求能力.md`。
-- `tests/`：在临时目录中验证正常、断链、漂移和配置异常。
+成果登记 schema 与命令见 [成果索引规则](capabilities/artifact-registry.md)，确认和交接状态见 [确认交接规则](capabilities/confirmation-handoff.md)，Main 身份及依据边界见 [接入说明](adapters/main-artifact-registry.md)，信封格式和 Buzz 最小补丁见 [宿主上下文接入](adapters/buzz-host-context.md)。完整设计见 `../fusion-design/05-项目成果索引与确认交接.md`。
+- `tests/`：在临时目录中验证正常、断链、漂移、配置异常、成果登记、并发冲突和中断恢复；不修改真实业务项目。
 
 ## 检查
 
@@ -22,9 +31,17 @@
 ```sh
 python3 -B scripts/check_foundation.py check
 python3 -B -m unittest discover -s tests -v
+python3 -B scripts/artifacts.py inspect <PROJECT_ID>
+python3 -B scripts/collaboration.py <PROJECT_ID>
 ```
 
 检查通过只表示路径、项目父目录和锁定内容匹配，不表示 Agent 已共享背景、Git 已同步或上游只读沙箱已部署。工具失败返回非零状态，不会修复链接或刷新锁文件。
+
+成果 `inspect` 和 `preview-register` 同样只读。预览中的 Main 身份与写入时间是必填占位，不能保存为正式登记。写入/恢复内核没有 CLI，只接受绑定 principal、authority 和项目授权的 Main capability。融合层已经能从短期宿主签名信封验签并签发内部 capability，不能依靠 CLI `--role`、环境变量或消息自述；Buzz ACP 源码已能签发该信封，当前安装的 first-mate 实例尚未启用。登记不会验证确认事件，也不会改变 Draft、交接或启动下游。
+
+`project.json` 与 README 写入前同时校验预览取得的 SHA-256，并在公共项目锁内重新生成变更。两文件之间的持久事务日志支持中断后前滚；恢复只处理仍与事务前/后摘要匹配的文件，遇到外部编辑即停止并保留日志。需求保存与 Git 初始化元数据更新也使用同一公共锁，未知锁不会自动删除。该内核限制的是工具调用面；拥有通用 shell 或编辑权限的 Agent 仍需由宿主沙箱另行限制。
+
+当前会话确认把用户身份、会话/消息、成果版本、内容 SHA 和允许用途绑定到 `docs/decisions.md`，并创建内容寻址快照。单文件确认后 registry 版本改指向固定快照，原工作文件可继续形成下一版；确认不会改写 Draft。交接依次记录 `prepared / sent / received-verified`，每一步都需要相应运行时依据；所有返回都保持 `downstream_started=false`。
 
 `snapshot <目录>` 子命令只输出指纹 JSON，用于经审查建立基线。它不写锁文件。正常运行不自动接受新指纹；升级需审查上游差异后单独更新基线。
 
