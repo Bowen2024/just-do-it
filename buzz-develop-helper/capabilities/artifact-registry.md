@@ -1,6 +1,6 @@
 # 项目成果索引与登记预览
 
-状态：首版 schema、只读核对、登记预览、Main-only 一致性写入内核，以及宿主验签上下文到 capability 的融合层适配已实现；当前会话确认与交接内核见 `confirmation-handoff.md`。下游启动未实现；Buzz Rust 宿主尚未产生逐事件上下文。
+状态：首版 schema、只读核对、登记预览、Main-only 一致性写入内核，以及宿主验签上下文到 capability 的融合层适配已实现；当前会话确认与交接内核见 `confirmation-handoff.md`。下游启动未实现。Buzz Rust 宿主已产生协作上下文，但第一轮运行验收发现混合批次只按最后事件建立 claim，尚不满足逐事件可信边界。
 
 ## 职责边界
 
@@ -126,4 +126,4 @@ python3 -B scripts/artifacts.py preview-register <PROJECT_ID> \
 - 写入完成后重新运行 registry/README 一致性核对，成功才删除事务日志。重复应用同一登记返回 `unchanged`，不产生重复版本。
 - 登记不会改变 Draft、创建确认、生成交接、启动下游或执行 Git；返回值明确标记 `approval_changed=false`、`handoff_started=false`。后续确认必须单独调用 `main_collaboration.py` 的宿主 API。
 
-该 capability 是工具调用边界，不是操作系统安全边界。生产适配通过 `authorization_from_host_context` 使用已验签上下文；`_issue_runtime_main` 只保留为测试钩子。Buzz/Codex 尚未产生真实逐事件信封。拥有通用 shell 或文件编辑权限的 Agent 仍可绕过本模块，因此上线前还需配置运行时工具暴露与文件权限并做拒绝验证。
+该 capability 是工具调用边界，不是操作系统安全边界。生产适配通过 `authorization_from_host_context` 使用已验签上下文；`_issue_runtime_main` 只保留为测试钩子。Buzz/Codex 已产生真实协作信封，但当前混合批次只验证最后事件，必须修复并复验后才能称为逐事件可信。拥有通用 shell 或文件编辑权限的 Agent 仍可绕过本模块，因此上线前还需配置运行时工具暴露与文件权限并做拒绝验证。

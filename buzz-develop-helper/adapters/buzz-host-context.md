@@ -1,6 +1,6 @@
 # Buzz 宿主可信事件上下文接入
 
-状态：融合层的验签、调用边界、角色工具裁剪及现有 capability 接入已经实现并通过临时夹具。Buzz ACP 源码已在 session 解析后签发逐事件信封，并挂载不含私钥的独立协作 MCP；Desktop 记录已有角色/项目/helper 字段且禁止用户 env 覆盖。当前运行的 Buzz 安装包和 first-mate 实例尚未启用这些字段。
+状态：融合层的验签、调用边界、角色工具裁剪及现有 capability 接入已经实现并通过临时夹具。Buzz ACP 生产实例已在 session 解析后签发协作信封，并挂载不含私钥的独立协作 MCP；Desktop 记录已有角色/项目/helper 字段且禁止用户 env 覆盖。当前 Buzz 已重启并加载新 ACP 二进制，first-mate 已绑定为 `just-start` 的 Main。运行验收已证明保留字段与角色工具面拒绝，但发现信封只依据批次最后事件、prompt 却包含整个批次的隔离缺口，不能再称为严格逐事件签发。
 
 ## 1. 信任边界
 
@@ -46,7 +46,7 @@ HMAC 只是首版进程间认证格式，不代替 Buzz 原事件的 Schnorr 签
 - 接收回执：调用 Agent principal 必须等于交接指定接收者；实际输入版本仍由内核逐项核对。
 - 所有返回继续保持 `downstream_started=false`；任何记录都不创建或启动角色。
 
-## 4. Buzz 当前缺口与最小补丁
+## 4. Buzz 宿主实现与当前运行缺口
 
 源码已有的可信材料位于：
 
@@ -58,12 +58,15 @@ HMAC 只是首版进程间认证格式，不代替 Buzz 原事件的 Schnorr 签
 
 最小 Rust 补丁进度：
 
-1. 已完成：`run_prompt_task` 在 session 解析后从已接纳 `nostr::Event` 签发信封；顶层事件以自身 ID 为 root。
-2. 已完成：Desktop `collaboration_role` / `managed_project_ids` / `collab_helper_root` 进入 spawn snapshot 和重启差异。不从 Persona 名称推断。
+1. 部分完成：`run_prompt_task` 在 session 解析后从已接纳 `nostr::Event` 签发信封；顶层事件以自身 ID 为 root。但 `envelope_for_batch` 当前只取 `events.last()` 建立 claim，而模型 prompt 会渲染完整 batch。混合合法/非法事件可由最后一条合法事件为整批提供工具上下文，必须修复后才能满足逐事件边界。
+2. 已完成：Desktop `collaboration_role` / `managed_project_ids` / `collab_helper_root` 进入 spawn snapshot 和重启差异。角色存在时允许 1 个或多个规范项目 ID，helper root 仍必填。不从 Persona 名称推断，不取名单第一项签发。
 3. 部分完成：指定接收者来自单一其他 `p` tag；零个或多个 mention 时为 null，不猜测。专用 UI/CLI 选择仍待后续。
 4. 已完成：host-owned broker 按 `(agent principal, ACP session)` 更新；heartbeat 清除 turn 文件，避免确认工具沿用旧事件。
 5. 已完成：HMAC 只进入 `buzz-acp collab-mcp`。`buzz-dev-mcp` 仍可有 Agent 私钥，但不持有 HMAC。不要把 `BUZZ_PRIVATE_KEY` 注入 dsh，也不要用 `buzz-dev-mcp` 代替 Main 工具。
 6. 已完成：工具 ceiling 由信封强制；`reserved_env_keys` 拒绝全部 `BUZZ_COLLAB_*` 用户覆盖。角色工具在 sidecar 中全部注册，调用时按信封拒绝越权。
-7. 已完成 ACP seam tests（HMAC 向量、伪造角色、工作者 ceiling、会话复用替换、缺唯一项目拒绝、collab MCP 不含私钥）。Desktop 全量测试本机因 cmake/opus 未跑通。
+7. 已完成 ACP seam tests（HMAC 向量、伪造角色、工作者 ceiling、会话复用替换、按线程选定允许名单内项目、名单第一项不自动签发、同线程换项目/名单外/多槽位拒绝、签发失败清 turn、collab MCP 不含私钥）。Desktop `collab_host` 3 项通过；Desktop 全量应用测试仍未作为本轮范围。
+8. 已完成：ACP 按 NIP-10 root 绑定本轮 `project_id`。只认独立行 `project_id=…` / `project_id:…` / `project_id：…`，ID 格式与融合层一致。回复沿用根绑定；无声明、进程未见根事件时失败关闭。
 
-在这些点进入当前安装包、first-mate 绑定唯一项目并重启之前，不能称 Buzz 真实链路已经接通。first-mate 用 `buzz messages send` 失败是预期的：频道回复由 ACP 自己签名，不经过 agent shell。
+当前生产记录：Buzz 已重启并加载新 ACP 二进制；first-mate 已绑定 `collaboration_role=main`、`managed_project_ids=[just-start]`、指向融合层的 `collab_helper_root` 和 `agent_command=/opt/homebrew/bin/dsh`。未向 dsh 注入 `BUZZ_PRIVATE_KEY`，也未把 `mcp_command` 改成 `buzz-dev-mcp`。编辑页尚未画出这些宿主字段；频道回复由 ACP 自己签名，first-mate 使用 `buzz messages send` 失败属于预期行为。
+
+2026-09-21 第一轮运行验收结果：合法 `artifact.inspect` / `collaboration.inspect` 成功；Main 调用 `requirements.context` 被拒绝；请求中伪造 `event_id` 与 `recipient_principal_id` 均被 `-32602` 拒绝。错误项目、多个项目和线程内换项目没有得到有效拒绝证据：三条事件与随后合法事件进入同一模型 turn，直接暴露了上述批次隔离缺口。下一步先修复批次边界、增加混合批次测试并重启复验；未获得用户对业务写入的另行明确授权前，不对 `just-start` 执行成果登记、当前会话确认或交接。

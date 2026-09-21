@@ -1,6 +1,6 @@
 # Main 成果登记接入边界
 
-状态：身份与确认依据读取方式已收敛为接入契约；融合层已有宿主事件信封验签、角色工具裁剪，并已连接 Main-only 登记、当前会话确认、固定快照、交接和接收回执内核。Buzz ACP 源码已能签发逐事件信封；当前安装的应用和 first-mate 实例尚未绑定 `role=main` 与唯一项目。没有 provider-read 连接器。信封格式、工具面及宿主补丁见 `buzz-host-context.md`。
+状态：身份与确认依据读取方式已收敛为接入契约；融合层已有宿主事件信封验签、角色工具裁剪，并已连接 Main-only 登记、当前会话确认、固定快照、交接和接收回执内核。first-mate 已绑定 `collaboration_role=main` 与 `just-start` 项目允许名单。合法只读调用、保留字段和角色工具面拒绝已有运行证据；但 Buzz ACP 当前只按批次最后事件建立 claim，混合批次项目/线程隔离未通过验收。仍没有 provider-read 连接器。信封格式、工具面及宿主补丁见 `buzz-host-context.md`。
 
 ## Main 身份
 
