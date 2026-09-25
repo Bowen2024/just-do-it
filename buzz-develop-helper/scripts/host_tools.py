@@ -14,6 +14,7 @@ import collaboration
 import main_artifacts
 import main_collaboration
 import requirements
+import solution
 import trusted_context
 from project_init import context as project_context
 
@@ -21,6 +22,11 @@ from project_init import context as project_context
 IMPLEMENTED_TOOLS = frozenset({
     "requirements.context",
     "requirements.save-draft",
+    "requirements.inspect-prd",
+    "requirements.save-prd-draft",
+    "solution.context",
+    "solution.inspect",
+    "solution.save-tech-spec-draft",
     "artifact.inspect",
     "artifact.preview-register",
     "artifact.register",
@@ -67,6 +73,11 @@ class HostToolSurface:
         dispatch = {
             "requirements.context": self._requirements_context,
             "requirements.save-draft": self._requirements_save,
+            "requirements.inspect-prd": self._requirements_inspect_prd,
+            "requirements.save-prd-draft": self._requirements_save_prd,
+            "solution.context": self._solution_context,
+            "solution.inspect": self._solution_inspect,
+            "solution.save-tech-spec-draft": self._solution_save,
             "artifact.inspect": self._artifact_inspect,
             "artifact.preview-register": self._artifact_preview,
             "artifact.register": self._artifact_register,
@@ -89,6 +100,43 @@ class HostToolSurface:
             self.context.project_id,
             args.get("content"),
             args.get("expected_sha256"),
+        )
+
+    def _requirements_inspect_prd(self, arguments):
+        _arguments(arguments, ())
+        return requirements.inspect_prd(self.foundation, self.context.project_id)
+
+    def _requirements_save_prd(self, arguments):
+        args = _arguments(arguments, (
+            "content", "expected_prd_sha256", "expected_requirements_sha256",
+        ))
+        return requirements.save_prd_draft(
+            self.foundation,
+            self.context.project_id,
+            args.get("content"),
+            args.get("expected_prd_sha256"),
+            args.get("expected_requirements_sha256"),
+        )
+
+    def _solution_context(self, arguments):
+        _arguments(arguments, ())
+        return solution.context(self.foundation, self.context.project_id)
+
+    def _solution_inspect(self, arguments):
+        _arguments(arguments, ())
+        return solution.inspect(self.foundation, self.context.project_id)
+
+    def _solution_save(self, arguments):
+        args = _arguments(arguments, (
+            "content", "expected_tech_sha256", "expected_prd_sha256", "profile",
+        ))
+        return solution.save_tech_spec_draft(
+            self.foundation,
+            self.context.project_id,
+            args.get("content"),
+            args.get("expected_tech_sha256"),
+            args.get("expected_prd_sha256"),
+            args.get("profile"),
         )
 
     def _artifact_inspect(self, arguments):

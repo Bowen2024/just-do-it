@@ -1,6 +1,6 @@
 # Buzz × Develop Helper 融合基础
 
-阶段：融合基础、本地项目初始化、需求草案工具、成果索引、当前会话确认、固定快照、交接/回执内核，以及宿主事件信封验签与角色工具裁剪已实现并通过 82 项测试。单元 02 需求能力已完成范围内建设与 Buzz 回归；单元 05 的融合层可信上下文接收端已实现。Buzz 当前生产实例已加载协作信封和独立协作 MCP，first-mate 已绑定为 `just-start` 的 Main。混合批次隔离缺口已在 Buzz ACP 修复：协作 turn 逐事件排队、签发端拒绝多事件/取消事件批次、上下文拒绝立即隔离。完整 `buzz-acp` 回归和错误项目/多项目/线程换项目三组真实复验均已通过。`just-start` v0.3 仍未正式批准且业务索引未修改。
+阶段：融合基础、本地项目初始化、轻量需求、A 阶段 PRD、七层方案、成果索引、当前会话确认、固定快照、交接/回执内核，以及宿主事件信封验签与角色工具裁剪已实现；新单元设计门禁检查器已加入，当前融合层全量 116 项测试通过。A 阶段 PRD 和方案新工具已进入 Buzz ACP/MCP 源码，release 构建已通过；solution-mate 已完成角色绑定、线程项目重启恢复与宿主 Channel 回复主路径验收，需求 Agent 新工具和方案 Draft 工具链的真实验收仍未完成。Buzz 当前生产实例中 first-mate 仍是 `just-start` 的 Main。`just-start` v0.3 仍未正式批准，未生成 PRD，业务索引也未修改。
 
 ## 目录
 
@@ -8,8 +8,11 @@
 - `upstream/develop-helper`：本地软链，只作显式引用，不自动注册上游入口。
 - `upstream-lock.json`：本次上游文件内容及链接指纹。记录版本漂移，不提供不可变快照或安全签名。
 - `scripts/check_foundation.py`：Python 标准库只读检查工具，无网络、无上游脚本执行、无文件写入。
+- `scripts/check_design_contract.py`：进入实现前检查单元设计是否包含上游原文、继承/适配/新增边界、确认状态和来源追踪表；只检查结构，不替代语义评审或用户确认。
 - `scripts/project_init.py`：本地项目预览、创建、检查和独立 Git 初始化；写入必须显式指定 `--apply`，不提交、不推送、不调用 GitHub API。
-- `scripts/requirements.py`：需求背景读取、带摘要校验的 Draft 保存及旧稿保留，不执行模型调用或正式确认。
+- `scripts/requirements.py`：需求背景读取、轻量 Draft 保存、完整 PRD Draft 保存/历史与结构检查；不执行正式确认。
+- `scripts/solution.py`：方案上下文、PRD 用途确认与固定 SHA 核验、`tech-spec` Draft 保存/历史，以及 REQ/AC 引用和覆盖表结构检查；不验证语义正确或真实运行。
+- 方案契约与模板：`capabilities/solution.md`、`capabilities/solution-tech-spec-template.md`；本地工具存在不表示 Buzz 角色已经可用。
 - `scripts/artifacts.py`：成果索引完整性核对与登记预览；无 `--apply`，不写项目、不读取确认事件、不启动下游。
 - `scripts/project_state.py`：需求保存、Git 初始化元数据和成果登记共用的项目状态锁、原子文件替换与持久事务日志辅助。
 - `scripts/main_artifacts.py`：无 CLI 的 Main-only 成果登记与恢复内核；校验项目授权 capability、预览摘要前提和中断日志，不确认、不交接、不执行 Git。
@@ -21,6 +24,7 @@
 - `adapters/`、`capabilities/`：接入与能力边界说明；用户已据此人工创建需求角色，但文件本身不负责自动安装或证明完整运行通过。
 
 需求 Agent 接入见 [人工配置卡](adapters/requirements-buzz.md)，权威方法见 [需求角色规则](capabilities/requirements.md)。用户选择复用 Buzz 现有设置；已观察 Honey 为 Codex + gpt-5.6-sol，配置卡不修改原开发角色，不复制凭据。完整设计及实测边界见 `../fusion-design/02-需求能力.md`。
+方案能力的当前规则见 [方案角色契约](capabilities/solution.md)、[统一模板](capabilities/solution-tech-spec-template.md)和 [Buzz 接入边界](adapters/solution-buzz.md)。本地受控工具、宿主接收端与 Buzz MCP 源码注册已实现；solution-mate 已验证角色绑定、线程恢复与普通回复发布，但方案 Draft 保存、恢复、冲突和工具裁剪仍待真实运行验收，因此尚不能称方案能力生产可用；完整设计见 `../fusion-design/03-方案能力.md`。
 成果登记 schema 与命令见 [成果索引规则](capabilities/artifact-registry.md)，确认和交接状态见 [确认交接规则](capabilities/confirmation-handoff.md)，Main 身份及依据边界见 [接入说明](adapters/main-artifact-registry.md)，信封格式和 Buzz 最小补丁见 [宿主上下文接入](adapters/buzz-host-context.md)。完整设计见 `../fusion-design/05-项目成果索引与确认交接.md`。
 - `tests/`：在临时目录中验证正常、断链、漂移、配置异常、成果登记、并发冲突和中断恢复；不修改真实业务项目。
 
@@ -30,9 +34,12 @@
 
 ```sh
 python3 -B scripts/check_foundation.py check
+python3 -B scripts/check_design_contract.py check ../fusion-design/03-方案能力.md
 python3 -B -m unittest discover -s tests -v
 python3 -B scripts/artifacts.py inspect <PROJECT_ID>
 python3 -B scripts/collaboration.py <PROJECT_ID>
+python3 -B scripts/requirements.py inspect-prd <PROJECT_ID>
+python3 -B scripts/solution.py inspect <PROJECT_ID>
 ```
 
 检查通过只表示路径、项目父目录和锁定内容匹配，不表示 Agent 已共享背景、Git 已同步或上游只读沙箱已部署。工具失败返回非零状态，不会修复链接或刷新锁文件。

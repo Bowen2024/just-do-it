@@ -1,6 +1,6 @@
 # Buzz 需求角色接入卡（人工配置）
 
-状态：单元 02 范围内完成。通用角色与本地文档工具已准备，`just-start` 已验证自主 A/R、用户最小输入、三版 Draft 保存、历史保留、来源 SHA 校验和文件恢复，39 项自动化测试通过。项目索引、正式确认、跨角色交接和独立实例日志属于后续建设或验证。
+状态：原有轻量需求角色已在 `just-start` 完成范围内验收。新增的 A 阶段 PRD 模板、`requirements.inspect-prd` 和 `requirements.save-prd-draft` 已在融合层及 Buzz ACP/MCP 源码实现，但尚未重启生产需求 Agent 并做真实验收。不把旧版运行证据当成新 PRD 能力已上线。
 
 本文件是人工配置与测试说明，不是 Buzz 中已经自动安装的 Agent。`capabilities/requirements.md` 是需求角色的核心规则；只有用户将薄入口配置到角色、运行环境实际能读取该路径后才会生效。两者都不属于 Developer 规则，不能用来配置 Honey 或其他开发角色。
 
@@ -72,7 +72,9 @@ project_id：just-start
 
 在融合层目录运行 `python3 -B scripts/requirements.py context <PROJECT_ID>` 可只读检查。保存时以 `save-draft <PROJECT_ID> --expected-sha <实际摘要或首次 missing> --apply` 调用，正文通过标准输入传入。`PROJECT_ID` 已经是命令参数槽位；工具从 `config/local.json` 的 `projects_root` 解析真实目录，无需在 Persona 里保存绝对项目路径。
 
-草案会保留上一版到 docs/requirements-history，重试须先核对新摘要。工具不修改 project.json/README 索引、不认证确认消息、不发送 Buzz 消息；Main 尚未接入时由用户或当前主会话核对交接与索引。
+草案会保留上一版到 docs/requirements-history，重试须先核对新摘要。工具不修改 project.json/README 索引、不认证确认消息、不发送 Buzz 消息；索引和用途确认由 Main 通过独立工具执行。
+
+用户明确要进入方案时，角色使用 `capabilities/requirements-prd-template.md` 整理 `docs/PRD.md`，内部调用 `save-prd-draft` 并在写后调用 `inspect-prd`。PRD 结构通过仍不等于用户确认；须将该 SHA 作为 requirements 类成果交给 Main 登记，并以用途“形成技术方案”建立当前会话确认。
 
 ## 项目槽位的实现边界
 

@@ -40,13 +40,20 @@ MAIN_TOOLS = frozenset({
 REQUIREMENTS_TOOLS = frozenset({
     "requirements.context",
     "requirements.save-draft",
+    "requirements.inspect-prd",
+    "requirements.save-prd-draft",
+})
+SOLUTION_TOOLS = frozenset({
+    "solution.context",
+    "solution.inspect",
+    "solution.save-tech-spec-draft",
 })
 RECIPIENT_TOOLS = frozenset({"handoff.verify-receipt"})
 
 ROLE_TOOL_CEILINGS = {
     "main": READ_TOOLS | MAIN_TOOLS,
     "requirements": READ_TOOLS | REQUIREMENTS_TOOLS,
-    "solution": READ_TOOLS,
+    "solution": READ_TOOLS | SOLUTION_TOOLS,
     "ui": READ_TOOLS,
     "recipient": READ_TOOLS | RECIPIENT_TOOLS,
 }

@@ -26,7 +26,48 @@ class HostToolTests(unittest.TestCase):
     def project(self):
         project_init.create(self.app, "demo", "宿主接入试点", "验证可信上下文")
         root = (self.projects / "demo").resolve()
-        requirements.save_draft(self.app, "demo", "# 需求 v0.1\n\n保持草案。", "missing")
+        lightweight = requirements.save_draft(
+            self.app, "demo", "# 需求 v0.1\n\n保持草案。", "missing"
+        )
+        requirements.save_prd_draft(
+            self.app, "demo", """# PRD
+
+## 用户结果与成功指标
+可验证结果。
+## 具体案例
+输入到结果与失败恢复。
+## 范围与边界
+只做核心。
+## REQ 与 AC
+## REQ-001 能力
+### AC-001 成功
+- 结果类型：成功
+- 前置条件：有效输入
+- 操作：提交
+- 可观察结果：成功
+- 验证方式：检查
+### AC-002 失败
+- 结果类型：失败
+- 前置条件：无效输入
+- 操作：提交
+- 可观察结果：可恢复错误
+- 验证方式：检查
+## 业务流程图
+```mermaid
+flowchart TD
+A --> B
+```
+## 业务时序图
+```mermaid
+sequenceDiagram
+U->>S: 提交
+```
+## 事实、假设与待决事项
+无。
+## 变更摘要
+初版。""",
+            "missing", lightweight["sha256"],
+        )
         return root
 
     def payload(self, *, role="main", tools=None, agent="main-1",
@@ -173,19 +214,73 @@ class HostToolTests(unittest.TestCase):
         payload = self.payload(
             role="requirements", agent="requirements-1",
             tools=["requirements.context", "requirements.save-draft",
+                   "requirements.inspect-prd", "requirements.save-prd-draft",
                    "artifact.inspect", "collaboration.inspect"],
         )
         context = self.verified(payload)
         surface = host_tools.HostToolSurface(context, self.app)
         self.assertEqual(surface.list_tools(), [
             "artifact.inspect", "collaboration.inspect",
-            "requirements.context", "requirements.save-draft",
+            "requirements.context", "requirements.inspect-prd",
+            "requirements.save-draft", "requirements.save-prd-draft",
         ])
         with self.assertRaisesRegex(PermissionError, "未获工具 capability"):
             self.register(surface)
         with self.assertRaisesRegex(PermissionError, "只有宿主绑定"):
             import main_artifacts
             main_artifacts.authorization_from_host_context(context)
+
+    def test_solution_role_only_sees_solution_and_read_tools(self):
+        self.project()
+        payload = self.payload(
+            role="solution", agent="solution-1",
+            tools=["solution.context", "solution.inspect", "solution.save-tech-spec-draft",
+                   "artifact.inspect", "collaboration.inspect"],
+        )
+        context = self.verified(payload)
+        surface = host_tools.HostToolSurface(context, self.app)
+        self.assertEqual(surface.list_tools(), [
+            "artifact.inspect", "collaboration.inspect", "solution.context",
+            "solution.inspect", "solution.save-tech-spec-draft",
+        ])
+        requirement_document = surface.call("solution.context")["documents"][3]
+        main_surface = host_tools.HostToolSurface(self.verified(), self.app)
+        main_surface.call("artifact.register", {
+            "artifact_id": "requirements", "kind": "requirements", "version": "v0.1",
+            "producer_role": "requirements", "purpose": "形成技术方案",
+            "summary": "完整 A 阶段 PRD", "path": "docs/PRD.md", "set_current": True,
+        })
+        main_surface.call("confirmation.confirm-current", {
+            "artifact_id": "requirements", "version": "v0.1",
+            "content_sha256": requirement_document["sha256"],
+            "permitted_use": "形成技术方案", "confirmed_scope": "PRD 与 REQ/AC",
+            "non_authorizations": ["不启动下游"], "blocking_open_items": [],
+        })
+        saved = surface.call("solution.save-tech-spec-draft", {
+            "content": (
+                "# 技术方案\n\n## 1. 用户结果\nREQ-001 / AC-001\n\n"
+                "## 11. REQ/AC 覆盖表\n"
+                "| REQ | AC | 实现设计/API | 成功路径 | 失败路径 | 验证方式 | 状态 |\n"
+                "| --- | --- | --- | --- | --- | --- | --- |\n"
+                "| REQ-001 | AC-001 | 章节 1 | 成功 | 失败 | 检查 | covered |\n"
+            ),
+            "expected_tech_sha256": "missing",
+            "expected_prd_sha256": requirement_document["sha256"],
+            "profile": "Lite",
+        })
+        self.assertEqual(saved["status"], "Draft")
+        self.assertEqual(surface.call("solution.inspect")["tech_spec"]["profile"], "Lite")
+        with self.assertRaisesRegex(PermissionError, "未获工具 capability"):
+            self.register(surface)
+
+    def test_host_rejects_solution_envelope_with_main_or_requirements_tool(self):
+        for tool in ("artifact.register", "requirements.save-draft"):
+            with self.subTest(tool=tool):
+                payload = self.payload(
+                    role="solution", agent="solution-1", tools=["solution.context", tool]
+                )
+                with self.assertRaisesRegex(PermissionError, "越权工具"):
+                    self.verified(payload)
 
     def test_host_rejects_worker_envelope_that_contains_main_tool(self):
         payload = self.payload(

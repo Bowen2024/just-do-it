@@ -5,6 +5,7 @@ import unittest
 import test_foundation
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+import artifacts
 import project_init
 import requirements
 
@@ -16,6 +17,55 @@ class RequirementsTests(unittest.TestCase):
     def project(self):
         project_init.create(self.app, "demo", "需求试点", "验证共享")
         return (self.projects / "demo").resolve()
+
+    @staticmethod
+    def valid_prd():
+        return """# PRD
+
+## 用户结果与成功指标
+用户获得可验证结果。
+
+## 具体案例
+输入 → 处理 → 结果 → 失败恢复。
+
+## 范围与边界
+本次只做核心流程。
+
+## REQ 与 AC
+
+## REQ-001 完成操作
+
+### AC-001 成功
+- 结果类型：成功
+- 前置条件：输入有效
+- 操作：提交
+- 可观察结果：显示成功
+- 验证方式：人工及自动检查
+
+### AC-002 失败
+- 结果类型：失败
+- 前置条件：输入无效
+- 操作：提交
+- 可观察结果：显示可恢复错误
+- 验证方式：人工及自动检查
+
+## 业务流程图
+```mermaid
+flowchart TD
+A --> B
+```
+
+## 业务时序图
+```mermaid
+sequenceDiagram
+U->>S: 提交
+```
+
+## 事实、假设与待决事项
+无阻塞项。
+
+## 变更摘要
+初版。"""
 
     def test_context_is_read_only(self):
         root = self.project()
@@ -99,6 +149,53 @@ class RequirementsTests(unittest.TestCase):
         self.assertIn("不要求用户说“进入 R”", role)
         self.assertIn("不要要求用户提供命令、绝对路径、expected-sha", role)
         self.assertIn("保存工具会重新核验并拒绝不一致值", role)
+
+    def test_prd_save_inspect_and_history(self):
+        root = self.project()
+        first = requirements.save_prd_draft(
+            self.app, "demo", self.valid_prd(), "missing", "missing"
+        )
+        self.assertEqual(requirements.inspect_prd(self.app, "demo")["status"], "ready_for_review")
+        before = (root / "docs/PRD.md").read_bytes()
+        second = requirements.save_prd_draft(
+            self.app, "demo", self.valid_prd() + "\n补充说明。", first["sha256"], "missing"
+        )
+        self.assertEqual(
+            (root / f"docs/prd-history/{first['sha256']}.md").read_bytes(), before
+        )
+        self.assertFalse(second["approval_verified"])
+
+    def test_prd_inspect_requires_complete_ac_and_two_business_diagrams(self):
+        self.project()
+        incomplete = self.valid_prd().replace("- 验证方式：人工及自动检查", "", 1)
+        incomplete = incomplete.replace("sequenceDiagram", "stateDiagram")
+        requirements.save_prd_draft(self.app, "demo", incomplete, "missing", "missing")
+        codes = {issue["code"] for issue in requirements.inspect_prd(self.app, "demo")["issues"]}
+        self.assertIn("acceptance_criteria_incomplete", codes)
+        self.assertIn("business_sequence_diagram_missing", codes)
+
+    def test_prd_source_version_and_frontmatter_are_enforced(self):
+        self.project()
+        lightweight = requirements.save_draft(self.app, "demo", "# 轻量需求", "missing")
+        with self.assertRaisesRegex(ValueError, "轻量需求输入版本冲突"):
+            requirements.save_prd_draft(
+                self.app, "demo", self.valid_prd(), "missing", "missing"
+            )
+        with self.assertRaisesRegex(ValueError, "不得自带 front matter"):
+            requirements.save_prd_draft(
+                self.app, "demo", "---\nstatus: Confirmed\n---\nPRD", "missing", lightweight["sha256"]
+            )
+
+    def test_prd_becomes_the_requirements_registration_candidate(self):
+        self.project()
+        lightweight = requirements.save_draft(self.app, "demo", "# 轻量需求", "missing")
+        before = artifacts.inspect(self.app, "demo")
+        self.assertEqual(before["candidates"][0]["content"]["path"], "docs/requirements.md")
+        requirements.save_prd_draft(
+            self.app, "demo", self.valid_prd(), "missing", lightweight["sha256"]
+        )
+        after = artifacts.inspect(self.app, "demo")
+        self.assertEqual(after["candidates"][0]["content"]["path"], "docs/PRD.md")
 
 
 if __name__ == "__main__":

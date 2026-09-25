@@ -313,7 +313,11 @@ def inspect(foundation, project_id):
     registry, verified = validate_registry(root, data)
     candidates = []
     issues = []
-    for kind, relative in DEFAULT_CANDIDATES.items():
+    candidates_by_kind = dict(DEFAULT_CANDIDATES)
+    prd_candidate = root / "docs/PRD.md"
+    if prd_candidate.exists() or prd_candidate.is_symlink():
+        candidates_by_kind["requirements"] = "docs/PRD.md"
+    for kind, relative in candidates_by_kind.items():
         candidate = root / relative
         if candidate.exists() or candidate.is_symlink():
             try:
