@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-28",
+  "server_name": "requirements",
+  "installed_launcher_exit_code": 0,
+  "main_document_path": "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/requirements.md",
+  "main_document_exists": true,
+  "tool_names": [
+    "requirements_project_initialize",
+    "requirements_project_inspect",
+    "requirements_read_context",
+    "requirements_save_draft"
+  ],
+  "all_tools_include_main_document_hint": true,
+  "tool_schemas_unchanged": true,
+  "business_tools_called": false,
+  "cursor_agent_reading_behavior_verified": false
+}

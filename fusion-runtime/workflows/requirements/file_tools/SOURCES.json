@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "copied_on": "2026-10-27",
+  "localized_on": "2026-10-30",
+  "source_root": "buzz-develop-helper/scripts",
+  "files": [
+    {
+      "file": "check_foundation.py",
+      "source": "buzz-develop-helper/scripts/check_foundation.py",
+      "source_sha256": "0cc0f5ea36499af4b35adadd49185011f0861ffe08dd71e47328df071b2f3931",
+      "copy_sha256": "9aa95260425aad171d1c87653cbbdbc487d59caef90340ad9f2e5114b06d14d0",
+      "adaptations": [
+        "命令行 check 必须显式提供 --foundation",
+        "2026-10-30 本地化：上游入口改为 foundation 内 methods/develop-helper；仅有旧 upstream/develop-helper 布局时明确拒绝，不回退旧目录；锁定格式、内容基线与漂移拒绝不变",
+        "2026-11-03：增加 project_path_mode 统一解析；显式模式不解析旧 projects_root，缺省及 legacy_rooted 保持旧校验",
+        "2026-11-05 P5：需求 MCP 启动实际核对十文件采用摘要，检测缺失与漂移；低层 API 保持原检查边界；前摘要 0d0453d5adc453f01f4bee38dae986a93d4293e5cfc3b838d9798e83ebba1f04，新摘要 9aa95260425aad171d1c87653cbbdbc487d59caef90340ad9f2e5114b06d14d0"
+      ]
+    },
+    {
+      "file": "project_init.py",
+      "source": "buzz-develop-helper/scripts/project_init.py",
+      "source_sha256": "1e17206765a43085139757bcd7fd19df0bd13250e9f157a5486a45908d638556",
+      "copy_sha256": "426c4cb0ff6d39f8f24fe15c53c9b65a96ed302826ace0693ce8c778cfe82013",
+      "adaptations": [
+        "包内相对引用；直接脚本调用使用同目录依赖",
+        "命令行必须显式提供 --foundation",
+        "新增接入层 expected_root 固定目录校验；未传时保留原 API 行为",
+        "增加 directory_name 直接目录选择；必须同时固定 expected_root，不扩大 projects_root，也不改写映射配置",
+        "creation_files、create、initialize_existing 增加可选关键字参数 info，经 project_info 校验后把用户已明确的项目选择追加到 project.json；不传时三个文件逐字节不变，prepare_creation 与 PREPARED_KEYS 不扩展",
+        "2026-11-03：require_project_id 保留兼容包装，纯校验统一委托 project_binding",
+        "2026-11-03 PATH-EXPLICIT-01 attempt=2：project_directories 保留兼容包装并委托共享纯校验；前摘要 3fa43a9e88964025453d44c5918637ff2e7ba8e81054156096ee6a5944b3c94d",
+        "2026-11-04 PATH-EXPLICIT-02 attempt=1：内部 binding 透传初始化、检查、准备计划和 CLI；显式初始化依赖记录路径绑定，文档检查与 Git 建仓解耦；前摘要 02d5e9253898babd5c797ae704525cd4044df75af84817178f2183781e6d7c53"
+      ]
+    },
+    {
+      "file": "project_state.py",
+      "source": "buzz-develop-helper/scripts/project_state.py",
+      "source_sha256": "dbba61ab01f342720116f5a1705f30eaea9ac1b322a077d200014f6d1709defe",
+      "copy_sha256": "dbba61ab01f342720116f5a1705f30eaea9ac1b322a077d200014f6d1709defe",
+      "adaptations": []
+    },
+    {
+      "file": "requirements.py",
+      "source": "buzz-develop-helper/scripts/requirements.py",
+      "source_sha256": "6b08d6dfe0c9ba7c0eef03e1c73ca5db514b669eb24dd3726f6d0b1e32fdf049",
+      "copy_sha256": "e4707aab6f2081f7775e493b2061cc611b67be4f689124adc49e3a096207df9d",
+      "adaptations": [
+        "包内相对引用；直接脚本调用使用同目录依赖",
+        "命令行必须显式提供 --foundation",
+        "新增接入层 expected_root 固定目录校验；未传时保留原 API 行为",
+        "读取与轻量保存透传 directory_name；沿用同一项目锁、版本、历史和复读内核",
+        "inspect_prd 与 save_prd_draft 增加可选关键字参数 expected_root、directory_name 并透传到项目定位；位置参数、PRD 锁、版本检查、历史归档、元数据和原子替换不变",
+        "2026-11-04 PATH-EXPLICIT-02 attempt=1：需求／PRD 读写与 CLI 透传受信 binding，锁内及写后重验；前摘要 c9b06e2f3fa0e18a903c8d47077538628e151172e97a7698a9c773d3db299af8"
+      ]
+    },
+    {
+      "file": "artifact_records.py",
+      "source": "buzz-develop-helper/scripts/artifacts.py",
+      "source_sha256": "3874175c7c889f9f94fdb95e30645cd0a6856e8eea415097cb182438a891967d",
+      "copy_sha256": "a4fff1ee80244707553f9fefd68cc63a86d441117d55ae68af9bcc245d4b1fb3",
+      "copied_definitions": [
+        "REGISTRY_SCHEMA_VERSION", "MANIFEST_SCHEMA_VERSION", "KINDS", "MAX_METADATA_BYTES",
+        "MAX_ARTIFACT_BYTES", "SHA256_RE", "VERSION_RE", "ARTIFACT_ID_RE", "TIMESTAMP_RE",
+        "safe_project_file", "read_manifest", "validate_registry", "content_sha"
+      ],
+      "adaptations": [
+        "2026-10-30 本地化：仅复制只读登记校验闭包，定义体逐字一致；不复制 inspect、preview_register、preview_readme、render_managed_block、document_status、artifact_content、empty_registry、main 及 project_init 导入"
+      ]
+    },
+    {
+      "file": "confirmation_records.py",
+      "source": "buzz-develop-helper/scripts/collaboration.py；required_statement 与 _STATEMENT_WHITESPACE 来自 buzz-develop-helper/scripts/trusted_context.py",
+      "source_sha256": "ba9ed556b3ec98ddeb8d7a0c665d0b2791fe9a35082093328cf6fd208b8fc311",
+      "additional_source_sha256": {
+        "trusted_context.py": "1d11f154dcf8af09d65632cd124caf2e0ead4d7c112a5bc4263f11044bdb3f7e"
+      },
+      "copy_sha256": "7d390ca9ffa7024bbe1909f695c9835181c17b024d556aceb3b468d9fba9d83e",
+      "copied_definitions": [
+        "SCHEMA_VERSION", "DECISIONS_PATH", "DECISIONS_START", "DECISIONS_END", "MAX_RECORD_BYTES",
+        "CONFIRMATION_ID_RE", "TIMESTAMP_RE", "EFFECT_BINDING_KEYS", "_STATEMENT_WHITESPACE", "digest",
+        "read_regular", "empty_decisions", "parse_decisions_text", "read_decisions", "required_text",
+        "required_statement", "validate_actor", "validate_effect_binding", "validate_decisions_shape",
+        "artifact_version", "validate_snapshot"
+      ],
+      "adaptations": [
+        "2026-10-30 本地化：仅复制确认记录与快照只读校验闭包，定义体逐字一致；artifacts 改为包内 artifact_records；required_statement 直接取 trusted_context 纯函数，不引入 HMAC、宿主上下文或签发器；不复制 render_decisions、decisions_block、confirmation_map、read_handoffs、validate_handoff、inspect、main 及 project_init 导入；旧 buzz-develop-helper 记录标记保留为数据格式"
+      ]
+    }
+  ],
+  "local_additions": [
+    {
+      "file": "__init__.py",
+      "copy_sha256": "280ecab1b265972ec9b4dd0f3b8a9a698d892f389649ed1526dfd6b6963a5c0a",
+      "note": "2026-11-05 P5 补登记：共享十文件闭包入口；空包初始化文件保持原字节"
+    },
+    {
+      "file": "project_binding.py",
+      "copy_sha256": "811b1f33b4704dfbf3cd1a96d65405cc30cae839159a90ac5a5f27541c2d9975",
+      "note": "2026-11-03 新增：完整目录绑定、持久身份、目录重验、bind_initialized 提升及运行环境指纹；不反向依赖 project_init。attempt=2 修复 H-01：旧模式仅接受旧根直接子目录并核对映射／持久身份，映射纯校验移入共享模块；前摘要 3bc2a1c8cd89d29b83a3bae17e65c3e623d4ce6038c7917f00ce178b81d1a41c。2026-11-04 PATH-EXPLICIT-02 attempt=1：已有空目录初始化锁内重验仅豁免本次项目状态锁；前摘要 7c52a56996d41923be8f72f51d4612d7a9bc0b0e35505bf7482bece528aeb33c"
+    },
+    {
+      "file": "project_info.py",
+      "copy_sha256": "448f3c76e495385f4844d40aed6fbf913f4966e8cb9f5fe46b0e600b19dac6f0",
+      "note": "非复制文件：项目选择字段校验、报告与受控补录；复用 project_init 定位与 project_state 锁、原子替换。2026-11-04 PATH-EXPLICIT-02 attempt=1：补录透传 binding 并在写后重验；前摘要 a2891cb7fe4c06d08923b85ef068f9eafab8fcb21728c8e1a968990f3afec9be"
+    },
+    {
+      "file": "recovery.py",
+      "copy_sha256": "cfebc48b4970a1ea94b65ad05cc01be0ccc93ea2832ce00c5f184309014a7ddf",
+      "note": "非复制文件：只读恢复材料与 PRD 确认核验；复用 requirements.read_document 读取项目文件；2026-10-30 起确认核验只用包内 confirmation_records／artifact_records，导入失败返回 unavailable。2026-11-04 PATH-EXPLICIT-02 attempt=1：恢复读取前后核对本次 binding；前摘要 2c7dd4b78a7970a2f77423734232982ea15512f80febdb7988d0317816462c86"
+    }
+  ],
+  "local_copies": [
+    {
+      "file": "templates/prd-template.md",
+      "source": "buzz-develop-helper/capabilities/requirements-prd-template.md",
+      "source_sha256": "118f594d9cf1449da6439280e98085af3c56772302591da3e87bb7fe1839bc8f",
+      "copy_sha256": "6bce25a5884d743ba99bec3510f1bd1c33d36d153eef26f5d7d44523c8de376d",
+      "note": "本地维护版本；2026-11-05 参考高星项目的 PRD 方法改写日常评审写作指导，补充概述、背景与方案衔接、业务规则及验收、就近依据和评审重点；保留原始 source_sha256 与本地结构及保存约定；参考链接见本条 references，旧模板继续服务原使用方，人工同步。2026-11-06 PATH-EXPLICIT-05 attempt=2 经 Bowen 确认吸收该更新，原副本及 Bowen 更新前摘要 118f594d9cf1449da6439280e98085af3c56772302591da3e87bb7fe1839bc8f，Bowen 更新与开发适配摘要 6bce25a5884d743ba99bec3510f1bd1c33d36d153eef26f5d7d44523c8de376d",
+      "references": [
+        "https://github.com/deanpeters/Product-Manager-Skills/blob/main/skills/prd-development/SKILL.md",
+        "https://github.com/deanpeters/Product-Manager-Skills/blob/main/skills/prd-development/template.md",
+        "https://github.com/phuryn/pm-skills/blob/main/pm-execution/skills/create-prd/SKILL.md",
+        "https://github.com/snarktank/ai-dev-tasks/blob/main/create-prd.md"
+      ]
+    },
+    {
+      "file": "upstream-lock.json",
+      "source": "buzz-develop-helper/upstream-lock.json",
+      "source_sha256": "54397bd30e25f74a1801b298d1dca88916c1daa82cc46551f6bcea7f1f430373",
+      "copy_sha256": "54397bd30e25f74a1801b298d1dca88916c1daa82cc46551f6bcea7f1f430373",
+      "note": "逐字节副本，未重新 snapshot；新项目 dependencies.upstream 与旧值一致"
+    },
+    {
+      "file": "config/local.example.json",
+      "source": "buzz-develop-helper/config/local.example.json",
+      "source_sha256": "d05d2c7623a5f1a2105305e48802a6cab6aab3208b07294bf8f8a8e327272bba",
+      "copy_sha256": "a818d1a6b57674a6abb326928a708ff630eef488c1b2434895b0c35e68b90113",
+      "note": "2026-11-05 P5：新安装示例增加 project_path_mode=explicit，旧字段保留供 legacy_rooted 与回退；原复制摘要 d05d2c7623a5f1a2105305e48802a6cab6aab3208b07294bf8f8a8e327272bba。真实 config/local.json 不入版本跟踪"
+    }
+  ],
+  "local_links": [
+    {"file": "methods/develop-helper", "target": "../../../../Develop_Helper", "note": "上游方法只读入口，原文只在 Develop_Helper"},
+    {"file": "templates/research-template.md", "target": "../methods/develop-helper/harness-core/skills/sdd-product-design/references/research-template.md", "note": "经本地方法入口指向上游调研模板"}
+  ],
+  "retired_runtime_dependencies": [
+    {
+      "consumer": "recovery.py",
+      "source": "<foundation>/scripts/collaboration.py、artifacts.py 及其依赖",
+      "use": "2026-10-27 至 2026-10-30 恢复读取时动态加载 read_decisions、artifact_version、validate_snapshot、validate_registry、content_sha",
+      "retired_on": "2026-10-30",
+      "replacement": "file_tools/confirmation_records.py、file_tools/artifact_records.py"
+    }
+  ],
+  "sync": "Manual; check source and copy hashes before merging changes."
+}

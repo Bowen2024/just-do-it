@@ -1,0 +1,60 @@
+# UI step5 5B (S5-B1/B2) self-verification evidence
+# generated: 2026-11-03T02:33:52Z
+
+## environment
+cwd: /Users/bowen/Desktop/博文的career/vibe- coding
+python: 3.13.11
+executable: /Users/bowen/miniconda3/bin/python3
+platform: macOS-26.6.2-arm64-arm-64bit-Mach-O
+git HEAD: f33f9e66b42c70ce3f03b3976a6eebf8995620ab
+
+## [CMD] aggregated UI tests from workspace root
+$ python3 -B -m unittest discover -s fusion-runtime/tests -p 'test_ui_*.py'
+----------------------------------------------------------------------
+Ran 116 tests in 9.742s
+
+OK
+aggregated_exit=0
+
+## per module
+$ discover -p test_ui_fixtures.py
+Ran 13 tests in 0.973s
+
+OK
+$ discover -p test_ui_context.py
+Ran 25 tests in 1.961s
+
+OK
+$ discover -p test_ui_history.py
+Ran 9 tests in 0.833s
+
+OK
+$ discover -p test_ui_transactions.py
+Ran 12 tests in 0.796s
+
+OK
+$ discover -p test_ui_stdio.py
+Ran 13 tests in 1.291s
+
+OK
+$ discover -p test_ui_isolation.py
+Ran 3 tests in 0.292s
+
+OK
+$ discover -p test_ui_workspace.py
+Ran 20 tests in 1.531s
+
+OK
+$ discover -p test_ui_inspect.py
+Ran 21 tests in 1.905s
+
+OK
+
+## [CMD] dependency/closure probe
+{"passed": true, "checks": 22, "evidence": "/private/tmp/ui-gate5b-dependency.json", "failed_checks": []}
+
+## [CMD] full regression (all test_*.py)
+Ran 313 tests in 28.067s
+
+FAILED (failures=7)
+full_regression_exit=1  # true process exit; 7 pre-existing localization failures (see gate1 report), isolated module also fails 7

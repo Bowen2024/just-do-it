@@ -1,0 +1,22 @@
+{
+  "verified_date": "2026-10-28",
+  "project_path": "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点",
+  "baseline_sha256": "424279c67a3573f5540d5fc523069f46cab5d6e81f7fbb69af6b6aa3c22f7972",
+  "marked_sha256": "c92037435aa53b0c42e6afda60a60f3a44b16a658b2f23319b2bb8bed0c08dd7",
+  "checks": {
+    "current_sha256_matches_baseline": true,
+    "current_equals_archived_baseline": true,
+    "baseline_history_filename_matches_content": true,
+    "marked_history_filename_matches_content": true,
+    "marked_history_adds_only_expected_note": true,
+    "current_note_absent": true,
+    "current_draft_unapproved": true,
+    "exactly_two_history_files": true
+  },
+  "evidence": {
+    "cursor_call_sequence": "user-provided report; raw per-call logs not independently collected",
+    "filesystem_contents": "independently read and compared in this development chat"
+  },
+  "business_files_modified_by_this_check": false,
+  "git_operations": false
+}

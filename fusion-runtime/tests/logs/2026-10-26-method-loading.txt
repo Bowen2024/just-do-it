@@ -1,0 +1,30 @@
+Date: 2026-10-26 (Asia/Shanghai)
+Command: env PYTHONPATH='fusion-runtime:fusion-runtime-lab/src:fusion-runtime-lab/tests' fusion-runtime-lab/.venv/bin/python -B -m unittest discover -s fusion-runtime/tests -p 'test_requirements_workflow*.py'
+Exit code: 1
+Elapsed seconds: 6.715
+
+..................................................................F.................................................................................
+======================================================================
+FAIL: test_invalid_results_and_read_failures_keep_the_candidate (test_requirements_workflow_dialogue.FailureTest.test_invalid_results_and_read_failures_keep_the_candidate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/tests/test_requirements_workflow_dialogue.py", line 706, in test_invalid_results_and_read_failures_keep_the_candidate
+    self.assertEqual(result.progress.blocked.missing, ("项目文档与角色规则的完整读取",))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: ('项目文档、角色规则与适用方法的完整读取',) != ('项目文档与角色规则的完整读取',)
+
+First differing element 0:
+'项目文档、角色规则与适用方法的完整读取'
+'项目文档与角色规则的完整读取'
+
+- ('项目文档、角色规则与适用方法的完整读取',)
+?       ^    -----
+
++ ('项目文档与角色规则的完整读取',)
+?       ^
+
+
+----------------------------------------------------------------------
+Ran 148 tests in 6.607s
+
+FAILED (failures=1)

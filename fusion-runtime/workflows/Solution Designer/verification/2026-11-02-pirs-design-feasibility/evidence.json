@@ -1,0 +1,241 @@
+{
+  "date": "2026-11-02",
+  "timezone": "Asia/Shanghai",
+  "project_path": "/Users/bowen/Desktop/博文的career/my_mind/pirs-cursor-test",
+  "profile": "AI",
+  "method": "Actual parent Agent follows local role and upstream method; fresh readonly stdio inspects a new complete candidate",
+  "desktop_mcp_attempt": {
+    "status": "failed",
+    "code": "runtime_baseline_changed"
+  },
+  "server": {
+    "name": "solution-designer-file-tools",
+    "version": "0.1.0"
+  },
+  "tools": [
+    "solution_read_context",
+    "solution_inspect"
+  ],
+  "candidate_sha256": "4170d40cb9a4467cc0ccd56e581c4835c31bb7ce8554e894c69ef98b93682a44",
+  "candidate_persisted": false,
+  "candidate_characters": 10518,
+  "source_alignment": {
+    "status": "matched",
+    "bound_requirements_sha256": "01f38a9d7d10a0b26bfa30d8e3a0c0d8bb7c2786517619d342a6ed7489d5d82f",
+    "current_requirements_sha256": "01f38a9d7d10a0b26bfa30d8e3a0c0d8bb7c2786517619d342a6ed7489d5d82f",
+    "reasons": []
+  },
+  "prd_structure": {
+    "mode": "read-only",
+    "status": "ready_for_review",
+    "project_id": "pirs-cursor-test",
+    "prd": {
+      "path": "docs/PRD.md",
+      "sha256": "de1a3a0c0c40deb5ed4b1dd51d0376cbbfabe9330f562f57bb4c54e41e4bfebe",
+      "req_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005"
+      ],
+      "ac_ids": [
+        "AC-001",
+        "AC-002",
+        "AC-003",
+        "AC-004",
+        "AC-005",
+        "AC-006",
+        "AC-007",
+        "AC-008",
+        "AC-009",
+        "AC-010",
+        "AC-011",
+        "AC-012"
+      ]
+    },
+    "issues": [],
+    "approval_checked": false,
+    "semantic_correctness_checked": false
+  },
+  "confirmation": {
+    "status": "missing",
+    "reasons": [
+      "decisions_missing"
+    ],
+    "records": [],
+    "current_prd_sha256": "de1a3a0c0c40deb5ed4b1dd51d0376cbbfabe9330f562f57bb4c54e41e4bfebe",
+    "required_permitted_use": "形成技术方案",
+    "confirmation_written": false,
+    "downstream_started": false,
+    "decisions_sha256": "missing",
+    "valid_confirmation_ids": []
+  },
+  "current_structure": {
+    "status": "missing",
+    "checker_version": "solution-structure-v1",
+    "issues": []
+  },
+  "candidate_structure": {
+    "status": "pass",
+    "checker_version": "solution-structure-v1",
+    "issues": [],
+    "coverage": {
+      "counts": {
+        "requirements": 5,
+        "acceptance_criteria": 12,
+        "coverage_rows": 12,
+        "covered": 7,
+        "open": 5,
+        "blocked": 0,
+        "not_applicable": 0
+      },
+      "uncovered_acceptance_ids": []
+    },
+    "limitations": {
+      "semantic_correctness_verified": false,
+      "diagram_rendered": false,
+      "model_evaluated": false
+    }
+  },
+  "mutation_tests": [
+    {
+      "name": "delete_numbered_section_6",
+      "expected": "section_missing",
+      "observed": {
+        "status": "issues",
+        "checker_version": "solution-structure-v1",
+        "issues": [
+          {
+            "code": "section_missing",
+            "severity": "error",
+            "message": "缺少第 6 节：异常、重试与恢复",
+            "section": 6,
+            "line": null,
+            "related_ids": []
+          }
+        ],
+        "coverage": {
+          "counts": {
+            "requirements": 5,
+            "acceptance_criteria": 12,
+            "coverage_rows": 12,
+            "covered": 7,
+            "open": 5,
+            "blocked": 0,
+            "not_applicable": 0
+          },
+          "uncovered_acceptance_ids": []
+        },
+        "limitations": {
+          "semantic_correctness_verified": false,
+          "diagram_rendered": false,
+          "model_evaluated": false
+        }
+      }
+    },
+    {
+      "name": "remove_AC_012_coverage_row",
+      "expected": "coverage_ac_missing",
+      "observed": {
+        "status": "issues",
+        "checker_version": "solution-structure-v1",
+        "issues": [
+          {
+            "code": "coverage_ac_missing",
+            "severity": "error",
+            "message": "PRD AC 未出现在覆盖表",
+            "section": 11,
+            "line": null,
+            "related_ids": [
+              "AC-012"
+            ]
+          }
+        ],
+        "coverage": {
+          "counts": {
+            "requirements": 5,
+            "acceptance_criteria": 12,
+            "coverage_rows": 11,
+            "covered": 6,
+            "open": 5,
+            "blocked": 0,
+            "not_applicable": 0
+          },
+          "uncovered_acceptance_ids": [
+            "AC-012"
+          ]
+        },
+        "limitations": {
+          "semantic_correctness_verified": false,
+          "diagram_rendered": false,
+          "model_evaluated": false
+        }
+      }
+    },
+    {
+      "name": "change_raw_deadline_to_absolute_date",
+      "expected": "structure_checker_cannot_detect_semantic_conflict",
+      "observed": {
+        "status": "pass",
+        "checker_version": "solution-structure-v1",
+        "issues": [],
+        "coverage": {
+          "counts": {
+            "requirements": 5,
+            "acceptance_criteria": 12,
+            "coverage_rows": 12,
+            "covered": 7,
+            "open": 5,
+            "blocked": 0,
+            "not_applicable": 0
+          },
+          "uncovered_acceptance_ids": []
+        },
+        "limitations": {
+          "semantic_correctness_verified": false,
+          "diagram_rendered": false,
+          "model_evaluated": false
+        }
+      },
+      "manual_finding": "Contradicts adopted D3; reject semantic mutation"
+    }
+  ],
+  "business_before": {
+    "project.json": "e631496066b335f6e41c4a8fc3904650ec9923fd727d69f7c86fe407306bbf6d",
+    "README.md": "c36a009b0cfc59ab2fd2237b5f4cbf9b086b099ff54523fc7beed902f61ee46b",
+    ".gitignore": "6fb9ed8897de4f5192f0ff706372425b27ad3334cf4393477cc41864a07dc9e5",
+    "docs/requirements.md": "01f38a9d7d10a0b26bfa30d8e3a0c0d8bb7c2786517619d342a6ed7489d5d82f",
+    "docs/PRD.md": "de1a3a0c0c40deb5ed4b1dd51d0376cbbfabe9330f562f57bb4c54e41e4bfebe",
+    "docs/requirements-history/c85f3e64c0c0ce2f001df86c4be5a98e0ddcd10418dd82969cae5051b37f0e4b.md": "c85f3e64c0c0ce2f001df86c4be5a98e0ddcd10418dd82969cae5051b37f0e4b",
+    "docs/requirements-history/79a646555c05983f5f9c8992fc76a26207403c4ac7cf6ebfb7f5f1c8b7895883.md": "79a646555c05983f5f9c8992fc76a26207403c4ac7cf6ebfb7f5f1c8b7895883",
+    "docs/prd-history/6ee1f5f9de0b63773a785072a7d15dcf7bec90dfcb9b9256ecd4f3e72bf7e2a8.md": "6ee1f5f9de0b63773a785072a7d15dcf7bec90dfcb9b9256ecd4f3e72bf7e2a8"
+  },
+  "business_after": {
+    "project.json": "e631496066b335f6e41c4a8fc3904650ec9923fd727d69f7c86fe407306bbf6d",
+    "README.md": "c36a009b0cfc59ab2fd2237b5f4cbf9b086b099ff54523fc7beed902f61ee46b",
+    ".gitignore": "6fb9ed8897de4f5192f0ff706372425b27ad3334cf4393477cc41864a07dc9e5",
+    "docs/requirements.md": "01f38a9d7d10a0b26bfa30d8e3a0c0d8bb7c2786517619d342a6ed7489d5d82f",
+    "docs/PRD.md": "de1a3a0c0c40deb5ed4b1dd51d0376cbbfabe9330f562f57bb4c54e41e4bfebe",
+    "docs/requirements-history/c85f3e64c0c0ce2f001df86c4be5a98e0ddcd10418dd82969cae5051b37f0e4b.md": "c85f3e64c0c0ce2f001df86c4be5a98e0ddcd10418dd82969cae5051b37f0e4b",
+    "docs/requirements-history/79a646555c05983f5f9c8992fc76a26207403c4ac7cf6ebfb7f5f1c8b7895883.md": "79a646555c05983f5f9c8992fc76a26207403c4ac7cf6ebfb7f5f1c8b7895883",
+    "docs/prd-history/6ee1f5f9de0b63773a785072a7d15dcf7bec90dfcb9b9256ecd4f3e72bf7e2a8.md": "6ee1f5f9de0b63773a785072a7d15dcf7bec90dfcb9b9256ecd4f3e72bf7e2a8"
+  },
+  "business_unchanged": true,
+  "runtime_code_sha256": {
+    "mcp_server.py": "0ac05a3793c0619a55fc21e603db0145fd6292acc1e85863726097ab04a2d69d",
+    "shared_loader.py": "8dc9406fea33f98c34653913c05e904b57d0eed865cffd55c8324144e3953e99",
+    "file_tools/__init__.py": "edcbdcdc286d305612194e67618efffc4c649d39f2ba90c70c3cf3301cf57359",
+    "file_tools/dependencies.py": "6b277e4ec7e9d796f8c058d521afed0e8bf6e94e866e729817b9b1df33b54117",
+    "file_tools/solution.py": "8ae7a405e5e67f0a9fafc93fc279df807b4b97f906663f0cd5f6c37f16d5c117",
+    "configure_client.py": "c70403d15705a04e6021d66faee67c74d72106559f536491fafa89bdceb1e28c"
+  },
+  "runtime_code_changed": false,
+  "process_exit_code": 0,
+  "save_attempted": false,
+  "confirmation_written": false,
+  "business_model_called": false,
+  "diagram_rendered": false,
+  "independent_acceptance": false,
+  "step8_complete": false
+}

@@ -1,0 +1,9 @@
+Date: 2026-10-27 (Asia/Shanghai)
+Command: env PYTHONPATH=fusion-runtime:fusion-runtime-lab/src:fusion-runtime-lab/tests fusion-runtime-lab/.venv/bin/python -B -m unittest discover -s fusion-runtime/tests -p 'test_requirements*.py'
+Exit code: 0
+
+......................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 182 tests in 7.267s
+
+OK

@@ -1,0 +1,14 @@
+{
+  "config_path": "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点/.cursor/mcp.json",
+  "config_sha256": "bc6a7248cfd97d2ef02db8f7168b3512c5583c855c460e0e74df94e91ba4c864",
+  "exit_code": 0,
+  "protocol_version": "2025-11-25",
+  "tool_names": [
+    "requirements_project_initialize",
+    "requirements_project_inspect",
+    "requirements_read_context",
+    "requirements_save_draft"
+  ],
+  "business_tool_calls": [],
+  "cursor_agent_verified": false
+}

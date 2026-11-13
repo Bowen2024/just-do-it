@@ -1,0 +1,696 @@
+{
+  "boundary": "File acceptance only; browser/visual/business approval and real client integration remain unverified.",
+  "calls": [
+    {
+      "id": 101,
+      "name": "ui_read_context",
+      "project_id": "procurement-demo",
+      "state": "empty"
+    },
+    {
+      "id": 102,
+      "name": "ui_prepare_revision",
+      "request": {
+        "mode": "empty",
+        "request_id": "11111111-1111-4111-8111-111111111111"
+      },
+      "response": {
+        "base_digest": "c81b6e95b364aa4c1852fca978a5c198a3a9987ad16de0eb08d2b099ac809800",
+        "revision_id": "R-c219fcd33b18c070f4c584b29bda0c74",
+        "write_outcome": "prepared"
+      }
+    },
+    {
+      "id": 103,
+      "name": "ui_inspect",
+      "request": {
+        "revision_id": "R-c219fcd33b18c070f4c584b29bda0c74",
+        "target": "candidate"
+      },
+      "response": {
+        "candidate_digest": "86435863d7c105bd0f3fcb7da59f390a9a3d6be53a98817a7e097b8c3cdd9c6d",
+        "changes": {
+          "added": [
+            "docs/prototypes/demo/README.md",
+            "docs/prototypes/demo/assets/app.js",
+            "docs/prototypes/demo/assets/old.bin",
+            "docs/prototypes/demo/assets/styles.css",
+            "docs/prototypes/demo/index.html",
+            "docs/ui-style.md"
+          ],
+          "modified": [],
+          "removed": []
+        },
+        "proposed_revision_sha256": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+        "state": "candidate_ready"
+      }
+    },
+    {
+      "id": 104,
+      "name": "ui_accept_revision",
+      "request": {
+        "delete_paths": [],
+        "inspection_id": "inspect-f25d721eb4d56f2d041aed85e0520f85",
+        "project_path": "/private/var/folders/s_/hmcskr2s1w1757cxddvxmc400000gn/T/ui-tools-5_skkawp/business/采购演示",
+        "request_id": "22222222-2222-4222-8222-222222222222",
+        "revision_id": "R-c219fcd33b18c070f4c584b29bda0c74"
+      },
+      "response": {
+        "changes": {
+          "added": [
+            "docs/prototypes/demo/README.md",
+            "docs/prototypes/demo/assets/app.js",
+            "docs/prototypes/demo/assets/old.bin",
+            "docs/prototypes/demo/assets/styles.css",
+            "docs/prototypes/demo/index.html",
+            "docs/ui-style.md"
+          ],
+          "modified": [],
+          "removed": []
+        },
+        "checks": [
+          {
+            "checked": true,
+            "code": "document_set",
+            "message": "公共成员与版本 packet 逐字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "manifest",
+            "message": "公共清单与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "pointer",
+            "message": "当前指针与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "history",
+            "message": "新旧不可变版本均可完整核验",
+            "passed": true,
+            "paths": [],
+            "scope": "private"
+          },
+          {
+            "checked": true,
+            "code": "inputs",
+            "message": "输入来源与计划一致",
+            "passed": true,
+            "paths": [],
+            "scope": "project"
+          },
+          {
+            "checked": true,
+            "code": "unknown_files",
+            "message": "未知文件保持原样、未被自动登记或删除",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          }
+        ],
+        "contract_version": "ui-tools-v1",
+        "current_revision": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+        "diagnostics": [],
+        "error": null,
+        "next_action": "用只读工具复读当前集合；保存只证明文件接收，浏览器证据仍未验证",
+        "operation": "ui_accept_revision",
+        "project": {
+          "identity_persisted": true,
+          "identity_source": "persisted",
+          "project_id": "procurement-demo",
+          "project_path": "/private/var/folders/s_/hmcskr2s1w1757cxddvxmc400000gn/T/ui-tools-5_skkawp/business/采购演示"
+        },
+        "receipt_replay": false,
+        "request_id": "22222222-2222-4222-8222-222222222222",
+        "revision_id": "R-c219fcd33b18c070f4c584b29bda0c74",
+        "revision_sha256": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+        "state": "stable",
+        "transaction_id": "T-0be741cd3185375c4f01530a54767593",
+        "verification": [
+          {
+            "checked": true,
+            "code": "document_set",
+            "message": "公共成员与版本 packet 逐字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "manifest",
+            "message": "公共清单与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "pointer",
+            "message": "当前指针与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "history",
+            "message": "新旧不可变版本均可完整核验",
+            "passed": true,
+            "paths": [],
+            "scope": "private"
+          },
+          {
+            "checked": true,
+            "code": "inputs",
+            "message": "输入来源与计划一致",
+            "passed": true,
+            "paths": [],
+            "scope": "project"
+          },
+          {
+            "checked": true,
+            "code": "unknown_files",
+            "message": "未知文件保持原样、未被自动登记或删除",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          }
+        ],
+        "versions": {
+          "new": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+          "old": null
+        },
+        "write_outcome": "saved"
+      }
+    },
+    {
+      "id": 105,
+      "name": "ui_read_context",
+      "response": {
+        "current_revision": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+        "state": "stable"
+      }
+    },
+    {
+      "id": 106,
+      "name": "ui_read_history",
+      "response": {
+        "file_count": 6,
+        "revision_sha256": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+        "state": "history"
+      }
+    },
+    {
+      "id": 107,
+      "name": "ui_accept_revision",
+      "request": {
+        "delete_paths": [],
+        "request_id": "750f359f-a9cd-4cb9-88dc-1c63e35dcf6e",
+        "revision_id": "R-ef8abaa79263486e6049ac3d608ba0bf"
+      },
+      "response": {
+        "changes": {
+          "added": [],
+          "modified": [],
+          "removed": []
+        },
+        "checks": [
+          {
+            "checked": true,
+            "code": "document_set",
+            "message": "公共成员与版本 packet 逐字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "manifest",
+            "message": "公共清单与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "pointer",
+            "message": "当前指针与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "history",
+            "message": "新旧不可变版本均可完整核验",
+            "passed": true,
+            "paths": [],
+            "scope": "private"
+          },
+          {
+            "checked": true,
+            "code": "inputs",
+            "message": "输入来源与计划一致",
+            "passed": true,
+            "paths": [],
+            "scope": "project"
+          },
+          {
+            "checked": true,
+            "code": "unknown_files",
+            "message": "未知文件保持原样、未被自动登记或删除",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          }
+        ],
+        "contract_version": "ui-tools-v1",
+        "current_revision": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+        "diagnostics": [],
+        "error": null,
+        "next_action": "用只读工具复读当前集合；保存只证明文件接收，浏览器证据仍未验证",
+        "operation": "ui_accept_revision",
+        "project": {
+          "identity_persisted": true,
+          "identity_source": "persisted",
+          "project_id": "procurement-demo",
+          "project_path": "/private/var/folders/s_/hmcskr2s1w1757cxddvxmc400000gn/T/ui-tools-5_skkawp/business/采购演示"
+        },
+        "receipt_replay": false,
+        "request_id": "750f359f-a9cd-4cb9-88dc-1c63e35dcf6e",
+        "revision_id": "R-ef8abaa79263486e6049ac3d608ba0bf",
+        "revision_sha256": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+        "state": "stable",
+        "transaction_id": null,
+        "verification": [
+          {
+            "checked": true,
+            "code": "document_set",
+            "message": "公共成员与版本 packet 逐字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "manifest",
+            "message": "公共清单与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "pointer",
+            "message": "当前指针与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "history",
+            "message": "新旧不可变版本均可完整核验",
+            "passed": true,
+            "paths": [],
+            "scope": "private"
+          },
+          {
+            "checked": true,
+            "code": "inputs",
+            "message": "输入来源与计划一致",
+            "passed": true,
+            "paths": [],
+            "scope": "project"
+          },
+          {
+            "checked": true,
+            "code": "unknown_files",
+            "message": "未知文件保持原样、未被自动登记或删除",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          }
+        ],
+        "versions": {
+          "new": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+          "old": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43"
+        },
+        "write_outcome": "unchanged"
+      }
+    },
+    {
+      "id": 108,
+      "name": "ui_accept_revision",
+      "request": {
+        "delete_paths": [
+          "docs/prototypes/demo/assets/old.bin"
+        ],
+        "request_id": "bf5cec79-07c5-44be-9102-b4956ac11b82",
+        "revision_id": "R-45945eb5954b3a09526ff8869ef5d74c"
+      },
+      "response": {
+        "changes": {
+          "added": [],
+          "modified": [
+            "docs/prototypes/demo/assets/app.js"
+          ],
+          "removed": [
+            "docs/prototypes/demo/assets/old.bin"
+          ]
+        },
+        "checks": [
+          {
+            "checked": true,
+            "code": "document_set",
+            "message": "公共成员与版本 packet 逐字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "manifest",
+            "message": "公共清单与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "pointer",
+            "message": "当前指针与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "history",
+            "message": "新旧不可变版本均可完整核验",
+            "passed": true,
+            "paths": [],
+            "scope": "private"
+          },
+          {
+            "checked": true,
+            "code": "inputs",
+            "message": "输入来源与计划一致",
+            "passed": true,
+            "paths": [],
+            "scope": "project"
+          },
+          {
+            "checked": true,
+            "code": "unknown_files",
+            "message": "未知文件保持原样、未被自动登记或删除",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          }
+        ],
+        "contract_version": "ui-tools-v1",
+        "current_revision": "aceccdf6099498f30b7476b1401eb1e4f743107675b5fc1fe6b711bbd28eca70",
+        "diagnostics": [],
+        "error": null,
+        "next_action": "用只读工具复读当前集合；保存只证明文件接收，浏览器证据仍未验证",
+        "operation": "ui_accept_revision",
+        "project": {
+          "identity_persisted": true,
+          "identity_source": "persisted",
+          "project_id": "procurement-demo",
+          "project_path": "/private/var/folders/s_/hmcskr2s1w1757cxddvxmc400000gn/T/ui-tools-5_skkawp/business/采购演示"
+        },
+        "receipt_replay": false,
+        "request_id": "bf5cec79-07c5-44be-9102-b4956ac11b82",
+        "revision_id": "R-45945eb5954b3a09526ff8869ef5d74c",
+        "revision_sha256": "aceccdf6099498f30b7476b1401eb1e4f743107675b5fc1fe6b711bbd28eca70",
+        "state": "stable",
+        "transaction_id": "T-4af814121b69ffc130eb795cb0bef1d8",
+        "verification": [
+          {
+            "checked": true,
+            "code": "document_set",
+            "message": "公共成员与版本 packet 逐字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "manifest",
+            "message": "公共清单与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "pointer",
+            "message": "当前指针与固定新字节一致",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "history",
+            "message": "新旧不可变版本均可完整核验",
+            "passed": true,
+            "paths": [],
+            "scope": "private"
+          },
+          {
+            "checked": true,
+            "code": "inputs",
+            "message": "输入来源与计划一致",
+            "passed": true,
+            "paths": [],
+            "scope": "project"
+          },
+          {
+            "checked": true,
+            "code": "unknown_files",
+            "message": "未知文件保持原样、未被自动登记或删除",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          }
+        ],
+        "versions": {
+          "new": "aceccdf6099498f30b7476b1401eb1e4f743107675b5fc1fe6b711bbd28eca70",
+          "old": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43"
+        },
+        "write_outcome": "saved"
+      }
+    },
+    {
+      "id": 109,
+      "name": "ui_accept_revision",
+      "request": {
+        "delete_paths": [],
+        "inspection_id": "inspect-f25d721eb4d56f2d041aed85e0520f85",
+        "project_path": "/private/var/folders/s_/hmcskr2s1w1757cxddvxmc400000gn/T/ui-tools-5_skkawp/business/采购演示",
+        "request_id": "22222222-2222-4222-8222-222222222222",
+        "revision_id": "R-c219fcd33b18c070f4c584b29bda0c74"
+      },
+      "response": {
+        "changes": {
+          "added": [
+            "docs/prototypes/demo/README.md",
+            "docs/prototypes/demo/assets/app.js",
+            "docs/prototypes/demo/assets/old.bin",
+            "docs/prototypes/demo/assets/styles.css",
+            "docs/prototypes/demo/index.html",
+            "docs/ui-style.md"
+          ],
+          "modified": [],
+          "removed": []
+        },
+        "checks": [
+          {
+            "checked": true,
+            "code": "document_set",
+            "message": "回放复读：公共成员已不是回执版本",
+            "passed": false,
+            "paths": [
+              "docs/prototypes/demo/assets/app.js",
+              "docs/prototypes/demo/assets/old.bin"
+            ],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "manifest",
+            "message": "回放复读：公共清单与回执一致",
+            "passed": false,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "pointer",
+            "message": "当前版本已前进，回执仅代表历史结果",
+            "passed": false,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "history",
+            "message": "回执引用版本可核验",
+            "passed": true,
+            "paths": [],
+            "scope": "private"
+          },
+          {
+            "checked": true,
+            "code": "inputs",
+            "message": "输入来源与回执一致",
+            "passed": true,
+            "paths": [],
+            "scope": "project"
+          },
+          {
+            "checked": true,
+            "code": "unknown_files",
+            "message": "未知文件保持原样",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          }
+        ],
+        "contract_version": "ui-tools-v1",
+        "current_revision": "aceccdf6099498f30b7476b1401eb1e4f743107675b5fc1fe6b711bbd28eca70",
+        "diagnostics": [],
+        "error": null,
+        "next_action": "receipt_replay=true：结果来自已完成回执；current_revision 为独立复读的当前版本",
+        "operation": "ui_accept_revision",
+        "project": {
+          "identity_persisted": true,
+          "identity_source": "persisted",
+          "project_id": "procurement-demo",
+          "project_path": "/private/var/folders/s_/hmcskr2s1w1757cxddvxmc400000gn/T/ui-tools-5_skkawp/business/采购演示"
+        },
+        "receipt_replay": true,
+        "request_id": "22222222-2222-4222-8222-222222222222",
+        "revision_id": "R-c219fcd33b18c070f4c584b29bda0c74",
+        "revision_sha256": "aceccdf6099498f30b7476b1401eb1e4f743107675b5fc1fe6b711bbd28eca70",
+        "state": "stable",
+        "transaction_id": "T-0be741cd3185375c4f01530a54767593",
+        "verification": [
+          {
+            "checked": true,
+            "code": "document_set",
+            "message": "回放复读：公共成员已不是回执版本",
+            "passed": false,
+            "paths": [
+              "docs/prototypes/demo/assets/app.js",
+              "docs/prototypes/demo/assets/old.bin"
+            ],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "manifest",
+            "message": "回放复读：公共清单与回执一致",
+            "passed": false,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "pointer",
+            "message": "当前版本已前进，回执仅代表历史结果",
+            "passed": false,
+            "paths": [],
+            "scope": "public"
+          },
+          {
+            "checked": true,
+            "code": "history",
+            "message": "回执引用版本可核验",
+            "passed": true,
+            "paths": [],
+            "scope": "private"
+          },
+          {
+            "checked": true,
+            "code": "inputs",
+            "message": "输入来源与回执一致",
+            "passed": true,
+            "paths": [],
+            "scope": "project"
+          },
+          {
+            "checked": true,
+            "code": "unknown_files",
+            "message": "未知文件保持原样",
+            "passed": true,
+            "paths": [],
+            "scope": "public"
+          }
+        ],
+        "versions": {
+          "new": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+          "old": null
+        },
+        "write_outcome": "saved"
+      }
+    }
+  ],
+  "contract_version": "ui-tools-v1",
+  "execution": "temporary Chinese project created by shared project_init; real UiTools/MCP dispatch; ordinary candidate file edits; no real business files",
+  "file_evidence": {
+    "active_transaction_absent": true,
+    "all_second_verification_passed": true,
+    "current_revision_after_old_receipt_replay": "aceccdf6099498f30b7476b1401eb1e4f743107675b5fc1fe6b711bbd28eca70",
+    "initial_revision": "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+    "manifest_sha256": "61c3219d8d2533b0464d1d5a738b507c6b1df7f09f4c12eac3d9189e63cceca5",
+    "old_binary_preserved_in_first_version": true,
+    "old_binary_removed_from_current": true,
+    "pointer": {
+      "artifact_root": "docs/prototypes/demo",
+      "last_request_id": "bf5cec79-07c5-44be-9102-b4956ac11b82",
+      "last_transaction_id": "T-4af814121b69ffc130eb795cb0bef1d8",
+      "manifest_sha256": "61c3219d8d2533b0464d1d5a738b507c6b1df7f09f4c12eac3d9189e63cceca5",
+      "project_id": "procurement-demo",
+      "revision_sha256": "aceccdf6099498f30b7476b1401eb1e4f743107675b5fc1fe6b711bbd28eca70",
+      "schema_version": 1
+    },
+    "second_revision": "aceccdf6099498f30b7476b1401eb1e4f743107675b5fc1fe6b711bbd28eca70",
+    "verification_codes": [
+      "document_set",
+      "manifest",
+      "pointer",
+      "history",
+      "inputs",
+      "unknown_files"
+    ],
+    "version_directories": [
+      "3b91372a350f56d98a8150d78da2412970c62b4fd6a92b3c51d39c7fc5518f43",
+      "aceccdf6099498f30b7476b1401eb1e4f743107675b5fc1fe6b711bbd28eca70"
+    ]
+  },
+  "generated_at": "2026-11-03T04:49:09.858610Z",
+  "project_id": "procurement-demo",
+  "protected_snapshots_unchanged": {
+    "foundation": true,
+    "other_project": true,
+    "project_json": true,
+    "root_readme": true,
+    "upstream": true
+  },
+  "schema_version": 1,
+  "stage": "step5_gate2_complete_mainline"
+}

@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "module": "UI",
+  "recorded_on": "2026-11-02",
+  "stage": "step5_gate2_implemented_self_verified_pending_independent_review",
+  "role_entry": "ui-design.md",
+  "record_semantics": "来源记录；runtime_sources 由强制加载器核对，其他文档记录人工维护；不代表真实客户端或业务权限已接通。",
+  "adopted_upstream_snapshot": {
+    "entry_count": 250,
+    "policy": "source-tree-v1-no-projects-dependencies-git-cache-no-follow",
+    "schema_version": 1,
+    "sha256": "fb97638c61d552d32d677a4e8a161d81efae4ac1adb5bd4638b1ad7e1619f40b",
+    "lock_path": "../requirements/upstream-lock.json",
+    "checked_on": "2026-11-02",
+    "lock_refreshed": false
+  },
+  "upstream_files": [
+    {
+      "id": "phase_B",
+      "path": "methods/develop-helper/harness-core/skills/sdd-product-design/phase-B.md",
+      "source_path": "../../../Develop_Helper/harness-core/skills/sdd-product-design/phase-B.md",
+      "sha256": "1656f406355959050842e1c92bfba781503c33225ee40dfb564c51769611edce",
+      "use": "页面、交互与原型检查方法；入口前提、回写和自动派发由角色适配"
+    },
+    {
+      "id": "design_method",
+      "path": "methods/develop-helper/harness-core/skills/ui-design-standard/SKILL.md",
+      "source_path": "../../../Develop_Helper/harness-core/skills/ui-design-standard/SKILL.md",
+      "sha256": "6fad7c07f39c49b75314635199f9a8dcaa2570dcb7c3af45260dcb6394f5f9f1",
+      "use": "设计分析与逐页方法；由融合角色组织实际制作和检查"
+    },
+    {
+      "id": "style_template",
+      "path": "methods/develop-helper/harness-core/skills/ui-design-standard/references/ui-style-template.md",
+      "source_path": "../../../Develop_Helper/harness-core/skills/ui-design-standard/references/ui-style-template.md",
+      "sha256": "cdcaab1231a873928e5bc4b90fcedd1970c0c5da77ac8424fdd92a51fead9cea",
+      "use": "本地模板的原始复制来源"
+    },
+    {
+      "id": "frontend_gate_boundary",
+      "path": "methods/develop-helper/harness-core/protocols/frontend-gate.md",
+      "source_path": "../../../Develop_Helper/harness-core/protocols/frontend-gate.md",
+      "sha256": "0f76121267568af09bdbca1af5869cb154c8357ddd1eda386809c76d9abef02c",
+      "use": "仅作工程门禁边界依据，不在独立演示中执行"
+    }
+  ],
+  "local_links": [
+    {
+      "path": "methods/develop-helper",
+      "raw_target": "../../../../Develop_Helper",
+      "resolved_relative_to_workspace": "Develop_Helper",
+      "access": "explicit_read_only_by_workflow_not_OS_enforced"
+    }
+  ],
+  "local_copies": [
+    {
+      "file": "templates/ui-style-template.md",
+      "source": "../../../Develop_Helper/harness-core/skills/ui-design-standard/references/ui-style-template.md",
+      "source_sha256": "cdcaab1231a873928e5bc4b90fcedd1970c0c5da77ac8424fdd92a51fead9cea",
+      "copy_sha256": "6cc415b510f00df55ae2fe09edfa01d50c782749d6a98034418fe1345885d084",
+      "maintenance_owner": "UI",
+      "copied_and_adapted_on": "2026-11-02",
+      "adaptations": [
+        "保留文档头部、设计目标、全局视觉、组件、逐页设计、使用与验收骨架。",
+        "PRD／AC 或可定位场景双来源；不伪造需求编号或强制前置完整 PRD。",
+        "补充展示主线、前端实际／模拟／未实现、跨页状态、重复操作、刷新、本地存储与重置。",
+        "代表页面反馈与渐进完善；保留已有设计，局部修改不重做方向选择。",
+        "实际启动与演示步骤由演示 README 维护；设计记录检查版本与未验项。",
+        "保持 Draft，用户反馈不自动标 Confirmed、签正式确认或派发下游。",
+        "新增来源、版本与继续位置，明确隔离试验和受控保存的差别。"
+      ]
+    }
+  ],
+  "local_documents": [
+    {
+      "file": "ui-design.md",
+      "sha256": "b66f4c8058c3d11aaa58bf65ba32b9ceb3cabd37762cd33d8ca8f58bbca0bb1d",
+      "role": "唯一角色主文档"
+    },
+    {
+      "file": "agent-file-workflow.md",
+      "sha256": "0873d85146a7a56274c5ea54aaa39e294a5b27e5ce3870b1e864bfd747ac8070",
+      "role": "业务文件操作顺序与当前工具边界"
+    },
+    {
+      "file": "README.md",
+      "sha256": "060665b633ff99260f19d288f8e1305ff71a6b719318226d5a7cb45c74a60d2e",
+      "role": "显式入口、维护归属与实际能力说明"
+    },
+    {
+      "file": "ui-module-construction-plan.md",
+      "sha256": "20bc2471864e99496f3d1fe1b556eb54ed22c7badef83ef4278b2064e841521e",
+      "role": "历史建设进度文档；现行能力以 README、ui-design.md 和当前来源记录为准",
+      "record_correction": "2026-11-05 PATH-EXPLICIT-05：原安装与开发副本字节一致，仅修正既有错误登记；前记录 7e58a5d6c971725503dd86e5b4ec38ef9205a655449d14a0da113c04c2b6999a，文档内容未变"
+    },
+    {
+      "file": "ui-tools-implementation-plan.md",
+      "sha256": "5da11b8676e876a88aa962c8aac3f1cde6f32d1a7f7a1edeac51ad3ac12fe57a",
+      "role": "ui-tools-v1 历史实施规格；现行能力与目录规则以 README、ui-design.md 和当前来源记录为准",
+      "record_correction": "2026-11-05 PATH-EXPLICIT-05 ENV-04：仅将角色说明标为历史规格，文档摘要未变"
+    },
+    {
+      "file": "ui-tools-test-checklist.md",
+      "sha256": "3367c416aa11a81f463302669eca423556e5f144c2931057df35256c56a7158d",
+      "role": "UI-T01—T47 详细验证规格；文档自查不等于程序测试通过"
+    },
+    {
+      "file": "ui-step5-development-plan.md",
+      "sha256": "7c856818dce4bd759f0f050b7ce0e0f630bc9151190e4f0ead47a4a3cc641a08",
+      "role": "历史步骤 5 开发计划；现行目录规则以角色主文、README 和当前来源记录为准",
+      "record_correction": "2026-11-05 PATH-EXPLICIT-05：原安装与开发副本字节一致，仅修正既有错误登记；前记录 f283d798d2615fd413ddc383d837380824196c0819b9165eddd52d6011c02323，文档内容未变"
+    },
+    {
+      "file": "ui-step5-acceptance-test.md",
+      "sha256": "22182003c2b7d57c757bf81997f49a93d9a9587ff726c90908af0ec4ce67b8c2",
+      "role": "步骤 5 历史验收规程；当前执行结果以各轮证据目录为准",
+      "record_correction": "2026-11-05 PATH-EXPLICIT-05 ENV-04：仅将角色说明标为历史规程，文档摘要未变"
+    }
+  ],
+  "planned_shared_dependencies": [
+    {
+      "path": "../requirements/file_tools/__init__.py",
+      "sha256_at_inventory": "280ecab1b265972ec9b4dd0f3b8a9a698d892f389649ed1526dfd6b6963a5c0a",
+      "state": "step1_verified_not_UI_runtime_connected"
+    },
+    {
+      "path": "../requirements/file_tools/check_foundation.py",
+      "sha256_at_inventory": "9aa95260425aad171d1c87653cbbdbc487d59caef90340ad9f2e5114b06d14d0",
+      "p5_source_update": "2026-11-05：需求入口补充十文件采用校验；前摘要 0d0453d5adc453f01f4bee38dae986a93d4293e5cfc3b838d9798e83ebba1f04",
+      "state": "step1_verified_not_UI_runtime_connected"
+    },
+    {
+      "path": "../requirements/file_tools/project_binding.py",
+      "sha256_at_inventory": "811b1f33b4704dfbf3cd1a96d65405cc30cae839159a90ac5a5f27541c2d9975",
+      "state": "path_explicit_01_runtime_connected_controlled_alias",
+      "note": "2026-11-03 PATH-EXPLICIT-01 attempt=2：修复旧根直接子目录及映射／持久身份约束；前摘要 3bc2a1c8cd89d29b83a3bae17e65c3e623d4ce6038c7917f00ce178b81d1a41c。2026-11-04 PATH-EXPLICIT-02：初始化锁内重验适配；前摘要 7c52a56996d41923be8f72f51d4612d7a9bc0b0e35505bf7482bece528aeb33c"
+    },
+    {
+      "path": "../requirements/file_tools/project_state.py",
+      "sha256_at_inventory": "dbba61ab01f342720116f5a1705f30eaea9ac1b322a077d200014f6d1709defe",
+      "state": "step1_verified_not_UI_runtime_connected"
+    },
+    {
+      "path": "../requirements/file_tools/project_init.py",
+      "sha256_at_inventory": "426c4cb0ff6d39f8f24fe15c53c9b65a96ed302826ace0693ce8c778cfe82013",
+      "state": "step1_verified_not_UI_runtime_connected",
+      "note": "2026-11-03 PATH-EXPLICIT-01 attempt=2：目录映射纯校验委托 project_binding；前摘要 3fa43a9e88964025453d44c5918637ff2e7ba8e81054156096ee6a5944b3c94d。2026-11-04 PATH-EXPLICIT-02：绑定透传、初始化依赖与 CLI；前摘要 02d5e9253898babd5c797ae704525cd4044df75af84817178f2183781e6d7c53"
+    },
+    {
+      "path": "../requirements/file_tools/requirements.py",
+      "sha256_at_inventory": "e4707aab6f2081f7775e493b2061cc611b67be4f689124adc49e3a096207df9d",
+      "state": "step1_verified_not_UI_runtime_connected"
+    },
+    {
+      "path": "../requirements/file_tools/project_info.py",
+      "sha256_at_inventory": "448f3c76e495385f4844d40aed6fbf913f4966e8cb9f5fe46b0e600b19dac6f0",
+      "state": "step1_verified_not_UI_runtime_connected"
+    },
+    {
+      "path": "../requirements/file_tools/artifact_records.py",
+      "sha256_at_inventory": "a4fff1ee80244707553f9fefd68cc63a86d441117d55ae68af9bcc245d4b1fb3",
+      "state": "step1_verified_not_UI_runtime_connected"
+    },
+    {
+      "path": "../requirements/file_tools/confirmation_records.py",
+      "sha256_at_inventory": "7d390ca9ffa7024bbe1909f695c9835181c17b024d556aceb3b468d9fba9d83e",
+      "state": "step1_verified_not_UI_runtime_connected"
+    },
+    {
+      "path": "../requirements/file_tools/recovery.py",
+      "sha256_at_inventory": "cfebc48b4970a1ea94b65ad05cc01be0ccc93ea2832ce00c5f184309014a7ddf",
+      "state": "step1_verified_not_UI_runtime_connected"
+    }
+  ],
+  "configuration_dependency": {
+    "foundation": "../requirements",
+    "local_config": "../requirements/config/local.json",
+    "exists_at_step2": true,
+    "policy": "仅已有共享基础的依赖记录；本步不创建或改写配置，不启动 UI 服务。"
+  },
+  "runtime_sources": {
+    "policy": "ui-tools-v1 运行源码采用记录；加载器启动及每次工具调用按这些摘要强制核对，变更必须先人工更新本记录，不允许运行时自动重写。",
+    "contract_version": "ui-tools-v1",
+    "stage": "step5_gate2_accept_versions_receipts_recovery_implemented",
+    "files": [
+      {
+        "path": "mcp_server.py",
+        "sha256": "f7f238f7e23fefe8a648b85f785004762b234586a709c4e4db4000140689b7b3"
+      },
+      {
+        "path": "shared_loader.py",
+        "sha256": "e38b2cedfbf60f40ca1491eaa4ee5c7da1d23bd1ab9e675f6a124ee1903c7270"
+      },
+      {
+        "path": "file_tools/__init__.py",
+        "sha256": "9e6cba607facbb991a58c766371388385481f70d61929240fc37f1ef15a5cba7"
+      },
+      {
+        "path": "file_tools/context.py",
+        "sha256": "1b82a111b654c29315f94301cb2c3f0b5897a59e77dd7db206b04cb335b040e9"
+      },
+      {
+        "path": "file_tools/versions.py",
+        "sha256": "8e52b3ce630e300a7657251aa41457da4535aeb0e6c2fe2a226c6e2986a071ed"
+      },
+      {
+        "path": "file_tools/transactions.py",
+        "sha256": "f5127315bc09d95f28c0e8fff73ad7c12571df8a9b2044a177eb00338bbf8cee"
+      },
+      {
+        "path": "file_tools/workspace.py",
+        "sha256": "ac3941989bba5f3cf87d936cc65e53d1c137014aabd91548b62e6659cbc99f1f"
+      }
+    ]
+  },
+  "related_documents": [
+    {
+      "path": "../../../fusion-design/requirements-construction-review-and-reuse-guide.md",
+      "sha256": "a67a838eaa3b4363cb10b82c1e606049b0ec9e1482a4982e0e4371f11e02c53a",
+      "role": "融合设计依据，非新增角色入口"
+    },
+    {
+      "path": "../../../fusion-design/00-拆解与融合框架.md",
+      "sha256": "cd15f90c7e231b548d4e71379fe435a5a3c491499cec01f7a9c099b3621683a0",
+      "role": "融合设计依据，非新增角色入口"
+    },
+    {
+      "path": "../../../fusion-design/05-项目成果索引与确认交接.md",
+      "sha256": "053205c16e1f6469d3a9937bf87c5b1c54da3392c87d732f60201bdb556c91b6",
+      "role": "融合设计依据，非新增角色入口"
+    },
+    {
+      "path": "../../../fusion-design/module-design-template.md",
+      "sha256": "23a8e1b4d540331431691ba7b941f080baf1c71395283049043d60dd5a08911e",
+      "role": "融合设计依据，非新增角色入口"
+    }
+  ],
+  "step1_evidence": [
+    {
+      "file": "runtime-dependency-verification.md",
+      "sha256": "fbd54ba5e407aafe747694bae4ce66389fb257f89a582143923102c152c0e0ee",
+      "scope": "保留步骤 1 时点证据，不回填后续入口状态"
+    },
+    {
+      "file": "verification/verify_runtime_dependencies.py",
+      "sha256": "4b6811c6582dab658e6470d7ebf3920b7fc4a525bddf956de013ed0ae4820ce1",
+      "scope": "保留步骤 1 时点证据，不回填后续入口状态"
+    },
+    {
+      "file": "verification/runtime-dependency-verification.json",
+      "sha256": "f9b88796de56d6a7c4394bd514844e4e14f40e20ff506df572cfab1299532623",
+      "scope": "保留步骤 1 时点证据，不回填后续入口状态"
+    }
+  ],
+  "not_created": [
+    "真实客户端配置与安装器",
+    "正式业务基线确认、登记、交接与下游启动"
+  ],
+  "verification_boundary": "步骤 5 临时项目实现与开发自验证据；不证明浏览器、视觉、业务确认、门 2 独立验收或真实客户端接入通过。",
+  "sync_policy": "手动核对来源与实际差异后更新；不自动覆盖副本、换源、改上游或刷新锁。SOURCES.json 不包含自身摘要。",
+  "document_revisions": [
+    {
+      "date": "2026-11-02",
+      "file": "ui-design.md",
+      "previous_sha256": "857c36be2e341ff666f33442c2e38cbe984089d92fb9da7cbe26d239444e6a17",
+      "sha256": "921067d6c98660f05485578d6c4cb63189fe76369ae5852d39f68ac13c1e44b0",
+      "reason": "用户授权步骤 4：建立工具契约和测试清单，同步入口／进度；未实现工具代码。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "agent-file-workflow.md",
+      "previous_sha256": "c516ccf3c44d1614cded4f4d40cee63820635e9076da63f72789ced169e40a2b",
+      "sha256": "53e4e9474c4cb7eb3792e2efbb0cda97dfb4ba5ba6a61b583a1cc7e029add603",
+      "reason": "用户授权步骤 4：建立工具契约和测试清单，同步入口／进度；未实现工具代码。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "README.md",
+      "previous_sha256": "51e4d615349add39bbc9b9873ed92e2ee1724d19cc3a223909283d6c1552c6c9",
+      "sha256": "3b783dd8d103dc022a65ea7171b18c168f887960e34c9b175dd68c3b50dbc86a",
+      "reason": "用户授权步骤 4：建立工具契约和测试清单，同步入口／进度；未实现工具代码。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-module-construction-plan.md",
+      "previous_sha256": "80430b937d17335131878aa17ae150029a32380bff8769b84b2b397812e153fd",
+      "sha256": "58aa701b135556ef130552fc3d425139c4c55fd9afaf06476efbbf4ee91843b0",
+      "reason": "用户授权步骤 4：建立工具契约和测试清单，同步入口／进度；未实现工具代码。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-tools-implementation-plan.md",
+      "previous_sha256": null,
+      "sha256": "2395d66e671474d178191eafaa4c4a48458c225a136cab459e8f0520be6e2278",
+      "reason": "用户授权步骤 4：建立工具契约和测试清单，同步入口／进度；未实现工具代码。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-tools-test-checklist.md",
+      "previous_sha256": null,
+      "sha256": "3367c416aa11a81f463302669eca423556e5f144c2931057df35256c56a7158d",
+      "reason": "用户授权步骤 4：建立工具契约和测试清单，同步入口／进度；未实现工具代码。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-tools-implementation-plan.md",
+      "previous_sha256": "2395d66e671474d178191eafaa4c4a48458c225a136cab459e8f0520be6e2278",
+      "sha256": "5da11b8676e876a88aa962c8aac3f1cde6f32d1a7f7a1edeac51ad3ac12fe57a",
+      "reason": "步骤 4 文档自查补齐返回对象、摘要与恢复边界；无运行代码变更。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-design.md",
+      "previous_sha256": "921067d6c98660f05485578d6c4cb63189fe76369ae5852d39f68ac13c1e44b0",
+      "sha256": "734c711f8dabc45fd97ba3b205ce45ffd39407b393c38c6c22074635bb72be7a",
+      "reason": "用户要求输出步骤 5 的 Agent 逐步开发方案；仅同步入口和进度，未实现运行代码。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "README.md",
+      "previous_sha256": "3b783dd8d103dc022a65ea7171b18c168f887960e34c9b175dd68c3b50dbc86a",
+      "sha256": "ade278dc5a6b02fbbfe764ae27ad226da48edd292158a25e4302dc7351f2041a",
+      "reason": "用户要求输出步骤 5 的 Agent 逐步开发方案；仅同步入口和进度，未实现运行代码。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-module-construction-plan.md",
+      "previous_sha256": "58aa701b135556ef130552fc3d425139c4c55fd9afaf06476efbbf4ee91843b0",
+      "sha256": "776818766d2e882839614ed7b00e45994d03b51f88b25332fccc02cb177959a8",
+      "reason": "用户要求输出步骤 5 的 Agent 逐步开发方案；仅同步入口和进度，未实现运行代码。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-step5-development-plan.md",
+      "previous_sha256": null,
+      "sha256": "b8e6e0ed7f4385060d569f798b101484259a191d367fa18b70d51e5ad1156b64",
+      "reason": "用户要求供 Agent 按序开发的详细方案，区分步骤 5 自验与步骤 6 系统故障验证。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "README.md",
+      "previous_sha256": "ade278dc5a6b02fbbfe764ae27ad226da48edd292158a25e4302dc7351f2041a",
+      "sha256": "1f415eee7662faedbac38b75e461e442be04f79803ee6f7f08e41aa445a65727",
+      "reason": "用户要求测试开发结果的执行文档；同步文档入口，未实现或运行 UI 工具测试。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-module-construction-plan.md",
+      "previous_sha256": "776818766d2e882839614ed7b00e45994d03b51f88b25332fccc02cb177959a8",
+      "sha256": "cd64c91085680f445b8ba4ca5e0c227850c7819423e8775c93a69229df07b197",
+      "reason": "用户要求测试开发结果的执行文档；同步文档入口，未实现或运行 UI 工具测试。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-step5-development-plan.md",
+      "previous_sha256": "b8e6e0ed7f4385060d569f798b101484259a191d367fa18b70d51e5ad1156b64",
+      "sha256": "0c4bda24ff9118da8bb769a268ab14e708edf93744ff63edabf6117501356f3d",
+      "reason": "用户要求测试开发结果的执行文档；同步文档入口，未实现或运行 UI 工具测试。"
+    },
+    {
+      "date": "2026-11-02",
+      "file": "ui-step5-acceptance-test.md",
+      "previous_sha256": null,
+      "sha256": "22182003c2b7d57c757bf81997f49a93d9a9587ff726c90908af0ec4ce67b8c2",
+      "reason": "用户要求一份可供 Agent 测试开发结果的验收执行文档；不预填运行通过。"
+    },
+    {
+      "date": "2026-11-05",
+      "file": "file_tools/context.py",
+      "previous_sha256": "1302955037294fcf16f073d4c76b2f6e7a8abd36785adf32320c3ce624199383",
+      "sha256": "1b82a111b654c29315f94301cb2c3f0b5897a59e77dd7db206b04cb335b040e9",
+      "reason": "PATH-EXPLICIT-04 attempt=1：UI 六工具复用共享项目绑定，凭据联合路径、编号与目录身份，显式导入使用当前项目边界。"
+    },
+    {
+      "date": "2026-11-05",
+      "file": "file_tools/workspace.py",
+      "previous_sha256": "c22e462c1dcd39cfa489d0df346bf3e760f9e7d4261f984b2241bf300cd04b7f",
+      "sha256": "ac3941989bba5f3cf87d936cc65e53d1c137014aabd91548b62e6659cbc99f1f",
+      "reason": "PATH-EXPLICIT-04 attempt=1：候选和回执持久化绑定指纹，准备与检查使用当前 import_roots，不再从持久 root 重建授权。"
+    },
+    {
+      "date": "2026-11-05",
+      "file": "file_tools/transactions.py",
+      "previous_sha256": "191d059cfaf5cb9c67d8bd00a6494759332ce49ef1ea6113d384d6a76803e1f1",
+      "sha256": "f5127315bc09d95f28c0e8fff73ad7c12571df8a9b2044a177eb00338bbf8cee",
+      "reason": "PATH-EXPLICIT-04 attempt=1：接受与恢复锁内重验绑定，事务防跨目录消费；导入撤权后 resume 拒绝，本地 rollback 不读取外部来源。"
+    },
+    {
+      "date": "2026-11-05",
+      "file": "README.md",
+      "previous_sha256": "520efd0a380d0b652c56c85dbd479b8e8181508d51f795b1f510ccf460812a42",
+      "sha256": "060665b633ff99260f19d288f8e1305ff71a6b719318226d5a7cb45c74a60d2e",
+      "reason": "PATH-EXPLICIT-05：共享闭包更新为十文件，登记六工具显式目录与当前导入授权规则"
+    },
+    {
+      "date": "2026-11-05",
+      "file": "ui-design.md",
+      "previous_sha256": "734c711f8dabc45fd97ba3b205ce45ffd39407b393c38c6c22074635bb72be7a",
+      "sha256": "b66f4c8058c3d11aaa58bf65ba32b9ceb3cabd37762cd33d8ca8f58bbca0bb1d",
+      "reason": "PATH-EXPLICIT-05：移除工具尚未实现的过时说明，明确完整目录、候选接受与历史恢复边界"
+    },
+    {
+      "date": "2026-11-05",
+      "file": "agent-file-workflow.md",
+      "previous_sha256": "53e4e9474c4cb7eb3792e2efbb0cda97dfb4ba5ba6a61b583a1cc7e029add603",
+      "sha256": "0873d85146a7a56274c5ea54aaa39e294a5b27e5ce3870b1e864bfd747ac8070",
+      "reason": "PATH-EXPLICIT-05：文件约定对齐已建立六工具、写能力、完整 project_path 与实际恢复证据"
+    }
+  ],
+  "updated_on": "2026-11-05",
+  "contract_version": "ui-tools-v1",
+  "step4_evidence": {
+    "file": "verification/step4-contract-check.json",
+    "sha256": "5d7c44272e4a707a0d07f1a0fbf27d458940f85ed8a41450317915638ec69e11",
+    "scope": "文档、链接、来源、接口和测试编号静态自查；未运行正式程序测试、未独立验收。"
+  },
+  "step5_plan_evidence": {
+    "file": "verification/step5-plan-check.json",
+    "sha256": "9f06ccebab616e02c1a07ed96f5bde078ecd963f7ef60c1338b69f946906b037",
+    "scope": "开发任务、链接、来源和边界的文档静态自查；未实现或运行 UI 工具及正式程序测试。"
+  },
+  "step5_acceptance_document_evidence": {
+    "file": "verification/step5-acceptance-document-check.json",
+    "sha256": "565ee5f918a77ea4f28577b5b870acce5ad71d3f21f119d10420c9c3aab9163d",
+    "scope": "验收执行文档的任务、链接、来源与边界静态自查；未执行正式程序测试或运行验收。"
+  }
+}

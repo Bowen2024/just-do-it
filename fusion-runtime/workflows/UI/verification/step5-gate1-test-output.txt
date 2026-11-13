@@ -1,0 +1,71 @@
+# UI step5 gate1 (S5-00 + 5A) self-verification evidence
+# generated: 2026-11-02T16:44:30Z
+
+## environment
+cwd: /Users/bowen/Desktop/博文的career/vibe- coding
+python: 3.13.3
+executable: /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
+platform: macOS-26.6.2-arm64-arm-64bit-Mach-O
+machine: arm64
+git version 2.52.0
+git HEAD: f33f9e66b42c70ce3f03b3976a6eebf8995620ab
+
+## [CMD] aggregated UI tests from workspace root
+$ python3 -B -m unittest discover -s fusion-runtime/tests -p 'test_ui_*.py'
+.......................................................................
+----------------------------------------------------------------------
+Ran 71 tests in 5.402s
+
+OK
+aggregated_exit=0
+
+## [CMD] repeat run (determinism)
+Ran 71 tests in 5.474s
+
+OK
+repeat_exit=0
+
+## [CMD] dependency/closure probe in isolated -I -S -B child
+$ python3 -B .../verify_runtime_dependencies.py --output <temp>
+{"passed": true, "checks": 22, "evidence": "/private/tmp/ui-gate1-dependency.json", "failed_checks": []}
+probe_exit=0
+probe_passed: True checks: 22 runs: [('normal', True, 0), ('missing-module', True, 0)]
+
+## [CMD] full directory regression (all test_*.py)
+$ python3 -B -m unittest discover -s fusion-runtime/tests -p 'test_*.py'
+----------------------------------------------------------------------
+Ran 268 tests in 22.016s
+
+FAILED (failures=7)
+full_regression_exit=0
+
+## failing module isolated (proves independence from UI changes)
+$ python3 -B -m unittest discover -s fusion-runtime/tests -p 'test_requirements_localization.py'
+Ran 23 tests in 1.473s
+
+FAILED (failures=7)
+localization_exit=0
+
+## pre-existing residue (outside UI write_scope)
+total 0
+drwxr-xr-x  3 bowen  staff   96 Nov  2 14:20 .
+drwxr-xr-x@ 5 bowen  staff  160 Nov  2 14:20 ..
+drwxr-xr-x  5 bowen  staff  160 Nov  2 14:21 20261102T062029639617Z
+mtime: Nov  2 14:20:29 2026  fusion-runtime/workflows/requirements/config/migration-backups
+
+## true process exit codes (no pipe masking)
+ui_aggregated_exit=0 (Ran 71 tests in 5.417s OK)
+full_regression_exit=1 (Ran 268 tests in 22.000s FAILED)
+localization_alone_exit=1 (Ran 23 tests in 1.485s FAILED)
+
+## full-regression failures (all in requirements localization; zero UI)
+  FAIL: test_backup_failure_stops_before_any_config_write (test_requirements_localization.MigrationTests.test_backup_failure_stops_before_any_config_write)
+  FAIL: test_command_line_preview_prints_a_ready_apply_command (test_requirements_localization.MigrationTests.test_command_line_preview_prints_a_ready_apply_command)
+  FAIL: test_local_config_is_copied_verbatim_and_never_overwritten (test_requirements_localization.MigrationTests.test_local_config_is_copied_verbatim_and_never_overwritten)
+  FAIL: test_modified_missing_and_concurrently_changed_entries_are_not_overwritten (test_requirements_localization.MigrationTests.test_modified_missing_and_concurrently_changed_entries_are_not_overwritten)
+  FAIL: test_preview_backup_exact_replacement_and_idempotent_repeat (test_requirements_localization.MigrationTests.test_preview_backup_exact_replacement_and_idempotent_repeat)
+  FAIL: test_rollback_restores_only_the_migrated_entry_and_reports_code_separately (test_requirements_localization.MigrationTests.test_rollback_restores_only_the_migrated_entry_and_reports_code_separately)
+  FAIL: test_real_tree_has_no_switched_config_or_migration_backup (test_requirements_localization.RealTreeTests.test_real_tree_has_no_switched_config_or_migration_backup)
+
+## localization module has zero UI imports
+  ui_import_lines=0

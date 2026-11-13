@@ -1,0 +1,148 @@
+{
+  "date": "2026-10-28",
+  "verification_scope": "第 6 步：文档、程序方法加载与现有 MCP 接入；未运行真实需求 Agent",
+  "main_document": {
+    "path": "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/requirements.md",
+    "sha256": "c48ab257c6abc2dc6e59de85de99ead0bcb94b028385ca1dca18fad5adefa5f4",
+    "program_body_and_sha_match": true,
+    "program_and_mcp_paths_match": true
+  },
+  "checks": {
+    "source_links": {
+      "passed": true,
+      "count": 5,
+      "sources": [
+        {
+          "path": "/Users/bowen/Desktop/博文的career/vibe- coding/Develop_Helper/harness-core/skills/sdd-product-design/phase-A.md",
+          "sha256": "1f894c9730f009b76ff558669db50af41d7eced2087ae3845c4fa80491eca316"
+        },
+        {
+          "path": "/Users/bowen/Desktop/博文的career/vibe- coding/Develop_Helper/harness-core/skills/sdd-product-design/phase-R.md",
+          "sha256": "97fccdaf310a1a5e19dadb29a5afb615d1ecb4a8e21d4c660132e7e49b82e5f5"
+        },
+        {
+          "path": "/Users/bowen/Desktop/博文的career/vibe- coding/Develop_Helper/harness-core/skills/sdd-product-design/references/research-template.md",
+          "sha256": "165d133eda370ce7e00c3b0e8c2510b50f2f094337ce63421632874affc6fc35"
+        },
+        {
+          "path": "/Users/bowen/Desktop/博文的career/vibe- coding/buzz-develop-helper/capabilities/requirements-prd-template.md",
+          "sha256": "118f594d9cf1449da6439280e98085af3c56772302591da3e87bb7fe1839bc8f"
+        },
+        {
+          "path": "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/agent-file-workflow.md",
+          "sha256": "c6ff02090d9b0ea8ea5dbe0d69d9b3bb2a380b435a2c49130ab1371fcdf41e8e"
+        }
+      ]
+    },
+    "main_rule_source": {
+      "passed": true,
+      "legacy_is_pointer": true,
+      "program_fallback_to_legacy": false
+    },
+    "method_selection": {
+      "passed": true,
+      "matrix": {
+        "research=False,prd=False": [
+          "A"
+        ],
+        "research=True,prd=False": [
+          "A",
+          "R",
+          "research_template"
+        ],
+        "research=False,prd=True": [
+          "A",
+          "prd_template"
+        ],
+        "research=True,prd=True": [
+          "A",
+          "R",
+          "research_template",
+          "prd_template"
+        ]
+      }
+    },
+    "source_errors": {
+      "passed": true,
+      "evidence": "既有方法测试覆盖缺失、空/非法正文、超限、断链、漂移、失败后保留候选与禁止保存"
+    },
+    "existing_mcp": {
+      "passed": true,
+      "exit_code": 0,
+      "tools": [
+        "requirements_project_initialize",
+        "requirements_project_inspect",
+        "requirements_read_context",
+        "requirements_save_draft"
+      ],
+      "input_schemas_unchanged": true,
+      "main_document_hint_in_all_tools": true,
+      "methods_called": [
+        "initialize",
+        "notifications/initialized",
+        "tools/list"
+      ],
+      "business_tools_called": false,
+      "evidence": "MCP 与共用入口测试覆盖只读能力、跨项目引用拒绝、版本冲突、历史及写后失败"
+    },
+    "side_effects": {
+      "passed": true,
+      "watched_file_count": 22,
+      "changed_files": [],
+      "history_filenames_unchanged": true,
+      "business_tools_called": false,
+      "real_agents_started": false
+    }
+  },
+  "upstream_before": {
+    "status": "pass",
+    "checked_entries": 250,
+    "runtime_readonly_enforced": false,
+    "buzz_connected": false,
+    "note": "仅路径与内容基线通过；运行时权限和业务闭环未验证"
+  },
+  "upstream_after": {
+    "status": "pass",
+    "checked_entries": 250,
+    "runtime_readonly_enforced": false,
+    "buzz_connected": false,
+    "note": "仅路径与内容基线通过；运行时权限和业务闭环未验证"
+  },
+  "regression": {
+    "tests": 56,
+    "elapsed_seconds": 2.282,
+    "result": "OK",
+    "log": "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/tests/logs/2026-10-28-entry-integration-regression.txt"
+  },
+  "unchanged_files": {
+    "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/requirements.md": "c48ab257c6abc2dc6e59de85de99ead0bcb94b028385ca1dca18fad5adefa5f4",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/buzz-develop-helper/roles/requirements.md": "0f4a7f80e521cf15b58bf6b7ee791516c8ef7ff158f19f601fb202b6ca856d3c",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/buzz-develop-helper/roles/README.md": "dd70aefd4acc5e4ec8110a1a19ed03cdcf70afcaa234b966cb59542def498b34",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/README.md": "1f3c4c39e9211c0ffad2da301a4065aa071a27c42cfc0ce10cddf8f015ce37da",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/agent-file-workflow.md": "c6ff02090d9b0ea8ea5dbe0d69d9b3bb2a380b435a2c49130ab1371fcdf41e8e",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/hardcode/tools.py": "8a34ce64fcb270662dc391e32c0bc412c5522aa6f9f0348fb83b6bd0746c8067",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/hardcode/workflow.py": "85e9e1a39c79d45cf490fd9301d847ebb42f970712fc7e36c2b7d26982635c9a",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/cursor_mcp.py": "3c0f52a3c9c8e49bfeb352af5ee495be9a686d44e0bad44af4e1b3a07d1de1c7",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/fusion-runtime/workflows/requirements/file_tools/SOURCES.json": "cb36d3751b4e46085ba9ef58e9266bcbe11c060e7df9b281f9f4a43e8775a9ab",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/buzz-develop-helper/config/local.json": "79ef0e1bc579473f4ba52b29518b662072a140c82aef5e5ca0f1dfdefb2fa322",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/buzz-develop-helper/upstream-lock.json": "54397bd30e25f74a1801b298d1dca88916c1daa82cc46551f6bcea7f1f430373",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/buzz-develop-helper/capabilities/requirements.md": "660dd1b1243363a368d1205df306115a10011863e37517f1c53231645be043e2",
+    "/Users/bowen/Desktop/博文的career/vibe- coding/buzz-develop-helper/adapters/requirements-buzz.md": "a96cae81e29eaec68a2be9f40512c72eac8b36ff28237cd94d2edcb9c7806397",
+    "/Users/bowen/.cursor/mcp.json": "26157ca781a55129dd2bed3e2ecd751c3abb258678f6128f4422ecbf43efec5d",
+    "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点/project.json": "de369ddcc040694c0b09be41e7d128c27bb1de7d925fbb2d60dc734fa8fa2853",
+    "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点/README.md": "10a19a79698e000c66a8fb33121b57f8fd989867d14bfa3acc72471daa8065da",
+    "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点/.gitignore": "6fb9ed8897de4f5192f0ff706372425b27ad3334cf4393477cc41864a07dc9e5",
+    "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点/.cursor/mcp.json": "d8e397af03b5b032f21d0aa967086f0c78b33c87b76f2e9898ae0a144df7de02",
+    "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点/docs/requirements.md": "424279c67a3573f5540d5fc523069f46cab5d6e81f7fbb69af6b6aa3c22f7972",
+    "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点/docs/PRD.md": "missing",
+    "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点/docs/requirements-history/424279c67a3573f5540d5fc523069f46cab5d6e81f7fbb69af6b6aa3c22f7972.md": "424279c67a3573f5540d5fc523069f46cab5d6e81f7fbb69af6b6aa3c22f7972",
+    "/Users/bowen/Desktop/博文的career/my_mind/语音约碰面地点/docs/requirements-history/c92037435aa53b0c42e6afda60a60f3a44b16a658b2f23319b2bb8bed0c08dd7.md": "c92037435aa53b0c42e6afda60a60f3a44b16a658b2f23319b2bb8bed0c08dd7"
+  },
+  "limitations": [
+    "程序需求角色使用 FakeAgentRunner；不代表真实模型业务质量",
+    "已安装 MCP 仅握手与工具发现；未由 Cursor 新会话验证主动读取",
+    "未验证真实调研、完整 PRD 保存或新项目初始化",
+    "保留原 S1—S7 结果，未重做其完整验收"
+  ],
+  "implementation_changed": false
+}

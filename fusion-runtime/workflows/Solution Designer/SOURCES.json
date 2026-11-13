@@ -1,0 +1,528 @@
+{
+ "schema_version": 1,
+ "recorded_on": "2026-10-31",
+ "scope": "步骤 5—7 已在既定范围通过 Honey 独立验收；步骤 8 已准备真实 foundation 并经 Codex 原生 CLI 注册服务；用户重启后当前会话已发现三工具，真实项目读取／检查通过；真实用途确认和业务保存完整链未验；生产代码和测试未改",
+ "upstream": {
+  "entrypoint": "methods/develop-helper",
+  "canonical_source": "Develop_Helper",
+  "shared_lock_path": "../requirements/upstream-lock.json",
+  "shared_lock_file_sha256": "54397bd30e25f74a1801b298d1dca88916c1daa82cc46551f6bcea7f1f430373",
+  "locked_tree": {
+   "entry_count": 250,
+   "policy": "source-tree-v1-no-projects-dependencies-git-cache-no-follow",
+   "schema_version": 1,
+   "sha256": "fb97638c61d552d32d677a4e8a161d81efae4ac1adb5bd4638b1ad7e1619f40b"
+  },
+  "policy": "上游正文唯一；只读核对，不自动刷新锁定基线"
+ },
+ "local_links": [
+  {
+   "file": "methods/develop-helper",
+   "target": "../../../../Develop_Helper",
+   "resolves_to": "Develop_Helper",
+   "purpose": "方案直接方法入口，不经 requirements 或旧 upstream 软链串接"
+  },
+  {
+   "file": "templates/research-template.md",
+   "target": "../methods/develop-helper/harness-core/skills/sdd-product-design/references/research-template.md",
+   "resolves_to": "Develop_Helper/harness-core/skills/sdd-product-design/references/research-template.md",
+   "purpose": "上游调研模板入口，不维护副本"
+  }
+ ],
+ "local_copies": [
+  {
+   "file": "templates/tech-spec-template.md",
+   "source": "buzz-develop-helper/capabilities/solution-tech-spec-template.md",
+   "source_sha256": "5bbb37eb60266d3ab7cb201b6def58516edfbbc362a306ca7ce79d9d913eea6a",
+   "copy_sha256": "5bbb37eb60266d3ab7cb201b6def58516edfbbc362a306ca7ce79d9d913eea6a",
+   "copy_mode": "byte-for-byte",
+   "content_changes": [],
+   "maintenance": "本地文件为本角色唯一工程模板维护位置；旧模板继续服务原使用方，人工核对后同步",
+   "usage_adaptations": "候选不含模板顶部受管 YAML；独立使用的 Main 用途建议、统一编号与深度裁剪在 solution-design.md 第 5.1 节说明，不改写复制内容"
+  }
+ ],
+ "local_documents": [
+  {
+   "file": "solution-design.md",
+   "sha256": "7df470bb9edacaa3de2d7cfd4befa9817c591bf5d146db7ce8d362303562d67c",
+   "role": "角色主文档；步骤 6-A 按已实现的独立 stdio 三工具校准可用性与调用时机口径，参数表仍归实施说明"
+  },
+  {
+   "file": "agent-file-workflow.md",
+   "sha256": "d843b66cbc8bea57f791d9cac79a951e3dbbec5f77be1e4e8c6c29fcd719b75e",
+   "role": "文件操作约定；步骤 6-A 把工具前提与保存五态从拟建口径校准为已实现隔离服务口径，真实客户端链路仍待步骤 8"
+  },
+    {
+      "file": "README.md",
+      "sha256": "9af998996b97d4e7a2ba7d57c3c760c0fc440463c6f97650e0ab03024f36d14a",
+      "role": "入口、依赖边界、目录规则与历史验收索引；真实确认／保存链以对应证据为准"
+  },
+  {
+   "file": "solution-tools-implementation-plan.md",
+   "sha256": "0d98fcedbde9fc9b84aaba3c213e8df7e787f6f11120f3d37c60e3c0297b342f",
+   "role": "步骤 4 实施说明 v1.2；统一维护建设细节，两份手册仅为执行入口；步骤 5 已据此实施并通过独立验收，步骤 8 真实链路待验"
+  },
+  {
+   "file": "solution-tools-test-checklist.md",
+   "sha256": "ee65fe009db2c0fb5587b512dd47517e52ab06993b8848d37ab5e774a0dbc9c7",
+   "role": "详细测试清单 v1.1；统一维护原 26 项操作与判定；步骤 5—7 已按此自验并经 Honey 独立验收，步骤 8 对应项待验"
+  }
+ ],
+ "planned_shared_dependencies": [
+  {
+   "path": "../requirements/file_tools/__init__.py",
+   "sha256_at_inventory": "280ecab1b265972ec9b4dd0f3b8a9a698d892f389649ed1526dfd6b6963a5c0a",
+   "symbols": [],
+   "state": "runtime_connected_controlled_alias",
+   "note": "2026-11-01 实施准备补记受控包加载所需入口；原八模块盘点仍保留为历史基线"
+  },
+  {
+   "path": "../requirements/file_tools/check_foundation.py",
+   "sha256_at_inventory": "9aa95260425aad171d1c87653cbbdbc487d59caef90340ad9f2e5114b06d14d0",
+   "p5_source_update": "2026-11-05：需求入口补充十文件采用校验；前摘要 0d0453d5adc453f01f4bee38dae986a93d4293e5cfc3b838d9798e83ebba1f04",
+   "symbols": [
+    "check",
+    "configured_directory",
+    "read_json",
+    "snapshot"
+   ],
+   "state": "runtime_connected_controlled_alias"
+  },
+  {
+   "path": "../requirements/file_tools/project_binding.py",
+   "sha256_at_inventory": "811b1f33b4704dfbf3cd1a96d65405cc30cae839159a90ac5a5f27541c2d9975",
+   "symbols": [
+    "bind_project",
+    "revalidate",
+    "bind_initialized",
+    "binding_fingerprint",
+    "environment_fingerprint",
+    "require_project_id"
+   ],
+   "state": "runtime_connected_controlled_alias",
+   "note": "2026-11-03 P1 新增第十个受控共享模块；在 check_foundation 后、project_init 前加载。attempt=2 修复旧根边界与映射一致性；前摘要 3bc2a1c8cd89d29b83a3bae17e65c3e623d4ce6038c7917f00ce178b81d1a41c。2026-11-04 PATH-EXPLICIT-02：初始化锁内重验适配；前摘要 7c52a56996d41923be8f72f51d4612d7a9bc0b0e35505bf7482bece528aeb33c"
+  },
+  {
+   "path": "../requirements/file_tools/project_state.py",
+   "sha256_at_inventory": "dbba61ab01f342720116f5a1705f30eaea9ac1b322a077d200014f6d1709defe",
+   "symbols": [
+    "project_state_lock",
+    "exclusive_lock",
+    "atomic_replace"
+   ],
+   "state": "runtime_connected_controlled_alias"
+  },
+  {
+   "path": "../requirements/file_tools/project_init.py",
+   "sha256_at_inventory": "426c4cb0ff6d39f8f24fe15c53c9b65a96ed302826ace0693ce8c778cfe82013",
+   "symbols": [
+    "context",
+    "load_project",
+    "require_project_id",
+    "project_directories"
+   ],
+   "state": "runtime_connected_controlled_alias",
+   "note": "2026-11-03 PATH-EXPLICIT-01 attempt=2：目录映射纯校验委托 project_binding；前摘要 3fa43a9e88964025453d44c5918637ff2e7ba8e81054156096ee6a5944b3c94d。2026-11-04 PATH-EXPLICIT-02：绑定透传、初始化依赖与 CLI；前摘要 02d5e9253898babd5c797ae704525cd4044df75af84817178f2183781e6d7c53"
+  },
+  {
+   "path": "../requirements/file_tools/requirements.py",
+   "sha256_at_inventory": "e4707aab6f2081f7775e493b2061cc611b67be4f689124adc49e3a096207df9d",
+   "symbols": [
+    "read_document",
+    "safe_path",
+    "digest",
+    "LIMIT",
+    "inspect_prd",
+    "validate_source_digests"
+   ],
+   "state": "runtime_connected_controlled_alias"
+  },
+  {
+   "path": "../requirements/file_tools/project_info.py",
+   "sha256_at_inventory": "448f3c76e495385f4844d40aed6fbf913f4966e8cb9f5fe46b0e600b19dac6f0",
+   "symbols": [
+    "report",
+    "resolve_specification"
+   ],
+   "state": "runtime_connected_controlled_alias"
+  },
+  {
+   "path": "../requirements/file_tools/recovery.py",
+   "sha256_at_inventory": "cfebc48b4970a1ea94b65ad05cc01be0ccc93ea2832ce00c5f184309014a7ddf",
+   "symbols": [
+    "verify_prd_confirmation"
+   ],
+   "state": "runtime_connected_controlled_alias"
+  },
+  {
+   "path": "../requirements/file_tools/confirmation_records.py",
+   "sha256_at_inventory": "7d390ca9ffa7024bbe1909f695c9835181c17b024d556aceb3b468d9fba9d83e",
+   "symbols": [
+    "read_decisions",
+    "artifact_version",
+    "validate_snapshot"
+   ],
+   "state": "runtime_connected_controlled_alias"
+  },
+  {
+   "path": "../requirements/file_tools/artifact_records.py",
+   "sha256_at_inventory": "a4fff1ee80244707553f9fefd68cc63a86d441117d55ae68af9bcc245d4b1fb3",
+   "symbols": [
+    "validate_registry",
+    "content_sha"
+   ],
+   "state": "runtime_connected_controlled_alias"
+  }
+ ],
+ "configuration_dependency": {
+  "foundation": "../requirements",
+  "local_config": "../requirements/config/local.json",
+  "state_at_recording": "missing",
+  "example_path": "../requirements/config/local.example.json",
+  "lock_path": "../requirements/upstream-lock.json",
+  "current_state": "prepared_for_codex_step8",
+  "prepared_on": "2026-11-02",
+  "current_sha256": "79ef0e1bc579473f4ba52b29518b662072a140c82aef5e5ca0f1dfdefb2fa322",
+  "note": "state_at_recording 保留步骤 2 历史；步骤 8 已经原有准备工具从旧本机配置逐字节复制真实 local.json，保留映射并核对 250 项上游；Codex 原生注册已完成，用户稍后重载"
+ },
+ "related_documents": [
+  {
+   "file": "../../../fusion-design/agent-rule/FIZZ_DEVELOPMENT_RUNBOOK.md",
+   "sha256": "b8ea65405adfbd9347dcbef7bcc5519977a6560b4fa8ba6c08315810e48ad22a",
+   "role": "按用户要求收敛为简短开发执行入口；移除旧任务专章和重复建设细节"
+  },
+  {
+   "file": "../../../fusion-design/agent-rule/HONEY_VERIFICATION_RUNBOOK.md",
+   "sha256": "b1b6fbfb4b44e97c47b00911d781566df5bbe8a04555c17b2b3ad96409b60117",
+   "role": "按用户要求收敛为简短独立验收入口；操作和判定统一引用清单"
+  }
+ ],
+ "sync_policy": "Manual；来源或本地内容变化时先核对并记录；不自动覆盖原件、副本或刷新锁定基线。角色文档修改后更新其当前摘要。",
+ "not_created": [],
+ "verification_boundary": "链接、字节、结构和规则一致性核对；不代表真实设计试用、受控保存、客户端接入或正式确认链通过",
+ "document_revisions": [
+  {
+   "date": "2026-11-01",
+   "file": "README.md",
+   "previous_sha256": "5eed6ff484cddbe64e9dd0462b1250523a339050403a6ea43f5ef334b98b720b",
+   "sha256": "6f8f0a668a0c4dac08f9ba6ca4d59dde9b5cad6566f9f66428ab31e0ec20e5ed",
+   "reason": "步骤 3 已启动；同步进行中而非已验收的状态，不改方法、模板或工具契约"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "README.md",
+   "previous_sha256": "6f8f0a668a0c4dac08f9ba6ca4d59dde9b5cad6566f9f66428ab31e0ec20e5ed",
+   "sha256": "72ff392b3d6cf14259643b9099decaeaf8ff43a7079c969b442509329b69564e",
+   "reason": "步骤 3 本案例完成真实选择与候选反馈修订；不扩大为模型、工具或其他配置通过"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "README.md",
+   "previous_sha256": "72ff392b3d6cf14259643b9099decaeaf8ff43a7079c969b442509329b69564e",
+   "sha256": "40bf09efc98c2653b731b74d3f592aed625bc2b44fe9789b1c1365478c5f0103",
+   "reason": "补步骤 4 详细建设与契约候选入口，准确区分文档交付、实现和真实确认链"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "solution-tools-implementation-plan.md",
+   "previous_sha256": null,
+   "sha256": "734e7e911ffc0f115ed4eab77e62b20ab9d70478cc5297e7281a5bc486e0d5ec",
+   "reason": "按用户请求新建步骤 4 实施说明，提供工具契约、依赖、示例及验证安排；未创建代码或修改真实配置"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "solution-tools-implementation-plan.md",
+   "previous_sha256": "734e7e911ffc0f115ed4eab77e62b20ab9d70478cc5297e7281a5bc486e0d5ec",
+   "sha256": "fecec51ddd5401b2c916bc3cbdae62113aa54af251a63623782a43dd4334aad1",
+   "reason": "v1.1 补齐开工范围、分段、命令与手册／清单入口，澄清返回、限额和失败判定；未启动实施"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "solution-tools-test-checklist.md",
+   "previous_sha256": null,
+   "sha256": "98baa1d0e2c88f191358f8987145202d8bcf53987c486c1ddc8b11b623a2be08",
+   "reason": "新建原 26 个编号的详细自验与独立验收清单，区分文档、代码、真实链；尚未执行"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "README.md",
+   "previous_sha256": "40bf09efc98c2653b731b74d3f592aed625bc2b44fe9789b1c1365478c5f0103",
+   "sha256": "4985aba5f900c1570f30cecbfc7e3ae326baed3f43d086b9e4d425a20e5f4949",
+   "reason": "同步实施准备、清单、Fizz／Honey 专用入口及真实状态"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "../../../fusion-design/agent-rule/FIZZ_DEVELOPMENT_RUNBOOK.md",
+   "previous_sha256": "0372ab6f9a6c2adb1bf64e7ca5f647707a84086a3963e8312c860f0c83fb5bfe",
+   "sha256": "bccc667c972f1bc106f15177815eb700a9b9870bc6e8129c43509fe0238ce10b",
+   "reason": "用户授权新增方案工具第 0C 节并衔接自然语言任务通用规则"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "../../../fusion-design/agent-rule/HONEY_VERIFICATION_RUNBOOK.md",
+   "previous_sha256": "2a8c27bf4f1c15840a0cb02f6ca7e11988706f58a4a4dd7225f8f1d4debec17e",
+   "sha256": "e9bba32aca0c3c316142ae2082e6be87a86c1ff62bdc1be9a729330ee538ed87",
+   "reason": "用户授权新增方案工具第 0C 节，明确共用清单、正式只读与分层独立结论"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "../../../fusion-design/agent-rule/FIZZ_DEVELOPMENT_RUNBOOK.md",
+   "previous_sha256": "bccc667c972f1bc106f15177815eb700a9b9870bc6e8129c43509fe0238ce10b",
+   "sha256": "b8ea65405adfbd9347dcbef7bcc5519977a6560b4fa8ba6c08315810e48ad22a",
+   "reason": "用户要求手册只作简短执行入口；删除旧 requirements 专章与重复建设说明"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "../../../fusion-design/agent-rule/HONEY_VERIFICATION_RUNBOOK.md",
+   "previous_sha256": "e9bba32aca0c3c316142ae2082e6be87a86c1ff62bdc1be9a729330ee538ed87",
+   "sha256": "b1b6fbfb4b44e97c47b00911d781566df5bbe8a04555c17b2b3ad96409b60117",
+   "reason": "用户要求手册只作简短验收入口；操作与判定引用统一测试清单"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "solution-tools-implementation-plan.md",
+   "previous_sha256": "fecec51ddd5401b2c916bc3cbdae62113aa54af251a63623782a43dd4334aad1",
+   "sha256": "0d98fcedbde9fc9b84aaba3c213e8df7e787f6f11120f3d37c60e3c0297b342f",
+   "reason": "v1.2 明确建设细节唯一维护位置，更新简短手册指针；工具契约与实施范围不变"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "solution-tools-test-checklist.md",
+   "previous_sha256": "98baa1d0e2c88f191358f8987145202d8bcf53987c486c1ddc8b11b623a2be08",
+   "sha256": "ee65fe009db2c0fb5587b512dd47517e52ab06993b8848d37ab5e774a0dbc9c7",
+   "reason": "v1.1 同步手册指针；26 项测试操作与判定不变"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "README.md",
+   "previous_sha256": "4985aba5f900c1570f30cecbfc7e3ae326baed3f43d086b9e4d425a20e5f4949",
+   "sha256": "17168b71159db7b95b806faebbc8f4a8cb578569e7f6ef6bfeefb4ee222fc433",
+   "reason": "同步精简手册入口，移除已撤销 0C 锚点"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "README.md",
+   "previous_sha256": "17168b71159db7b95b806faebbc8f4a8cb578569e7f6ef6bfeefb4ee222fc433",
+   "sha256": "aa6733cc70e9e18b58d541fc4a52a438afabd1abf351a7a915dbc650ed985320",
+   "reason": "步骤 5 记录独立 stdio 工具、保存/配置能力、真实自验命令和计数；明确真实客户端与真实确认链仍未验证"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "README.md",
+   "previous_sha256": "aa6733cc70e9e18b58d541fc4a52a438afabd1abf351a7a915dbc650ed985320",
+   "sha256": "7981be2226dd533ff04b6319e9c31476e678f872968d90d127a1239450ef3dca",
+   "reason": "步骤 5 加固后自验计数更新为 39 tests（context 15、inspect 5、save 13、client/stdio 6）；能力范围不变"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "solution-design.md",
+   "previous_sha256": "343e2bc30b455980281afd9faf05d9e2ae5046ae4700fcf0ccb9876f5f76d9d2",
+   "sha256": "c27293fab3ec6933c1e871184100cba9412931cfa7fb1ff41b542cdc6a716cb6",
+   "reason": "步骤 6-A 按已实现的独立 stdio 三工具校准可用性与调用时机：区分隔离服务已实现与真实客户端/真实确认链接通；不复制参数表"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "agent-file-workflow.md",
+   "previous_sha256": "32cfcee4abeac4ecfcd2bc365945e675b8246aa6b7d18bef2f72ba65950f875c",
+   "sha256": "d05c3fc52b3179c5d8337a9f3454418193f7b02a656bed98dca3557ccdfe782b",
+   "reason": "步骤 6-A 把工具前提从拟建口径校准为已实现隔离服务口径（读/检查默认、保存 --allow-save），并明确保存五态为已实现契约；真实客户端链路仍待步骤 8"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "README.md",
+   "previous_sha256": "1e957c59aad5bff0f0c483de1bdda1b9cd921526bc7e5a42aa309d2064391696",
+   "sha256": "e4a8adf956588b86823c356be3d51b6bef9e99776e1af232fdf15c449017e94d",
+   "reason": "步骤 6-B 收尾状态句为步骤 5 已 REVIEW_ACCEPTED、步骤 6 校准中，并明确配置辅助仅支持 Cursor JSON、Codex 等待步骤 8；步骤 5 期间 README 的若干中间版次未逐条登记（local_documents 始终与当前文件一致，不臆造历史哈希）"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "README.md",
+   "previous_sha256": "e4a8adf956588b86823c356be3d51b6bef9e99776e1af232fdf15c449017e94d",
+   "sha256": "0ceb17d566104c5e5d07e1e6501fb24370b983e92dc8a7937680aeefacdbbf68",
+   "reason": "按 Bowen 授权显式标注当前依赖边界：复用 requirements 共享基础、不要求需求 Agent/MCP 在线但不可仅复制本目录分发、Develop_Helper 为方法上游但不依赖旧 buzz-develop-helper 运行代码、共享抽取仅记方向不迁移；纯文档，不改代码/契约/验收标准"
+  },
+  {
+   "date": "2026-11-01",
+   "file": "solution-designer-construction-plan.md",
+   "previous_sha256": "68d5dd54853d3deb799bb7629f41b7c58367d4f0c71d2f305efad7b9ce3a1241",
+   "sha256": "646254edffaea5f258cd13a71f8fd3d80f7906bdc665480e7a1e9406c33159c0",
+   "reason": "第 9.3 节新增同一四点「当前依赖边界」说明；该文档不在启动摘要校验集合内，此条仅作变更出处记录"
+  },
+  {
+   "date": "2026-11-02",
+   "file": "README.md",
+   "previous_sha256": "0ceb17d566104c5e5d07e1e6501fb24370b983e92dc8a7937680aeefacdbbf68",
+   "sha256": "9d6ddc3d0178187b1813f7f58b2ace121297024385da3a61228fc12916ce2c7f",
+   "reason": "步骤 6/7 已通过 Honey 独立验收：更新开头与结尾状态句，测试计数 57→60（新增固化隔离回归 isolation 3 项）；纯状态与证据更新，不改代码/契约/验收标准"
+  },
+  {
+   "date": "2026-11-02",
+   "file": "solution-designer-construction-plan.md",
+   "previous_sha256": "646254edffaea5f258cd13a71f8fd3d80f7906bdc665480e7a1e9406c33159c0",
+   "sha256": "2b21067f76f32ed0c16f83660127e89399f0e35bb18edecf83820f67254ef316",
+   "reason": "据 Honey 实际验收记录更新开头状态、1.2 汇总、9.1 目录树、10.1 工具面、第 14 节步骤 4—7 状态、15.3 执行安排、17.2 状态表与停点段，新增 17.8 步骤 5—7 验收证据节；该文档不在启动摘要校验集合内，此条仅作变更出处记录"
+  },
+  {
+   "date": "2026-11-02",
+   "file": "solution-designer-construction-plan.md",
+   "previous_sha256": "2b21067f76f32ed0c16f83660127e89399f0e35bb18edecf83820f67254ef316",
+   "sha256": "b827049e7037e5ba7faf86619935c942f182701b92d47cc8f1cbe1900828e368",
+   "reason": "按 Honey 2026-11-02 REVIEW_ACCEPTED 的非阻断订正：§14 步骤5 与 §17.8 步骤5 行的聚合数 56→57（56 为 attempt 1 自验，最终 attempt 3 交付以 Honey 验收记录 57 为准）；该文档不在启动摘要校验集合内，此条仅作变更出处记录"
+  },
+  {
+   "date": "2026-11-02",
+   "file": "README.md",
+   "previous_sha256": "9d6ddc3d0178187b1813f7f58b2ace121297024385da3a61228fc12916ce2c7f",
+   "sha256": "f339434d1a1ee322b79c602f402a4a9505c3d322519f24ef737fd64c9fb3b2cb",
+   "reason": "用户选择 Codex 与 pirs-cursor-test；同步真实配置准备、原生注册和直接 stdio 读取，明确稍后重载及确认／保存链未验；未改代码"
+  },
+  {
+   "date": "2026-11-02",
+   "file": "solution-designer-construction-plan.md",
+   "previous_sha256": "b827049e7037e5ba7faf86619935c942f182701b92d47cc8f1cbe1900828e368",
+   "sha256": "05560264162208bffd78d6bad47336e2b17bb94a54a340b9495d4c186ab4be6f",
+   "reason": "步骤 8 已进入 Codex 配置和真实目录预检；同步开头、步骤 8、状态表、配置条件及第 17.9 节；用户稍后重载，不冒充完整链通过"
+  },
+  {
+   "date": "2026-11-02",
+   "file": "step8-codex-verification.md",
+   "previous_sha256": null,
+   "sha256": "de232bcba8df64d19c52c70b942947c0e03d6b5c56f2bfc50dcf7043e9bceefb",
+   "reason": "新增步骤 8 真实配置／注册／直接读取证据与客户端重载、确认链的继续条件；仅为验证记录，不加入启动文档校验集合"
+  },
+  {
+   "date": "2026-11-02",
+   "file": "README.md",
+   "previous_sha256": "f339434d1a1ee322b79c602f402a4a9505c3d322519f24ef737fd64c9fb3b2cb",
+   "sha256": "9e6ecfe48a2c4602487f55548272ac995e5cf2dd4f2f145002ad73434e035e4c",
+   "reason": "用户报告重启后，当前 Codex 会话已发现三工具并真实读取／检查 pirs-cursor-test；8 个业务文件及集合未变，PRD 缺用途确认，未调用保存；仅更新状态和证据"
+  },
+  {
+   "date": "2026-11-02",
+   "file": "solution-designer-construction-plan.md",
+   "previous_sha256": "05560264162208bffd78d6bad47336e2b17bb94a54a340b9495d4c186ab4be6f",
+   "sha256": "50d0f96e1fd10304cb09f159b21fde25ced8e1c1ad89ca41b9eaebc645945910",
+   "reason": "用户报告重启后，当前 Codex 会话已发现三工具并真实读取／检查 pirs-cursor-test；8 个业务文件及集合未变，PRD 缺用途确认，未调用保存；仅更新状态和证据"
+  },
+  {
+   "date": "2026-11-02",
+   "file": "step8-codex-verification.md",
+   "previous_sha256": "de232bcba8df64d19c52c70b942947c0e03d6b5c56f2bfc50dcf7043e9bceefb",
+   "sha256": "68ae1016490bc035b1edc12c33e562c7680415d9769faf10976b500248f9b805",
+   "reason": "用户报告重启后，当前 Codex 会话已发现三工具并真实读取／检查 pirs-cursor-test；8 个业务文件及集合未变，PRD 缺用途确认，未调用保存；仅更新状态和证据"
+  },
+  {
+   "date": "2026-11-05",
+   "file": "README.md",
+   "previous_sha256": "9e6ecfe48a2c4602487f55548272ac995e5cf2dd4f2f145002ad73434e035e4c",
+   "sha256": "a1d525fb883b6a704207180675208519a95710f2510c2c13eb3ac733b6d20875",
+   "reason": "PATH-EXPLICIT-05：登记显式完整目录、共享持久身份与旧模式兼容规则；不扩大真实客户端或安装验收范围"
+  },
+  {
+   "date": "2026-11-05",
+   "file": "solution-design.md",
+   "previous_sha256": "c27293fab3ec6933c1e871184100cba9412931cfa7fb1ff41b542cdc6a716cb6",
+   "sha256": "7df470bb9edacaa3de2d7cfd4befa9817c591bf5d146db7ce8d362303562d67c",
+   "reason": "PATH-EXPLICIT-05：主文档明确完整 project_path、持久身份与旧模式边界"
+  },
+    {
+      "date": "2026-11-05",
+      "file": "agent-file-workflow.md",
+      "previous_sha256": "d05c3fc52b3179c5d8337a9f3454418193f7b02a656bed98dca3557ccdfe782b",
+      "sha256": "d843b66cbc8bea57f791d9cac79a951e3dbbec5f77be1e4e8c6c29fcd719b75e",
+      "reason": "PATH-EXPLICIT-05：文件约定明确同一路径、目录身份、运行基线与材料假授权边界"
+    },
+    {
+      "date": "2026-11-05",
+      "file": "README.md",
+      "previous_sha256": "a1d525fb883b6a704207180675208519a95710f2510c2c13eb3ac733b6d20875",
+      "sha256": "9af998996b97d4e7a2ba7d57c3c760c0fc440463c6f97650e0ab03024f36d14a",
+      "reason": "PATH-EXPLICIT-05 ENV-04：将两处过时九文件描述修正为现行十文件受控闭包"
+    }
+ ],
+  "updated_on": "2026-11-05",
+ "implemented_runtime_files": [
+  {
+   "file": "mcp_server.py",
+   "sha256": "0ac05a3793c0619a55fc21e603db0145fd6292acc1e85863726097ab04a2d69d",
+   "role": "独立 stdio MCP；三工具 schema、能力开关、JSON-RPC 分派",
+   "state": "step5_implemented_self_verified"
+  },
+  {
+   "file": "shared_loader.py",
+   "sha256": "666fb95129899bb0ac02bb1bf1ec720d221ce2501f1f974e20558d2d7c8b0bde",
+   "role": "固定 requirements foundation 的十文件受控包加载、来源摘要、两种目录模式、配置/锁/双方法入口校验",
+   "state": "path_explicit_01_p1_implemented"
+  },
+  {
+   "file": "file_tools/__init__.py",
+   "sha256": "edcbdcdc286d305612194e67618efffc4c649d39f2ba90c70c3cf3301cf57359",
+   "role": "本地 file_tools 包入口",
+   "state": "step5_implemented_self_verified"
+  },
+  {
+   "file": "file_tools/dependencies.py",
+      "sha256": "f1afd3b867f75c101475a2a661b5f22b331fedab303617bbbd816b82c49a1ef3",
+      "role": "共享项目绑定适配、保护依赖闭包、规范集、登记/快照与事务状态",
+      "state": "path_explicit_03_p3_implemented",
+      "note": "2026-11-04 PATH-EXPLICIT-03：接入共享持久身份、显式路径与绑定重验；前摘要 6b277e4ec7e9d796f8c058d521afed0e8bf6e94e866e729817b9b1df33b54117"
+  },
+  {
+   "file": "file_tools/solution.py",
+      "sha256": "b9510f9c3f52a3d3a7f0cbec60721344fa0e9b37e75ee1169cb01485ec000910",
+      "role": "同一绑定下的上下文读取、结构检查、路径化 read_id、双锁 Draft 保存、历史和写后复读",
+      "state": "path_explicit_03_p3_implemented",
+      "note": "2026-11-04 PATH-EXPLICIT-03：PRD 检查透传共享绑定，凭据联合路径/目录身份，锁内及替换前复验；前摘要 8ae7a405e5e67f0a9fafc93fc279df807b4b97f906663f0cd5f6c37f16d5c117"
+  },
+  {
+   "file": "configure_client.py",
+   "sha256": "c70403d15705a04e6021d66faee67c74d72106559f536491fafa89bdceb1e28c",
+   "role": "Cursor JSON 配置预览、应用、备份和精确回退",
+   "state": "step5_implemented_self_verified"
+  }
+ ],
+ "step8_codex_verification": {
+  "date": "2026-11-02",
+  "record": "step8-codex-verification.md",
+  "record_sha256": "68ae1016490bc035b1edc12c33e562c7680415d9769faf10976b500248f9b805",
+  "status": "client_read_inspect_verified_confirmation_pending",
+  "client": "Codex",
+  "project_id": "pirs-cursor-test",
+  "registration": "codex_native_mcp_add",
+  "direct_stdio_real_project_read": "passed",
+  "business_files_unchanged": 8,
+  "business_save_attempted": false,
+  "prd_confirmation": "missing",
+  "client_session_tool_call_verified": true,
+  "user_reload_choice": "已重启",
+  "runtime_code_changed": false,
+  "runtime_regression_rerun": false,
+  "independent_acceptance": "not_performed_for_step8",
+  "client_discovered_tools": [
+   "solution_read_context",
+   "solution_inspect",
+   "solution_save_tech_spec_draft"
+  ],
+  "client_invoked_tools": [
+   "solution_read_context",
+   "solution_inspect"
+  ],
+  "client_current_tech_spec": "missing",
+  "client_save_eligible_at_read": false
+ },
+ "step5_self_verification": {
+  "date": "2026-11-02",
+  "scope": "5A 只读链、5B 保存链、5C Cursor 配置辅助与隔离 stdio 流程；步骤 7 后另固化净化环境隔离回归 3 项",
+  "command": "python3 -B -m unittest discover -s fusion-runtime/tests -p 'test_solution_*.py'",
+  "exit_code": 0,
+  "tests": 60,
+  "groups": {
+   "context": 22,
+   "inspect": 8,
+   "save": 17,
+   "client_config_stdio": 10,
+   "isolation": 3
+  },
+  "evidence_boundary": "仅系统临时目录中的复制 foundation、上游、业务项目和客户端配置；未触碰真实配置或业务项目"
+ }
+}

@@ -1,0 +1,351 @@
+{
+  "scope": "UI step 1 proposed dependency closure only; not an implemented UI service",
+  "verified_at": "2026-11-02T11:23:14.660231+08:00",
+  "python": "3.13.3 (v3.13.3:6280bb54784, Apr  8 2025, 10:47:54) [Clang 15.0.0 (clang-1500.3.9.4)]",
+  "python_executable": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+  "git": "git version 2.52.0",
+  "git_executable": "/opt/homebrew/bin/git",
+  "isolation_flags": [
+    "-I",
+    "-S",
+    "-B"
+  ],
+  "source_index": {
+    "file_tools/__init__.py": "280ecab1b265972ec9b4dd0f3b8a9a698d892f389649ed1526dfd6b6963a5c0a",
+    "file_tools/check_foundation.py": "43ed014b387126328b47d676da0779a5780b3f9038d19ba379ea2df7c2953f7b",
+    "file_tools/project_state.py": "dbba61ab01f342720116f5a1705f30eaea9ac1b322a077d200014f6d1709defe",
+    "file_tools/project_init.py": "1b7470a796fafecbd34ee2c9c5552155dcb2f2429885fc1876b6b82bec35ab14",
+    "file_tools/requirements.py": "c9b06e2f3fa0e18a903c8d47077538628e151172e97a7698a9c773d3db299af8",
+    "file_tools/project_info.py": "a2891cb7fe4c06d08923b85ef068f9eafab8fcb21728c8e1a968990f3afec9be",
+    "file_tools/artifact_records.py": "a4fff1ee80244707553f9fefd68cc63a86d441117d55ae68af9bcc245d4b1fb3",
+    "file_tools/confirmation_records.py": "7d390ca9ffa7024bbe1909f695c9835181c17b024d556aceb3b468d9fba9d83e",
+    "file_tools/recovery.py": "2c7dd4b78a7970a2f77423734232982ea15512f80febdb7988d0317816462c86"
+  },
+  "static_imports": {
+    "__init__": [],
+    "check_foundation": [
+      "argparse",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "sys"
+    ],
+    "project_state": [
+      "contextlib",
+      "json",
+      "os",
+      "pathlib",
+      "stat",
+      "tempfile"
+    ],
+    "project_init": [
+      "argparse",
+      "check_foundation",
+      "datetime",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "project_info",
+      "project_state",
+      "re",
+      "shutil",
+      "subprocess",
+      "sys"
+    ],
+    "requirements": [
+      "argparse",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "project_init",
+      "project_state",
+      "re",
+      "sys",
+      "tempfile"
+    ],
+    "project_info": [
+      "check_foundation",
+      "hashlib",
+      "json",
+      "pathlib",
+      "project_init",
+      "project_state",
+      "re",
+      "urllib"
+    ],
+    "artifact_records": [
+      "hashlib",
+      "json",
+      "pathlib",
+      "re"
+    ],
+    "confirmation_records": [
+      "artifact_records",
+      "hashlib",
+      "json",
+      "pathlib",
+      "re"
+    ],
+    "recovery": [
+      "artifact_records",
+      "confirmation_records",
+      "hashlib",
+      "json",
+      "pathlib",
+      "project_info",
+      "re",
+      "requirements"
+    ]
+  },
+  "actual_upstream": {
+    "schema_version": 1,
+    "policy": "source-tree-v1-no-projects-dependencies-git-cache-no-follow",
+    "entry_count": 250,
+    "sha256": "fb97638c61d552d32d677a4e8a161d81efae4ac1adb5bd4638b1ad7e1619f40b"
+  },
+  "matches_upstream_lock": true,
+  "real_local_config_exists": true,
+  "real_UI_methods_link_exists": false,
+  "real_local_config_sha256": "79ef0e1bc579473f4ba52b29518b662072a140c82aef5e5ca0f1dfdefb2fa322",
+  "actual_foundation_check": {
+    "status": "pass",
+    "checked_entries": 250,
+    "runtime_readonly_enforced": false,
+    "buzz_connected": false,
+    "note": "仅路径与内容基线通过；运行时权限和业务闭环未验证"
+  },
+  "temporary_fixture_config_only": true,
+  "protected_foundation_unchanged": true,
+  "upstream_unchanged": true,
+  "temporary_fixture_removed": true,
+  "runs": [
+    {
+      "scenario": "normal",
+      "checks": [
+        {
+          "check": "nine_file_imports_without_side_effects",
+          "status": "pass",
+          "details": {
+            "origins": {
+              "__init__": "install/requirements/file_tools/__init__.py",
+              "check_foundation": "install/requirements/file_tools/check_foundation.py",
+              "project_state": "install/requirements/file_tools/project_state.py",
+              "project_init": "install/requirements/file_tools/project_init.py",
+              "requirements": "install/requirements/file_tools/requirements.py",
+              "project_info": "install/requirements/file_tools/project_info.py",
+              "artifact_records": "install/requirements/file_tools/artifact_records.py",
+              "confirmation_records": "install/requirements/file_tools/confirmation_records.py",
+              "recovery": "install/requirements/file_tools/recovery.py"
+            },
+            "isolated": 1,
+            "no_site": 1,
+            "dont_write_bytecode": true
+          }
+        },
+        {
+          "check": "copied_foundation_config_lock_methods",
+          "status": "pass",
+          "details": {
+            "status": "pass",
+            "checked_entries": 250,
+            "runtime_readonly_enforced": false,
+            "buzz_connected": false,
+            "note": "仅路径与内容基线通过；运行时权限和业务闭环未验证"
+          }
+        },
+        {
+          "check": "fixture_UI_and_foundation_methods",
+          "status": "pass",
+          "details": "both fixture links resolve to the copied upstream; three UI method files readable"
+        },
+        {
+          "check": "temporary_chinese_project_initialization_without_Git_mutation",
+          "status": "pass",
+          "details": {
+            "status": "local_files_ready",
+            "git_initialized": false
+          }
+        },
+        {
+          "check": "project_context_binding",
+          "status": "pass",
+          "details": "/private/var/folders/s_/hmcskr2s1w1757cxddvxmc400000gn/T/ui-runtime-dependency-5pdsmlg6/projects/演示依赖验证"
+        },
+        {
+          "check": "wrong_project_binding_rejected",
+          "status": "pass",
+          "details": {
+            "type": "ValueError",
+            "message": "项目目录与接入层固定的目录不一致"
+          }
+        },
+        {
+          "check": "document_and_project_choices_reads",
+          "status": "pass",
+          "details": "project/read/missing-document/recorded-choices/null and selected specification verified"
+        },
+        {
+          "check": "path_escape_rejected",
+          "status": "pass",
+          "details": {
+            "type": "ValueError",
+            "message": "路径越界"
+          }
+        },
+        {
+          "check": "UI_collection_text_binary_and_entrypoint",
+          "status": "pass",
+          "details": {
+            "type": "file-set",
+            "members": 4,
+            "entrypoint": "docs/prototypes/demo/index.html"
+          }
+        },
+        {
+          "check": "UI_member_digest_mismatch_rejected",
+          "status": "pass",
+          "details": {
+            "type": "ValueError",
+            "message": "成果清单摘要不匹配：docs/prototypes/demo/index.html"
+          }
+        },
+        {
+          "check": "UI_symlink_member_rejected",
+          "status": "pass",
+          "details": {
+            "type": "ValueError",
+            "message": "不允许通过软链登记成果"
+          }
+        },
+        {
+          "check": "local_validators_and_missing_confirmation_recovery_are_read_only",
+          "status": "pass",
+          "details": {
+            "confirmation_status": "missing",
+            "atomic_snapshot": false,
+            "writes": false,
+            "UI_recovery_implemented": false
+          }
+        },
+        {
+          "check": "shared_lock_conflict_and_release",
+          "status": "pass",
+          "details": {
+            "type": "ValueError",
+            "message": "项目状态写入锁已存在；先核对在途操作，不自动删除锁"
+          }
+        },
+        {
+          "check": "shared_single_file_atomic_replace",
+          "status": "pass",
+          "details": "single-file replacement only; not a UI multi-file transaction"
+        },
+        {
+          "check": "missing_local_config_rejected",
+          "status": "pass",
+          "details": {
+            "type": "FileNotFoundError",
+            "message": "[Errno 2] No such file or directory: '/private/var/folders/s_/hmcskr2s1w1757cxddvxmc400000gn/T/ui-runtime-dependency-5pdsmlg6/install/requirements/config/local.json'"
+          }
+        },
+        {
+          "check": "overlapping_roots_rejected",
+          "status": "pass",
+          "details": {
+            "type": "ValueError",
+            "message": "融合层、上游与业务项目父目录不得互相包含"
+          }
+        },
+        {
+          "check": "missing_methods_link_rejected",
+          "status": "pass",
+          "details": {
+            "type": "ValueError",
+            "message": "上游入口不是软链"
+          }
+        },
+        {
+          "check": "upstream_drift_rejected",
+          "status": "pass",
+          "details": {
+            "type": "ValueError",
+            "message": "上游版本漂移；停止相关调用，不自动更新基线"
+          }
+        },
+        {
+          "check": "restored_fixture_foundation_valid",
+          "status": "pass",
+          "details": {
+            "status": "pass",
+            "checked_entries": 250,
+            "runtime_readonly_enforced": false,
+            "buzz_connected": false,
+            "note": "仅路径与内容基线通过；运行时权限和业务闭环未验证"
+          }
+        },
+        {
+          "check": "fresh_process_no_source_or_legacy_fallback",
+          "status": "pass",
+          "details": {
+            "source_access_attempts": [],
+            "loaded_alias_modules": [
+              "_ui_step1_probe.file_tools",
+              "_ui_step1_probe.file_tools.check_foundation",
+              "_ui_step1_probe.file_tools.project_state",
+              "_ui_step1_probe.file_tools.project_init",
+              "_ui_step1_probe.file_tools.requirements",
+              "_ui_step1_probe.file_tools.project_info",
+              "_ui_step1_probe.file_tools.artifact_records",
+              "_ui_step1_probe.file_tools.confirmation_records",
+              "_ui_step1_probe.file_tools.recovery"
+            ],
+            "bytecode_cache_created": false,
+            "third_party_site_loaded": false
+          }
+        }
+      ],
+      "passed": true,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "scenario": "missing-module",
+      "checks": [
+        {
+          "check": "missing_shared_module_no_fallback",
+          "status": "pass",
+          "details": {
+            "type": "FileNotFoundError",
+            "message": "[Errno 2] No such file or directory: '/private/var/folders/s_/hmcskr2s1w1757cxddvxmc400000gn/T/ui-runtime-dependency-5pdsmlg6/install/requirements/file_tools/artifact_records.py'"
+          }
+        },
+        {
+          "check": "fresh_process_no_source_or_legacy_fallback",
+          "status": "pass",
+          "details": {
+            "source_access_attempts": [],
+            "loaded_alias_modules": [
+              "_ui_step1_probe.file_tools",
+              "_ui_step1_probe.file_tools.check_foundation",
+              "_ui_step1_probe.file_tools.project_state",
+              "_ui_step1_probe.file_tools.project_init",
+              "_ui_step1_probe.file_tools.requirements",
+              "_ui_step1_probe.file_tools.project_info",
+              "_ui_step1_probe.file_tools.artifact_records"
+            ],
+            "bytecode_cache_created": false,
+            "third_party_site_loaded": false
+          }
+        }
+      ],
+      "passed": true,
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "check_count": 22,
+  "passed": true
+}

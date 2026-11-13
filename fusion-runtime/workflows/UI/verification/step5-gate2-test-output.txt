@@ -1,0 +1,57 @@
+UI step 5 gate 2 development self-verification output
+Generated: 2026-11-03T12:45:55+08:00
+Workspace: /Users/bowen/Desktop/博文的career/vibe- coding
+Git HEAD: f33f9e6
+Python: 3.13.3
+Executable: /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
+Platform: macOS-26.6.2-arm64-arm-64bit-Mach-O
+
+=== UI AGGREGATE ===
+Command: python3 -B -m unittest discover -s fusion-runtime/tests -p 'test_ui_*.py'
+Ran 153 tests in 15.382s
+OK
+Exit code: 0
+Discovered = executed = 153; skipped = 0; failed = 0; errors = 0.
+Breakdown: fixtures 13, context 25, history 9, transactions 12,
+workspace 21, inspect 21, accept 21, recovery 12, stdio 15, isolation 4.
+
+=== DEPENDENCY PROBE ===
+Command: python3 fusion-runtime/workflows/UI/verification/verify_runtime_dependencies.py --output /private/tmp/ui-gate2-deps.XXXXXX.json
+{"passed": true, "checks": 22, "failed_checks": []}
+Exit code: 0
+Normal and missing-module fresh-process scenarios both passed; no bytecode cache.
+
+=== FULL REGRESSION ===
+Command: python3 -B -m unittest discover -s fusion-runtime/tests -p 'test_*.py'
+Ran 350 tests in 33.612s
+FAILED (failures=7)
+Exit code: 1
+All seven failures are in test_requirements_localization.py:
+- MigrationTests.test_backup_failure_stops_before_any_config_write
+- MigrationTests.test_command_line_preview_prints_a_ready_apply_command
+- MigrationTests.test_local_config_is_copied_verbatim_and_never_overwritten
+- MigrationTests.test_modified_missing_and_concurrently_changed_entries_are_not_overwritten
+- MigrationTests.test_preview_backup_exact_replacement_and_idempotent_repeat
+- MigrationTests.test_rollback_restores_only_the_migrated_entry_and_reports_code_separately
+- RealTreeTests.test_real_tree_has_no_switched_config_or_migration_backup
+The first six assert that workflows/requirements/config/migration-backups is absent;
+the last asserts that workflows/requirements/config/local.json is absent.
+The migration-backups directory mtime is 2026-11-02 14:20:29, before this task's
+authorization. The UI tests and source changes do not import or modify that module.
+These are the same seven pre-existing failures recorded by gate 1 and gate 5B.
+
+=== REAL SUBPROCESS EVIDENCE ===
+test_ui_stdio.py starts real mcp_server.py subprocesses for modern/legacy
+handshakes, exact read/write tool discovery, strict arguments, six-tool calls,
+receipt replay after process restart, and JSON-RPC/business error separation.
+test_ui_isolation.py uses -I -S -B with PYTHONPATH/user-site decoys for
+shared_loader, context, workspace, and transactions. It runs the complete
+prepare/inspect/accept mainline and an interrupted-transaction resume, rejects
+decoy imports, and verifies no bytecode was written.
+
+=== FAILURE-INJECTION EVIDENCE ===
+test_ui_recovery.py uses only in-process failpoints, never MCP parameters.
+It covers pre-activation close, partial resume, partial rollback (first and
+existing collections), source-change rejection, third-party other, saved-receipt
+close/already_committed, invalid plan/evidence, incomplete replay, and
+saved_unverified classification.

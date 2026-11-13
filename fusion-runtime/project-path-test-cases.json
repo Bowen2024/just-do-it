@@ -1,0 +1,1987 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-11-03",
+  "plan_file": "project-path-implementation-plan.md",
+  "plan_sha256": "5160335c68bddd417e99c0bdff346bf1561046ed4adb0c349764e87a72620486",
+  "baseline_file": "project-path-implementation-baseline.json",
+  "baseline_sha256": "f1d255c22cc22651e65a4b34b9f66f6510a0fc8b90ed8a6a75a0ad180410a199",
+  "scope": "Test specification only; all cases are not_run. This JSON is a coverage/result ledger template, not a test runner.",
+  "mode_definitions": {
+    "E": "project_path_mode=explicit",
+    "L0": "field absent: legacy_rooted compatibility",
+    "L1": "project_path_mode=legacy_rooted",
+    "CONFIG": "invalid configuration parameterization"
+  },
+  "status_values": [
+    "not_run",
+    "pass",
+    "fail",
+    "blocked",
+    "not_applicable"
+  ],
+  "case_count": 69,
+  "cases": [
+    {
+      "id": "PATH-01",
+      "title": "原根之外初始化",
+      "implementation_phase": "P2",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "在旧根 R 外准备已存在父目录 X；最终目录 X/new-a 不存在；初始化能力开放。",
+      "steps": [
+        "只读 inspect X/new-a，记录建议编号。",
+        "明确 initialize，同一次调用提供完整目录、名称和用途。",
+        "读取项目并核对实际成员，再重复初始化一次。"
+      ],
+      "expected": [
+        "只创建 X/new-a，不自动追加名称层，不在 R 创建目录。",
+        "project.json 持久化实际编号；重复初始化不覆盖基础文件。",
+        "配置、旧映射和未选项目保持不变；不创建 Git 仓库。"
+      ],
+      "required_evidence": [
+        "最终目录成员、基础文件摘要、配置摘要、旧根快照、Git 写命令观测"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-02",
+      "title": "多层中文与带空格路径",
+      "implementation_phase": "P2",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "父目录 X/多级目录/客户 A 已存在，目标为其中的 采购 需求预测。",
+      "steps": [
+        "以完整路径初始化，保存两版需求并读取历史。",
+        "保存 PRD 并用三个角色读取该项目。",
+        "另测 Unicode 名称和系统正常祖先别名的规范化。"
+      ],
+      "expected": [
+        "路径和文本不截断、不错误拆分空格、不新增重复目录层。",
+        "三个角色返回同一规范目录与持久编号，历史位于该目录。"
+      ],
+      "required_evidence": [
+        "请求中的原路径、规范路径、编号、当前与历史正文摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-03",
+      "title": "不同父目录 A／B 交替调用",
+      "implementation_phase": "P2",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "A 位于 X，B 位于 Y；X、Y 均不在 R 内；A/B 使用不同哨兵正文。",
+      "steps": [
+        "在同一需求服务依次读取 A、读取 B、保存 A、保存 B、再读 A。",
+        "方案、UI 服务按 A→B→A 读取，保留各自读取记录。"
+      ],
+      "expected": [
+        "每次返回匹配的路径、编号、正文；B 不覆盖 A 的服务上下文。",
+        "切换不修改配置，不需重新注册或重启 MCP。"
+      ],
+      "required_evidence": [
+        "逐调用 project_path 与返回身份、A/B 当前与历史快照、配置前后摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-04",
+      "title": "不同位置的同名目录",
+      "implementation_phase": "P2",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "X/演示与 Y/演示，两个合法项目。",
+      "steps": [
+        "交替检查、读取并保存不同正文。",
+        "检查服务缓存行为及返回身份，不只检查缓存变量名称。"
+      ],
+      "expected": [
+        "不会因为 basename 相同混用实例、读取引用、历史或保存目标。"
+      ],
+      "required_evidence": [
+        "两个规范路径、保存目标、历史归属；必要的缓存观测"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-05",
+      "title": "跨项目读取凭据保存",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "A/B 都是合法项目，各自现有正文和摘要可核对。",
+      "steps": [
+        "从 A 获取需求 read_id，带 B 路径调用需求保存、PRD 保存和补录。",
+        "方案 A 的 read_id 用于 B 保存；UI read_id／inspection_id 分别跨项目调用。"
+      ],
+      "expected": [
+        "拒绝跨项目操作；A/B 公开成果、历史和配置均不误改。",
+        "不能因拒绝 B 操作而消费 A 的有效凭据；已进入写内核的情形按原契约单独判断。"
+      ],
+      "required_evidence": [
+        "错误原因、write_outcome、两项目完整快照、原引用在合法项目的后续行为"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-06",
+      "title": "外部编辑后的旧凭据",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "读取当前需求、PRD 或方案后保留引用。",
+      "steps": [
+        "分别外部改写目标文件、源需求、project.json，再使用旧引用。",
+        "UI 读取或候选检查后分别改变来源、候选及公开目标，再准备／接受。"
+      ],
+      "expected": [
+        "在相应阶段报告版本或来源冲突，外部内容保留。",
+        "不得重新读取摘要替换旧预期版本后直接重试。"
+      ],
+      "required_evidence": [
+        "外部改写后摘要、失败调用、实际当前正文、凭据消费状态"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-07",
+      "title": "目录名不同于持久编号",
+      "implementation_phase": "P3",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "中文目录通过需求初始化，持久编号为 req-... 或明确 ASCII 编号；L0/L1 使用合法旧映射。",
+      "steps": [
+        "三角色读取同一项目；检查初始化身份来源。",
+        "E 模式添加与元数据冲突的旧映射，再次读取。"
+      ],
+      "expected": [
+        "以持久编号为准；E 不要求编号等于目录名、不受旧映射覆盖。",
+        "三角色不能各自推断出不同编号。"
+      ],
+      "required_evidence": [
+        "原 project.json、三角色编号与路径、映射配置摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-08",
+      "title": "非空未初始化目录",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "分别准备只有普通文件、隐藏文件、.DS_Store、.git、业务代码的目录，均无合法 project.json。",
+      "steps": [
+        "inspect；明确 initialize；方案／UI 尝试读取。",
+        "针对每种非空组成保存前后文件快照。"
+      ],
+      "expected": [
+        "报告未初始化或非空状态；不接管、不补齐、不覆盖、不自动忽略隐藏成员。",
+        "不把目录当空目录，也不创建替代业务目录。"
+      ],
+      "required_evidence": [
+        "所有子场景成员和字节摘要、实际错误与零业务写入观测"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-09",
+      "title": "非法路径和元数据文件类型",
+      "implementation_phase": "P1",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "建立合法项目及其副本；准备文件目标、软链、断链和不同元数据异常。",
+      "steps": [
+        "参数化测试空串、相对路径、~、..、控制字符、非字符串、项目根软链和文件路径。",
+        "分别令 project.json 为软链、硬链接、目录、非法 JSON、错误 schema、非法 ID；目标文档另测越界和非普通文件。"
+      ],
+      "expected": [
+        "每个非法输入均按具体原因拒绝，不降级为新项目。",
+        "FIFO 等非普通文件如平台支持，以类型检查拒绝，不阻塞等待其内容。",
+        "错误不产生业务文件、配置变化或对软链目标的写入。"
+      ],
+      "required_evidence": [
+        "子场景输入类型、lstat 类型、错误原因、目标和链接目标快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-10",
+      "title": "不可写或不可访问目录",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "仅在临时目录设置真实拒绝权限；保留原权限用于 finally 恢复。",
+      "steps": [
+        "分测父目录不可写、项目不可写、元数据不可读和目标文件访问失败。",
+        "能力允许时使用实际权限；高权限执行环境另用定点 OSError 注入核对错误分类。"
+      ],
+      "expected": [
+        "不伪报保存成功，不回退到 R、cwd 或其他目录。",
+        "权限拒绝前无业务写入；存在已发生写入的故障按未知结果处理。",
+        "真实权限场景无法成立时标 BLOCKED，不用一次 os.access 或 mock 替代真实权限验收。"
+      ],
+      "required_evidence": [
+        "执行身份／能力、原权限、实际异常、目标快照和权限恢复结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-11",
+      "title": "版本、相同正文和历史",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "每类成果准备 V1、V2、相同正文重试和旧版恢复请求。",
+      "steps": [
+        "需求、PRD、方案分别保存 V1→V2→同正文，读取旧历史。",
+        "UI 接收 V1→V2→同集合；读取历史并将 V1 作为新候选恢复。"
+      ],
+      "expected": [
+        "当前及历史字节、文件名摘要、来源版本一致。",
+        "相同正文／集合沿原协议返回 unchanged，不重复公开写入或历史。",
+        "恢复保留中间版本；不把历史读取摘要当当前保存基线。"
+      ],
+      "required_evidence": [
+        "当前文件、历史路径与摘要、UI 内容版本和回执、公开写入计数"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-12",
+      "title": "显式模式不依赖旧根",
+      "implementation_phase": "P1",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "保留合法工具和上游；旧根分别设为不存在、无权限、文件、缺失字段或非路径值。",
+      "steps": [
+        "逐子场景启动三个服务并读取 R 外合法项目。",
+        "在旧根位置放访问哨兵；检查是否被解析、创建或作为目标。"
+      ],
+      "expected": [
+        "安装与项目调用不因无关旧根失败；不触及旧根。",
+        "上游锁和方法校验仍有效，不把 projects_root 伪造为其他目录。"
+      ],
+      "required_evidence": [
+        "三个进程握手／调用、旧根访问观测、有效运行基线"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-13",
+      "title": "模式缺省保持旧规则",
+      "implementation_phase": "P1",
+      "modes": [
+        "L0"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "配置不含 project_path_mode；R 有合法项目和映射。",
+      "steps": [
+        "在 R 的直接子目录执行原检查、初始化、读取和保存。",
+        "对 R 本身、孙目录和 R 外项目调用同样工具。"
+      ],
+      "expected": [
+        "缺省按 legacy_rooted；原映射有效；非直接子目录和范围外拒绝。",
+        "仅为本次明确调整的文档／Git 解耦校正旧断言，不放宽旧路径范围。"
+      ],
+      "required_evidence": [
+        "配置、成功及拒绝调用、原 API 与持久编号"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-14",
+      "title": "旧固定项目启动与能力开关",
+      "implementation_phase": "P2",
+      "modes": [
+        "L0",
+        "L1"
+      ],
+      "layer": "stdio",
+      "priority": "blocker",
+      "preconditions": "保留原 --project-id／--project-root 配对参数及原固定项目。",
+      "steps": [
+        "以只读、仅初始化、仅保存、两能力都开的启动组合发现工具并调用。",
+        "缺少一半固定参数、模型提交未知授权字段、只读调用写工具均做负向验证。"
+      ],
+      "expected": [
+        "旧合法启动与目录规则可用；错误配对拒绝。",
+        "工具面及能力开关不扩大，不以 clientInfo 或模型授权文本增加权限。"
+      ],
+      "required_evidence": [
+        "启动参数、工具名称集合、协议返回、未授权调用前后快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-15",
+      "title": "采购预测业务样本只读回归",
+      "implementation_phase": "P6",
+      "modes": [
+        "E"
+      ],
+      "layer": "live-client",
+      "priority": "blocker",
+      "preconditions": "只使用实施计划第 8 节精确目录与本轮重新核对的摘要；实际安装已明确切换。",
+      "steps": [
+        "核对样本当前元数据、需求、PRD 摘要与目录成员。",
+        "三个角色只读检查／读取，必要时记录业务前置条件拒绝。",
+        "再次核对受管文件、已有历史、候选及事务成员。"
+      ],
+      "expected": [
+        "三角色均识别相同持久编号。",
+        "现有正文和元数据不变，不新增测试内容、确认、候选或历史。",
+        "缺用途确认返回业务原因，不能以修改样本使流程通过。"
+      ],
+      "required_evidence": [
+        "样本前后摘要、成员变化、三个实际调用、业务拒绝原因"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "PATH-16",
+      "title": "UI 六工具和事务按目录隔离",
+      "implementation_phase": "P4",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "A/B 位于不同父目录且有可用 UI 输入；开启写能力。",
+      "steps": [
+        "A/B 交替读取、准备、编辑、检查、接受并读取历史。",
+        "各自注入局部写入中断，分别执行显式 resume 与 rollback。"
+      ],
+      "expected": [
+        "六工具返回和状态全部归属准确目录。",
+        "事务、回执、候选与历史不串用；B 的恢复不改变 A。"
+      ],
+      "required_evidence": [
+        "阶段参数、目标／历史／私有状态快照、事务 ID、回执与恢复结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-17",
+      "title": "依赖摘要与新共享模块漂移",
+      "implementation_phase": "P1",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "受控闭包已包含 project_binding；准备未损坏的对照安装。",
+      "steps": [
+        "逐个移除或修改每个共享模块，包括新模块，且不更新来源记录。",
+        "另改方案／UI 强制采用的运行源码、角色文件、模板；从 cwd／PYTHONPATH 放同名诱饵。"
+      ],
+      "expected": [
+        "启动或调用检测到相应缺失／漂移；新模块不能漏检。",
+        "不自动刷新摘要，不从诱饵或旧 helper 补导入。",
+        "每项用原样恢复后对照启动，证明错误来自目标变更。"
+      ],
+      "required_evidence": [
+        "逐模块变更及错误、实际模块路径、恢复后对照、原来源记录摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-18",
+      "title": "运行基线变化使旧凭据失效",
+      "implementation_phase": "P1",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "先读取合法项目取得需求／方案引用及 UI 候选／检查记录。",
+      "steps": [
+        "分别改变配置字节、模式、受控代码、方法链接或锁。",
+        "继续旧凭据操作，然后在合法新基线重启并重新读取。"
+      ],
+      "expected": [
+        "旧引用拒绝；不热刷新后继续使用旧实例。",
+        "新进程只在新基线已合法核对时可读取；不能复用旧进程引用。",
+        "模式变化不迁移或重写业务项目。"
+      ],
+      "required_evidence": [
+        "前后基线、旧调用失败、重启新读取、业务文件快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-19",
+      "title": "同内容替换项目根目录",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "读取 A 后，将其改名保留，再在原路径放逐字节副本；确保旧目录仍在，避免 inode 被复用。",
+      "steps": [
+        "记录原根 dev／ino；替换后记录新根身份。",
+        "分别在需求保存、补录、方案保存以及 UI 各写阶段触发重验。"
+      ],
+      "expected": [
+        "即使文件摘要与编号相同，也拒绝使用原绑定。",
+        "原件与替换目录都无禁止的业务写入；不自动重新绑定副本。"
+      ],
+      "required_evidence": [
+        "目录身份、两个目录的业务快照、拒绝原因和引用状态"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-20",
+      "title": "父路径改绑与系统别名",
+      "implementation_phase": "P1",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "既有祖先别名首次可规范化；另准备能在检查后改绑的临时父路径。",
+      "steps": [
+        "先证明合法系统祖先别名可绑定。",
+        "取得引用后将父路径重命名并以软链指向另一个同内容项目，调用重验。"
+      ],
+      "expected": [
+        "首次正常规范化不误拒绝；之后改绑不得静默切换。",
+        "原规范目标及新目标均不得被错写。"
+      ],
+      "required_evidence": [
+        "requested_path、首次 root、父目录身份、解析结果、两目标快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-21",
+      "title": "相同编号和内容的不同副本",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "将 A 复制为 B，保留相同 project_id、正文、合法模拟确认和历史。",
+      "steps": [
+        "分别新读取 A/B，比较其绑定和引用。",
+        "将 A 的引用、候选和检查结果用于 B；再用 B 自己新读取的结果按正常协议操作。"
+      ],
+      "expected": [
+        "不同目录是不同操作对象；旧引用不能跨目录消费。",
+        "新读取是否可保存仍按该项目当前协议判断，不新增全局编号唯一约束，不自动签发确认。"
+      ],
+      "required_evidence": [
+        "两个路径、绑定指纹、凭据来源、跨目录拒绝与独立正向对照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-22",
+      "title": "非法目录模式",
+      "implementation_phase": "P1",
+      "modes": [
+        "CONFIG"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "只修改隔离配置的 project_path_mode。",
+      "steps": [
+        "参数化 unknown、空串、null、true、false、数值、数组和对象。",
+        "分别执行配置检查和三个服务启动。"
+      ],
+      "expected": [
+        "明确配置错误，不默认为 explicit 或 legacy，不启动业务写入。",
+        "缺省字段在 PATH-13 单独验证，不能混同 null。"
+      ],
+      "required_evidence": [
+        "输入 JSON 类型、三服务退出码和诊断、配置／业务快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-23",
+      "title": "显式模式忽略过时映射",
+      "implementation_phase": "P1",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "旧映射指向其他名称、与持久编号冲突，或为仅旧模式才有意义的无效值。",
+      "steps": [
+        "读取 R 外已有项目；为新项目明确指定合法编号并初始化。",
+        "观察旧映射和 projects_root 是否被用于重新定位。"
+      ],
+      "expected": [
+        "E 依据本次路径与持久元数据，旧映射不覆盖身份、不阻断。",
+        "映射原字节保持不变；L0/L1 仍校验其合法性。"
+      ],
+      "required_evidence": [
+        "三角色身份、配置摘要、旧路径零业务写入、旧模式对照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-24",
+      "title": "项目与工具或上游重叠",
+      "implementation_phase": "P1",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "临时安装含 requirements、方案、UI、上游及额外受保护运行目录。",
+      "steps": [
+        "对每个受保护目录分别指定该目录、其父祖先及其内部子目录。",
+        "以可规范化祖先软链间接指向受保护目录再测。"
+      ],
+      "expected": [
+        "相等、互相包含和规范化后重叠均拒绝。",
+        "所有受保护内容原字节不变，不能只保护调用角色自己。"
+      ],
+      "required_evidence": [
+        "受保护集合、输入／规范路径、错误原因、受保护树摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-25",
+      "title": "缺失父目录与并发创建竞争",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "最终一级不存在的合法目录、缺失多级父链的目录，以及两个竞争初始化调用。",
+      "steps": [
+        "缺失父链时 initialize；确认没有递归 mkdir。",
+        "用确定性屏障在检查后让另一调用创建目录或放入文件；释放原调用。",
+        "另测两进程同时初始化同路径同编号和不同编号。"
+      ],
+      "expected": [
+        "只允许原已存在父目录下的最终一级排他创建。",
+        "竞争者文件不覆盖；最多一个实际创建者，后续只可核对已完成项目或明确冲突，不误报自身写入成功。",
+        "部分创建失败保留现状，不自动删目录重试。"
+      ],
+      "required_evidence": [
+        "屏障事件、父链成员、两调用结果、写入者／文件摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-26",
+      "title": "项目在其他 Git 仓库内",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "临时 Git 父仓内放已按协议初始化的项目；另准备正常独立项目。",
+      "steps": [
+        "读取和保存文档，观测 Git 命令调用。",
+        "对嵌套位置显式执行 Git 初始化保护测试；另测异常 .git 及 worktree 元数据。"
+      ],
+      "expected": [
+        "文档操作不因父仓归属一概失败，且不执行 init／add／commit／push。",
+        "Git 写路径仍拒绝非法嵌套或异常元数据；不新增 MCP Git 工具。"
+      ],
+      "required_evidence": [
+        "Git 状态／refs／index 摘要、命令观测、文档结果及 Git 拒绝"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-27",
+      "title": "元数据或初始化结构损坏",
+      "implementation_phase": "P1",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "编号合法但基础文件缺失、README／.gitignore 为软链、initialization 结构错误等。",
+      "steps": [
+        "三角色读取、需求 inspect／initialize。",
+        "损坏 project.json 的 ID 或 JSON 后重复调用；覆盖不同 API 路径。"
+      ],
+      "expected": [
+        "最小身份识别不能代替完整结构检查。",
+        "不修复、重建、补写或产生新编号；具体错误与“不存在”区分。"
+      ],
+      "required_evidence": [
+        "异常文件形态、各入口错误、成员与字节不变"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-28",
+      "title": "重复初始化与显式编号冲突",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "准备已初始化项目、空目录及缺失最终目录。",
+      "steps": [
+        "对新目录先只读检查两次，再明确编号初始化。",
+        "对现有项目重复相同请求；再用不同编号或名称／用途调用。"
+      ],
+      "expected": [
+        "建议身份检查无写入；成功后提升为持久身份，旧引用不继承。",
+        "重复初始化不覆盖；不同编号拒绝，返回 differences 也不能当已补录。"
+      ],
+      "required_evidence": [
+        "建议／持久状态、编号、基础文件摘要、读取凭据生命周期"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-29",
+      "title": "只读行为无副作用",
+      "implementation_phase": "P1",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "缺失目录、空目录、非空未初始化目录、合法项目四种状态。",
+      "steps": [
+        "执行 inspect、可用读取、PRD 检查、UI 历史／事务检查。",
+        "在 A/B 和只读服务中重复；以文件创建观测辅助比较。"
+      ],
+      "expected": [
+        "不创建目录、project.json、配置、历史、候选、事务、Git 或字节码。",
+        "读取所签发的凭据只在内存中，不落盘。"
+      ],
+      "required_evidence": [
+        "选定父目录和项目树前后快照、内存引用返回、写调用观测"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-30",
+      "title": "正常时间戳变化不误判",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "固定 A 的 dev／ino，保留合法读取引用。",
+      "steps": [
+        "通过正常锁生命周期和不属于读取保护闭包的无关文件活动改变目录时间戳。",
+        "在已重新读取需要保护的版本后，完成合法需求／方案／UI 操作。"
+      ],
+      "expected": [
+        "目录 dev／ino 未变时不因 mtime／ctime 变化误报 binding_changed。",
+        "涉及已读取文档版本的变更仍须冲突，不能以本例放宽版本检查。"
+      ],
+      "required_evidence": [
+        "时间戳和目录身份、保护集合、正向结果与外部编辑负向对照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-31",
+      "title": "准备初始化计划的兼容和失效",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel",
+      "priority": "blocker",
+      "preconditions": "使用 prepare_creation 产生真实准备计划；E 另提供当前受信绑定。",
+      "steps": [
+        "合法计划正常验证／应用；分别修改模式、绑定目录、初始化器或来源后重试旧计划。",
+        "仅给准备数据里的路径而不给受信绑定；篡改严格键集合。",
+        "读取升级前项目的原 dependencies。"
+      ],
+      "expected": [
+        "变化后的旧计划拒绝；准备文本不提供访问授权。",
+        "严格键校验保留，L0/L1 原调用可用。",
+        "新 E 初始化有历史绑定事实，旧项目依赖原样保留，不用旧路径重新定位。"
+      ],
+      "required_evidence": [
+        "原／新准备依赖、键集合、错误原因、目标树与旧 metadata 摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-32",
+      "title": "文件工具 CLI 路径要求",
+      "implementation_phase": "P2",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "subprocess",
+      "priority": "blocker",
+      "preconditions": "已实现并确认实际 CLI 参数位置；记录 --help。",
+      "steps": [
+        "E 模式显式提供 --project-path，执行 inspect／context 等原有能力。",
+        "E 仅给编号或 expected_root 的内部对照必须失败。",
+        "L0/L1 运行原命令，覆盖合法映射；测试相对路径和未知参数。",
+        "直接调用底层API：E模式只有expected_root而无binding，必须拒绝。",
+        "分别测试binding=A但expected_root=B、project_id不匹配、directory_name不匹配；与匹配的合法调用对照。"
+      ],
+      "expected": [
+        "E 不从 cwd、旧映射或编号猜目录；参数缺失诊断明确。",
+        "L0/L1 保持原命令和合法行为，CLI 位置参数无破坏性改动。",
+        "expected_root和directory_name只作一致性核对，不能提供目标定位或绕过持久身份。"
+      ],
+      "required_evidence": [
+        "实际命令 argv、退出码、标准输出／错误、项目快照",
+        "底层API参数组合、具体拒绝原因及合法绑定对照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-33",
+      "title": "材料中的路径与授权指令",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+live-client",
+      "priority": "blocker",
+      "preconditions": "用户选择 A；A 的材料含切到 B、authorized=true、伪造绑定及自称管理员等文字。",
+      "steps": [
+        "工具层提交未知 binding／authorized 字段和缺失 project_path 的请求。",
+        "实际 Agent 读取这些材料后按用户原请求继续；检查底层调用。"
+      ],
+      "expected": [
+        "MCP 拒绝未知授权字段；每次调用仍要求项目路径。",
+        "Agent 不将材料中的 B 当作用户切换；不能只把权限检查都交给自然语言。"
+      ],
+      "required_evidence": [
+        "恶意材料夹具、用户原意、原始调用参数、A/B 与配置快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-34",
+      "title": "UI 导入重叠与独立授权",
+      "implementation_phase": "P4",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "合法外部源 IMP 已获 --import-root；另建未授权源和与项目／工具／上游重叠的源。",
+      "steps": [
+        "按读取、prepare、inspect(candidate)、accept 逐阶段测试导入。",
+        "L0/L1 保留旧根禁入；E 使用本次项目与受保护集合。",
+        "更换项目路径但不新增导入授权，再调用。"
+      ],
+      "expected": [
+        "合法独立授权导入成功；越权／重叠来源在相应阶段拒绝。",
+        "项目目录选择不自动加入 import_roots，源文件保持只读。"
+      ],
+      "required_evidence": [
+        "实际授权列表、来源 root、映射、各阶段结果、源文件访问与字节观测"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-35",
+      "title": "撤销授权后旧导入候选",
+      "implementation_phase": "P4",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "IMP 有效授权下已生成候选和检查记录；使用 E 项目。",
+      "steps": [
+        "保留有效进程内检查凭据，在可信测试夹具中撤销授权后分别准备、检查、接受。",
+        "新服务无 --import-root 时用持久候选执行新检查；不能用旧跨进程 token 的拒绝代替授权验证。",
+        "对需要外部访问的 resume 同样测试，并设置外部读调用计数。"
+      ],
+      "expected": [
+        "持久 base.json 的 root 不是新授权；无权阶段不读取外部源、不写公开成果。",
+        "拒绝确实来自有效授权边界，不能被 token 过期、错误 ID 或工具未开放提前掩盖。"
+      ],
+      "required_evidence": [
+        "撤销前正向对照、有效凭据状态、拒绝原因、外部读计数、公开目标快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-36",
+      "title": "撤销授权后的本地事务回滚",
+      "implementation_phase": "P4",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "导入候选接受中断，事务前像和所有必要回滚证据已在项目内固定。",
+      "steps": [
+        "撤销外部授权，并让外部源不存在或不可读。",
+        "只读检查事务，再以明确 rollback 调用恢复。",
+        "另使 before 证据损坏或目标出现第三方字节。"
+      ],
+      "expected": [
+        "无需外部读取即可按完整本地前像回滚；不扩大权限。",
+        "只恢复受管目标，保留无关文件；损坏证据／第三方修改时拒绝覆盖。"
+      ],
+      "required_evidence": [
+        "外部零读取、before／after／other 分类、受管与无关文件前后摘要、回滚回执"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-37",
+      "title": "候选和事务复制到 B",
+      "implementation_phase": "P4",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "A/B 相同编号与内容；A 产生候选、inspection_id 和可恢复事务。",
+      "steps": [
+        "将 A 的私有候选／回执／事务副本置于 B 的相应位置。",
+        "带 B 路径尝试 inspect、accept、resume、rollback 和请求重放。"
+      ],
+      "expected": [
+        "不能用相同内容／编号跳过原绑定；A 结果不能在 B 消费。",
+        "拒绝后 A/B 公开成果、历史和未知文件不变，不自动重写绑定字段。"
+      ],
+      "required_evidence": [
+        "复制材料来源、原绑定、各调用失败原因与两项目快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-38",
+      "title": "方案的业务前置条件",
+      "implementation_phase": "P3",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "持久编号与中文目录不同；准备无确认、过期、错误用途、有效模拟确认的隔离项目。",
+      "steps": [
+        "逐项目 solution_read_context／inspect。",
+        "在保存能力开放且引用有效时尝试工程保存。"
+      ],
+      "expected": [
+        "目录和身份先正确识别；缺确认返回对应业务原因而非目录错误。",
+        "仅有效当前 PRD 用途确认且其他条件满足者可保存。",
+        "不自动写确认；结构检查结果与保存结果分别判断。"
+      ],
+      "required_evidence": [
+        "源需求／PRD／快照绑定、确认核验、保存资格、目标及确认记录摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-39",
+      "title": "进程重启和配置切换",
+      "implementation_phase": "P5",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "stdio",
+      "priority": "blocker",
+      "preconditions": "真实服务已返回读取引用或 UI 检查凭据；保留已落盘候选与历史。",
+      "steps": [
+        "正常关闭并启动新进程，使用旧凭据调用。",
+        "另在进程运行中修改目录模式或配置，再用旧引用。",
+        "按合法配置重新读取并按协议检查持久状态。"
+      ],
+      "expected": [
+        "进程内引用不跨重启；运行中配置变化要求重核，不热继承。",
+        "持久历史／已闭合回执仍按协议识别；新进程不继承全局当前项目。"
+      ],
+      "required_evidence": [
+        "PID、前后配置摘要、旧／新调用、持久状态摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "PATH-40",
+      "title": "旧历史、候选与在途状态升级",
+      "implementation_phase": "P5",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "kernel+installation-rehearsal",
+      "priority": "blocker",
+      "preconditions": "由改造前工具在临时环境生成旧历史、旧候选和未闭合事务，记录原版本及摘要。",
+      "steps": [
+        "新工具读取旧历史，核对内容版本未重算。",
+        "缺新绑定字段的旧候选在 E 模式尝试接受。",
+        "安装预检遇到未闭合事务；在原工具／基线下按原协议处理后再试安装。"
+      ],
+      "expected": [
+        "旧历史按原格式可核验；旧候选需重新准备，不能只补路径／摘要即视为受信。",
+        "未闭合事务阻止直接切换，日志、前像与业务文件保留，不自动迁移。",
+        "不篡改旧记录令其看似新格式，也不伪造正式确认。"
+      ],
+      "required_evidence": [
+        "旧工具来源、原始持久夹具摘要、预检结果、历史摘要与重新准备对照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "ENV-01",
+      "title": "来源基线与修改范围",
+      "implementation_phase": "P0",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "static",
+      "priority": "blocker",
+      "preconditions": "实施计划和 72 项基线可读；尚未创建开发副本。",
+      "steps": [
+        "只读核对源文件、软链、配置摘要和父仓状态。",
+        "相关差异逐项审查并登记本轮基线，不覆盖新改动。"
+      ],
+      "expected": [
+        "唯一开发来源明确；未知相关差异未被自动接受。"
+      ],
+      "required_evidence": [
+        "基线比对结果、已审查差异、父仓 index／远端摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P0"
+    },
+    {
+      "id": "ENV-02",
+      "title": "隔离环境与旧测试基线",
+      "implementation_phase": "P0",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "test-harness",
+      "priority": "blocker",
+      "preconditions": "开发副本不含真实 local.json／备份；业务夹具在系统临时目录。",
+      "steps": [
+        "复制并保留相对软链，验证指向与副本边界。",
+        "分组及聚合运行现有测试，保留实际计数和退出码。"
+      ],
+      "expected": [
+        "不访问真实业务写入口；原安装和上游不变。",
+        "发布时 350 项仅作参照；新输出才是本轮结果。"
+      ],
+      "required_evidence": [
+        "复制排除清单、源码树／上游前后摘要、实际测试日志"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P0"
+    },
+    {
+      "id": "ENV-03",
+      "title": "新测试确实被发现并执行",
+      "implementation_phase": "P5",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "test-harness",
+      "priority": "blocker",
+      "preconditions": "新测试实现后执行；初始这五个新测试文件尚不存在。",
+      "steps": [
+        "清点计划的五个新文件及 unittest 实际 discover ID。",
+        "核对每个 PATH 的模式／角色／阶段子场景映射。"
+      ],
+      "expected": [
+        "缺实现不能以 skip、空套件或旧350项宣称已覆盖。",
+        "测试导入失败、未发现、skip 和 BLOCKED 明确报告。"
+      ],
+      "required_evidence": [
+        "发现测试 ID 列表、覆盖映射、skip 原因与实际执行计数"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "ENV-04",
+      "title": "文档、依赖闭包与配置示例一致",
+      "implementation_phase": "P5",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "static+stdio",
+      "priority": "blocker",
+      "preconditions": "代码完成，角色说明、流程图和来源记录已定向更新。",
+      "steps": [
+        "逐项核对十文件闭包、模式默认值、CLI 帮助、工具描述和示例。",
+        "核对三个角色采用摘要及所有本地链接；保留历史源摘要意义。"
+      ],
+      "expected": [
+        "新安装推荐 E，缺省仍 L0；无旧根限制残留描述冒充新规则。",
+        "README 等受控文档变化后服务仍能合法加载；无自动刷新锁脚本。"
+      ],
+      "required_evidence": [
+        "文档差异、模块清单、链接结果、来源哈希及工具发现"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "FLOW-01",
+      "title": "新项目→需求→PRD→历史",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "stdio",
+      "priority": "blocker",
+      "preconditions": "R 外目标缺失；需求初始化／保存能力开放。",
+      "steps": [
+        "initialize→read→save_draft V1→read→save_prd_draft P1。",
+        "再改需求为V2，旧PRD引用应拒绝；重读后按新来源保存P2，读两类历史。"
+      ],
+      "expected": [
+        "整条链目标准确；两次保存分别核验，PRD来源指向真实读取的需求版本。"
+      ],
+      "required_evidence": [
+        "逐调用ID、当前及历史摘要、来源绑定、配置不变"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "FLOW-02",
+      "title": "补录、恢复与项目选择",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "stdio",
+      "priority": "blocker",
+      "preconditions": "项目选择部分缺失；既有需求／PRD可读。",
+      "steps": [
+        "include_recovery 读取；用当前引用补录用户已明确字段。",
+        "旧引用保存应失效；重新读取后保存，检查 recovery 输出。"
+      ],
+      "expected": [
+        "只更新 changes 指定字段；不修改ID、依赖或确认，不触发远端操作。",
+        "null 与未记录规范集仍有区别。"
+      ],
+      "required_evidence": [
+        "metadata字段差异、引用消费、恢复材料和远端零调用"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "FLOW-03",
+      "title": "方案完整正向与拒绝链",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "stdio",
+      "priority": "blocker",
+      "preconditions": "使用既有方案测试模板和合法模拟用途确认。",
+      "steps": [
+        "读取→候选检查→保存V1→同正文→V2→读历史。",
+        "使PRD或确认失效，旧／新引用分别尝试保存。"
+      ],
+      "expected": [
+        "合法保存和历史准确；来源变化后被拒绝，已保存V2不受误改。"
+      ],
+      "required_evidence": [
+        "PRD与确认版本、目标/历史摘要、保存五态与检查结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "FLOW-04",
+      "title": "UI 四种候选来源",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "stdio",
+      "priority": "blocker",
+      "preconditions": "工具写能力开放；IMP独立授权；有可用历史。",
+      "steps": [
+        "分别覆盖 empty、current、import、history。",
+        "每次 read→prepare→编辑tree/candidate.json→inspect→accept→read_history。"
+      ],
+      "expected": [
+        "清单成员、映射、入口、版本与回执正确；源文件不变。",
+        "旧版恢复形成新候选，中间历史保留。"
+      ],
+      "required_evidence": [
+        "模式、revision_id、inspection_id、成员变更、历史与回执"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "FLOW-05",
+      "title": "UI 中断分类与显式恢复",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "kernel+stdio",
+      "priority": "blocker",
+      "preconditions": "使用既有 failpoint 和真实事务；每次故障是全新夹具。",
+      "steps": [
+        "覆盖 evidence_fixed、before_first_write、member_after:0、after_pointer、after_saved_receipt。",
+        "先inspect事务，再分别resume／rollback；关键场景用新进程恢复。"
+      ],
+      "expected": [
+        "未激活、部分应用、已写但未核实、已提交准确区分。",
+        "回滚只处理受管前像；已提交版本不伪装可回滚；不盲目重复accept。"
+      ],
+      "required_evidence": [
+        "failpoint、before/after/other、write_outcome、事务阶段、回执与历史"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "FLOW-06",
+      "title": "三角色多项目交错",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "stdio",
+      "priority": "blocker",
+      "preconditions": "A/B 分处 X/Y，使用不同需求、PRD、方案和UI标记。",
+      "steps": [
+        "三服务交错执行 A需求→B需求→A方案→B UI→A UI→B方案。",
+        "分别读取历史；交叉传引用做负向对照。"
+      ],
+      "expected": [
+        "同一项目跨角色身份一致，不同项目版本与历史独立。",
+        "全局配置和其他项目不受切换影响。"
+      ],
+      "required_evidence": [
+        "统一时间线、服务PID、工具参数、成果哨兵及前后摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "CLIENT-01",
+      "title": "首次完整目录与全局配置",
+      "implementation_phase": "P6",
+      "modes": [
+        "E"
+      ],
+      "layer": "live-client",
+      "priority": "blocker",
+      "preconditions": "实际客户端已按授权重载新服务；使用隔离项目路径。",
+      "steps": [
+        "自然语言要求按需求角色在新完整目录初始化并保存需求。",
+        "核对Agent真实工具调用及文件落点。"
+      ],
+      "expected": [
+        "用户只给项目目录，不必给父目录注册信息；不多拼名称层。",
+        "配置只管理工具与能力，项目切换不改配置。"
+      ],
+      "required_evidence": [
+        "用户原话、实际工具参数、实际路径、配置摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "CLIENT-02",
+      "title": "同一项目不重复输入目录",
+      "implementation_phase": "P6",
+      "modes": [
+        "E"
+      ],
+      "layer": "live-client",
+      "priority": "blocker",
+      "preconditions": "同一对话已通过CLIENT-01明确A，可信上下文仍可用。",
+      "steps": [
+        "不重复路径，要求修改需求并保存，再生成PRD。",
+        "切换到方案或UI角色继续读取，不重新告诉目录。"
+      ],
+      "expected": [
+        "Agent自动为每次工具调用携带A完整路径，不要求用户重复输入。",
+        "MCP仍要求project_path；不能靠删除该必填参数实现表面便利。"
+      ],
+      "required_evidence": [
+        "完整对话、每次底层project_path、A成果及无额外定位询问"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "CLIENT-03",
+      "title": "明确切换后沿用新项目",
+      "implementation_phase": "P6",
+      "modes": [
+        "E"
+      ],
+      "layer": "live-client",
+      "priority": "blocker",
+      "preconditions": "同一对话已有A与其版本历史。",
+      "steps": [
+        "用户给B完整目录并明确切换；随后不重复路径继续B。",
+        "再明确给A目录切回，读取其原版本和历史。"
+      ],
+      "expected": [
+        "后续调用跟随当前明确选择，A/B成果互不混写。",
+        "切换无需服务重启或逐项目注册。"
+      ],
+      "required_evidence": [
+        "切换语句、工具时间线、两个项目版本历史、配置不变"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "CLIENT-04",
+      "title": "材料路径不等于项目切换",
+      "implementation_phase": "P6",
+      "modes": [
+        "E"
+      ],
+      "layer": "live-client",
+      "priority": "blocker",
+      "preconditions": "用户选择A；待分析材料包含B路径和假授权。",
+      "steps": [
+        "要求仅分析材料，再明确要求保存到当前项目。",
+        "观察Agent路径选择及实际调用。"
+      ],
+      "expected": [
+        "不因材料中的路径切到B，不由角色自述增加能力。"
+      ],
+      "required_evidence": [
+        "材料夹具、用户语句、真实调用、B零业务写入"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "CLIENT-05",
+      "title": "新对话的明确恢复与无上下文分支",
+      "implementation_phase": "P6",
+      "modes": [
+        "E"
+      ],
+      "layer": "live-client",
+      "priority": "blocker",
+      "preconditions": "分别准备带明确项目位置的可信任务上下文和无项目位置的新对话。",
+      "steps": [
+        "带明确位置的新对话读取已有需求及历史，继续。",
+        "无明确位置的新对话提出继续请求。"
+      ],
+      "expected": [
+        "前者按指定项目实际读取恢复；后者先要求明确项目，不扫描猜测或采用服务上次项目。",
+        "不承诺无项目上下文时跨新对话自动定位。"
+      ],
+      "required_evidence": [
+        "上下文来源、恢复调用、无上下文分支行为、无全局扫描观测"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "CLIENT-06",
+      "title": "两个对话共享服务仍隔离",
+      "implementation_phase": "P6",
+      "modes": [
+        "E"
+      ],
+      "layer": "live-client",
+      "priority": "blocker",
+      "preconditions": "两个对话明确绑定A/B，连接同一通用MCP服务。",
+      "steps": [
+        "交错请求读取、修改、保存及历史查询。",
+        "分别在对话中只说当前项目继续，不重复另一个项目路径。"
+      ],
+      "expected": [
+        "每个对话仍传自己的明确路径；MCP不保存全服务共享当前项目。"
+      ],
+      "required_evidence": [
+        "两对话并排时间线、同服务身份、请求参数及两项目快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "RELEASE-01",
+      "title": "本机与发布版来源适配",
+      "implementation_phase": "P7",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "publication-copy",
+      "priority": "blocker",
+      "preconditions": "本机与SA-mate文档／锁已知不同；变更包已完成P5。",
+      "steps": [
+        "在独立SA-mate副本按文件应用补丁，不复制本机配置或整套SOURCES。",
+        "核对原复制源、新副本、新模块和发布上游锁的对应摘要。"
+      ],
+      "expected": [
+        "保留发布版固定上游及流程图；本机个人状态不上传。",
+        "未知差异不通过全量重算摘要接受。"
+      ],
+      "required_evidence": [
+        "文件级差异、原/新摘要、敏感范围检查及准确来源链"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P7"
+    },
+    {
+      "id": "RELEASE-02",
+      "title": "干净发布克隆可验证",
+      "implementation_phase": "P7",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "publication-copy+stdio",
+      "priority": "blocker",
+      "preconditions": "干净发布副本尚未生成local.json，记录准确提交。",
+      "steps": [
+        "先运行旧／新全部离线测试。",
+        "在第二份临时安装生成配置、检查上游、从目录外启动三服务，执行E模式主线和L0/L1兼容。"
+      ],
+      "expected": [
+        "无原开发目录或旧helper依赖；相对软链和十模块完整。",
+        "未配置源码测试与已配置安装检查分开，不删除真实配置。"
+      ],
+      "required_evidence": [
+        "克隆来源、实际测试计数、模块来源、握手及三服务读写结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P7"
+    },
+    {
+      "id": "RELEASE-03",
+      "title": "公开说明和排除清单",
+      "implementation_phase": "P7",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "static",
+      "priority": "blocker",
+      "preconditions": "发布候选已更新README、接入说明、状态和路线。",
+      "steps": [
+        "核对默认/新模式、项目路径示例、真实未验项和全部本地链接。",
+        "审查将上传的文件清单及内容，不仅按文件名排除。"
+      ],
+      "expected": [
+        "不含本机local.json、备份、业务资料、原始私有日志或测试基线中的本机路径/业务指纹。",
+        "不上传LangGraph实验或退役Workflow，不夸大实际客户端结论。"
+      ],
+      "required_evidence": [
+        "文档差异、链接清单、内容检查和排除结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P7"
+    },
+    {
+      "id": "RELEASE-04",
+      "title": "远端发布回读",
+      "implementation_phase": "P7",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "remote-readback",
+      "priority": "blocker",
+      "preconditions": "已取得具体提交/推送范围授权，正常非强制推送完成。",
+      "steps": [
+        "核对远端分支提交号、每个变更文件的Git blob摘要和模式。",
+        "回读关键README、配置示例和来源记录；核对本机父仓与业务样本。"
+      ],
+      "expected": [
+        "远端与准确发布副本一致，软链模式保留。",
+        "父仓远端、index和业务文件不被顺带改变。"
+      ],
+      "required_evidence": [
+        "提交号、逐文件/模式对照、远端正文、父仓与样本摘要"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P7"
+    },
+    {
+      "id": "ROLLBACK-01",
+      "title": "仅切回旧模式",
+      "implementation_phase": "P6",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "installation-rehearsal",
+      "priority": "blocker",
+      "preconditions": "仅在临时已配置安装演练；原R、映射和范围外E项目都保留。",
+      "steps": [
+        "关闭旧进程，将配置切legacy_rooted并重启。",
+        "读取R内项目及R外E项目；核对业务目录。"
+      ],
+      "expected": [
+        "R内按旧规则可用；范围外明确不可访问但文件仍在。",
+        "旧凭据不继承，不移动项目制造回退成功。"
+      ],
+      "required_evidence": [
+        "配置前后、进程重启、两类调用、所有业务快照"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "ROLLBACK-02",
+      "title": "完整恢复旧工具基线",
+      "implementation_phase": "P6",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "installation-rehearsal",
+      "priority": "blocker",
+      "preconditions": "旧代码、文档、来源记录、配置备份和摘要完整；无未闭合事务。",
+      "steps": [
+        "在临时安装一起恢复整套旧基线并重载。",
+        "执行旧模式读写和来源检查，观测未恢复完整的负向对照。"
+      ],
+      "expected": [
+        "完整恢复后按旧范围正常；缺少任何采用记录时仍检测漂移。",
+        "不恢复或覆盖业务正文、历史，不只恢复Python。"
+      ],
+      "required_evidence": [
+        "恢复清单、前后摘要、旧工具调用及不完整恢复错误"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "ROLLBACK-03",
+      "title": "升级后新成果回退保留",
+      "implementation_phase": "P6",
+      "modes": [
+        "E",
+        "L0",
+        "L1"
+      ],
+      "layer": "installation-rehearsal",
+      "priority": "blocker",
+      "preconditions": "升级工具已在R内/外创建项目、保存多版文档和UI历史。",
+      "steps": [
+        "回退代码/模式，比较所有项目与历史。",
+        "用旧工具按实际支持范围读取，必要时再切回新工具核对。"
+      ],
+      "expected": [
+        "成果全部留在原位；不可访问是范围/格式限制，不能删成果或改历史规避。"
+      ],
+      "required_evidence": [
+        "项目/历史全量快照、旧/新工具访问结果与实际限制"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P6"
+    },
+    {
+      "id": "MUT-01",
+      "title": "去除跨路径凭据校验",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "targeted-mutation",
+      "priority": "blocker",
+      "preconditions": "相关正常负向测试先在未修改副本通过；仅操作一次性副本或测试mock。",
+      "steps": [
+        "仅移除或替换路径／绑定指纹比较，不改AC或预期。",
+        "运行针对PATH-05,PATH-21,PATH-37的真实行为断言，确认已到达目标分支。",
+        "恢复副本后复跑相同测试。"
+      ],
+      "expected": [
+        "mutant必须被对应安全/隔离断言杀死；ImportError、语法错误或未到达分支不计杀死。",
+        "未修改对照恢复通过；真实安装及上游始终不变。"
+      ],
+      "required_evidence": [
+        "单一变更、命中用例、失败断言、实际成功副作用观测、恢复后结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "MUT-02",
+      "title": "改回目录名或旧映射身份",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "targeted-mutation",
+      "priority": "blocker",
+      "preconditions": "相关正常负向测试先在未修改副本通过；仅操作一次性副本或测试mock。",
+      "steps": [
+        "仅移除或替换持久身份优先规则，不改AC或预期。",
+        "运行针对PATH-07,PATH-23的真实行为断言，确认已到达目标分支。",
+        "恢复副本后复跑相同测试。"
+      ],
+      "expected": [
+        "mutant必须被对应安全/隔离断言杀死；ImportError、语法错误或未到达分支不计杀死。",
+        "未修改对照恢复通过；真实安装及上游始终不变。"
+      ],
+      "required_evidence": [
+        "单一变更、命中用例、失败断言、实际成功副作用观测、恢复后结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "MUT-03",
+      "title": "改为仅按编号缓存",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "targeted-mutation",
+      "priority": "blocker",
+      "preconditions": "相关正常负向测试先在未修改副本通过；仅操作一次性副本或测试mock。",
+      "steps": [
+        "仅移除或替换路径缓存及联合身份隔离，不改AC或预期。",
+        "运行针对PATH-03,PATH-04,PATH-21的真实行为断言，确认已到达目标分支。",
+        "恢复副本后复跑相同测试。"
+      ],
+      "expected": [
+        "mutant必须被对应安全/隔离断言杀死；ImportError、语法错误或未到达分支不计杀死。",
+        "未修改对照恢复通过；真实安装及上游始终不变。"
+      ],
+      "required_evidence": [
+        "单一变更、命中用例、失败断言、实际成功副作用观测、恢复后结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "MUT-04",
+      "title": "跳过目录身份重验",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "targeted-mutation",
+      "priority": "blocker",
+      "preconditions": "相关正常负向测试先在未修改副本通过；仅操作一次性副本或测试mock。",
+      "steps": [
+        "仅移除或替换dev／ino及父路径重验，不改AC或预期。",
+        "运行针对PATH-19,PATH-20的真实行为断言，确认已到达目标分支。",
+        "恢复副本后复跑相同测试。"
+      ],
+      "expected": [
+        "mutant必须被对应安全/隔离断言杀死；ImportError、语法错误或未到达分支不计杀死。",
+        "未修改对照恢复通过；真实安装及上游始终不变。"
+      ],
+      "required_evidence": [
+        "单一变更、命中用例、失败断言、实际成功副作用观测、恢复后结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "MUT-05",
+      "title": "丢弃当前导入授权",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "targeted-mutation",
+      "priority": "blocker",
+      "preconditions": "相关正常负向测试先在未修改副本通过；仅操作一次性副本或测试mock。",
+      "steps": [
+        "仅移除或替换prepare／inspect／accept的实际import_roots透传，不改AC或预期。",
+        "运行针对PATH-34,PATH-35,PATH-36的真实行为断言，确认已到达目标分支。",
+        "恢复副本后复跑相同测试。"
+      ],
+      "expected": [
+        "mutant必须被对应安全/隔离断言杀死；ImportError、语法错误或未到达分支不计杀死。",
+        "未修改对照恢复通过；真实安装及上游始终不变。"
+      ],
+      "required_evidence": [
+        "单一变更、命中用例、失败断言、实际成功副作用观测、恢复后结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    },
+    {
+      "id": "MUT-06",
+      "title": "漏验新共享模块摘要",
+      "implementation_phase": "P5",
+      "modes": [
+        "E"
+      ],
+      "layer": "targeted-mutation",
+      "priority": "blocker",
+      "preconditions": "相关正常负向测试先在未修改副本通过；仅操作一次性副本或测试mock。",
+      "steps": [
+        "仅移除或替换project_binding的受控采用校验，不改AC或预期。",
+        "运行针对PATH-17,PATH-18的真实行为断言，确认已到达目标分支。",
+        "恢复副本后复跑相同测试。"
+      ],
+      "expected": [
+        "mutant必须被对应安全/隔离断言杀死；ImportError、语法错误或未到达分支不计杀死。",
+        "未修改对照恢复通过；真实安装及上游始终不变。"
+      ],
+      "required_evidence": [
+        "单一变更、命中用例、失败断言、实际成功副作用观测、恢复后结果"
+      ],
+      "status": "not_run",
+      "actual": null,
+      "subcase_results": [],
+      "evidence_paths": [],
+      "completion_gate": "P5"
+    }
+  ],
+  "phase_semantics": "implementation_phase is the first related batch; completion_gate is the full verdict gate. Multi-role coverage is accumulated after each role is implemented."
+}

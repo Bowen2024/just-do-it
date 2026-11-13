@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "retired_on": "2026-10-30",
+  "scope": "requirements program Workflow only; Agent + MCP remains active",
+  "archive_sha256": "5777b4c20449e4e264ab89e677d2ec5ca2745032acc96cd4f8a5dddc88482fbb",
+  "files": [
+    {
+      "path": "fusion-runtime/workflows/requirements/hardcode/__init__.py",
+      "sha256": "0418a4ccc996ac1cc5c7930b6b5351cff790939366a0c33526e74bd94225503b",
+      "role": "retired"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/hardcode/contracts.py",
+      "sha256": "eb85ed7ad34b7599dd202539b42b7da8713698ad3a2b0282497e0a582c122a46",
+      "role": "retired"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/hardcode/tools.py",
+      "sha256": "8a34ce64fcb270662dc391e32c0bc412c5522aa6f9f0348fb83b6bd0746c8067",
+      "role": "retired"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/hardcode/workflow.py",
+      "sha256": "85e9e1a39c79d45cf490fd9301d847ebb42f970712fc7e36c2b7d26982635c9a",
+      "role": "retired"
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_workflow_candidate.py",
+      "sha256": "012643e6175643f4e76229f19679fa03d9a2409c369fa550b09261ad058584a5",
+      "role": "retired",
+      "test_methods": 11
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_workflow_contracts.py",
+      "sha256": "0d0ced21a592a884d93f173fcd346643cc04854d5a2eb21adac344f12e34e04f",
+      "role": "retired",
+      "test_methods": 48
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_workflow_dialogue.py",
+      "sha256": "fad2cd28e04562d74b750dd5ff7242132044031f57eee1b4ca837feda2063c4f",
+      "role": "retired",
+      "test_methods": 20
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_workflow_lightweight.py",
+      "sha256": "b21618acf0d36464b299d916cf037102977967a043ed15bfebed01a596871d4d",
+      "role": "retired",
+      "test_methods": 21
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_workflow_methods.py",
+      "sha256": "f8810efe5e4be0b69b24b1cdb78346907493ad103ecf66e904794215973c479f",
+      "role": "retired",
+      "test_methods": 20
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_workflow_project_binding.py",
+      "sha256": "e3f1ebf7a746a34a6137b9b40cd58c2c0aef965869a47d3ca125029d7bf60fd7",
+      "role": "retired",
+      "test_methods": 2
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_workflow_research.py",
+      "sha256": "0e676a9a059936c08a374e89fe19f28368f125e02df223ac3f6fc52ee0124f58",
+      "role": "retired",
+      "test_methods": 13
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_workflow_save.py",
+      "sha256": "74ea10dfe40184baad9c10bc07d228950875f92ec6abeb9e1dd532caa618ed1b",
+      "role": "retired",
+      "test_methods": 17
+    },
+    {
+      "path": "fusion-runtime/tests/fixtures/requirements_case.json",
+      "sha256": "bdd7a38c224750ae38d469f70db2ce90358383b6cb23a9b75244851d736de1b5",
+      "role": "retired"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/__init__.py",
+      "sha256": "5fa2d9ee0824047d9280df0dcc31a18305d3165bd37c4407ff86926363388961",
+      "role": "pre_retirement_snapshot"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/README.md",
+      "sha256": "c193a9f5d0fcad71094bc0d1fe17eb00bafbb541f6ce637839a4da09abd41894",
+      "role": "pre_retirement_snapshot"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/requirements-workflow-plan.md",
+      "sha256": "91e7136c7c1461adb10fdf3f00b6d41abed9c283fc37d857a697a6a2f872a38d",
+      "role": "pre_retirement_snapshot"
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_workflow_file_tools.py",
+      "sha256": "2709dda34dc420c409ccb675191efbd7c8340f9bbd25713ecb61df3ca65b0289",
+      "role": "pre_retirement_snapshot",
+      "test_methods": 8
+    }
+  ]
+}

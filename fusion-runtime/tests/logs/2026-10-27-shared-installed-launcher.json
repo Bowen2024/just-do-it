@@ -1,0 +1,17 @@
+{
+  "global_config_path": "/Users/bowen/.cursor/mcp.json",
+  "global_config_sha256": "26157ca781a55129dd2bed3e2ecd751c3abb258678f6128f4422ecbf43efec5d",
+  "server_name": "requirements",
+  "tool_names": [
+    "requirements_project_initialize",
+    "requirements_project_inspect",
+    "requirements_read_context",
+    "requirements_save_draft"
+  ],
+  "all_calls_require_project_path": true,
+  "legacy_project_entry_removed": true,
+  "installed_launcher_exit_code": 0,
+  "business_tools_called": false,
+  "cursor_agent_verified": false,
+  "real_requirements_file_exists": false
+}

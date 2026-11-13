@@ -1,0 +1,10 @@
+Date: 2026-10-26 (Asia/Shanghai)
+Command: env PYTHONPATH='fusion-runtime:fusion-runtime-lab/src:fusion-runtime-lab/tests' fusion-runtime-lab/.venv/bin/python -B -m unittest discover -s fusion-runtime/tests -p 'test_requirements_workflow*.py'
+Exit code: 0
+Elapsed seconds: 6.440
+
+.....................................................................................................................................................
+----------------------------------------------------------------------
+Ran 149 tests in 6.316s
+
+OK

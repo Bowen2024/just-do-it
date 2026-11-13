@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-11-03",
+  "scope": "Planning baseline only. Not implementation, acceptance or deployment. Local paths and business fingerprints are not for automatic publication.",
+  "workspace": "/Users/bowen/Desktop/博文的career/vibe- coding",
+  "source_root": "fusion-runtime",
+  "implementation_worktree": "_work/project-path-explicit-20261103",
+  "published_reference": {
+    "repository": "https://github.com/Bowen2024/SA-mate",
+    "commit": "b52c7350917b4576be9cfe8856d1419114f13446",
+    "runtime_python_files_compared": 26,
+    "runtime_python_differences": []
+  },
+  "files": [
+    {
+      "path": "fusion-runtime/tests/solution_test_support.py",
+      "kind": "file",
+      "sha256": "86cb81aa72ccc8e3ba5783d29545f8790bd0c3116262a26f24be59c0eb011194"
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_cursor_tools.py",
+      "kind": "file",
+      "sha256": "99b3eb66541e6d416a916f2f7aba09576bcbc787cefebde3521143dd8db58723"
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_file_tools.py",
+      "kind": "file",
+      "sha256": "d8a62b6d4ef02faae34fd32354e35cebd1421dc66ac0920d65f16e7cb257ed42"
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_localization.py",
+      "kind": "file",
+      "sha256": "390bedbf05ab3656d5b69cd8826ec3d3a02ee4ddcfb7d403a7293c0017c011aa"
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_prd_tools.py",
+      "kind": "file",
+      "sha256": "dd6c60ac601ebb21d4ecc55c8d5b69744e0c73fc41c80491f76129435a40564d"
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_project_info.py",
+      "kind": "file",
+      "sha256": "95a47ff356a9830ee548ef23f89b1bb3bed99744779eeb039957d165254a1641"
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_recovery.py",
+      "kind": "file",
+      "sha256": "b1ea6acc01ef0895070ef49ee528c1900f763779bb46bc8e443f226a08f5f246"
+    },
+    {
+      "path": "fusion-runtime/tests/test_requirements_shared_tools.py",
+      "kind": "file",
+      "sha256": "b6ddfe3e01869e11520bd3dad33e7118301450160e9e38d271f9a51d54cf1c07"
+    },
+    {
+      "path": "fusion-runtime/tests/test_solution_client_config.py",
+      "kind": "file",
+      "sha256": "44c8ef56e46a07f6a0e0a6ea8953eeb89a6a3edd89613e7bc1894dc9f5e657e0"
+    },
+    {
+      "path": "fusion-runtime/tests/test_solution_context_tools.py",
+      "kind": "file",
+      "sha256": "9faad1f80c93471088812dcad407c0fb29056cf39935bbae94fd6c9e9a135dcd"
+    },
+    {
+      "path": "fusion-runtime/tests/test_solution_inspect_tools.py",
+      "kind": "file",
+      "sha256": "1dc1bf6a5a7fa3a67c13b69e449b14ca0be158d3998d1cd48ad4e4fe8b35b013"
+    },
+    {
+      "path": "fusion-runtime/tests/test_solution_isolation.py",
+      "kind": "file",
+      "sha256": "e409747af91fcd2fd5450ba25466026d984c960b70cc31e0272fcddd38d44647"
+    },
+    {
+      "path": "fusion-runtime/tests/test_solution_save_tools.py",
+      "kind": "file",
+      "sha256": "c3e8ccc92c64922e27126eee2d62467b59f1d735a2891d5c31c53caecd3530a6"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_accept.py",
+      "kind": "file",
+      "sha256": "4b75856b053466ae4756738038dddc84be08e9935897edc7d02e6f0412456ee9"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_context.py",
+      "kind": "file",
+      "sha256": "79aaf2a391e2050f049b0446d663dd9a7d61d8710bb533bda1f9debc8461326d"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_fixtures.py",
+      "kind": "file",
+      "sha256": "1b8ff2c3699781f06597612c896f249f3fe531e4ec78d6a11a8216ecfa586b37"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_history.py",
+      "kind": "file",
+      "sha256": "7f5add29150bc7439acbaaed26b6bb13c2c4fcea2958c1167b228b9e182e127d"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_inspect.py",
+      "kind": "file",
+      "sha256": "10344f2f4709b7ce6cadd9cf8ab0f0127562a96ed81445ac33b86443c9ed6926"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_isolation.py",
+      "kind": "file",
+      "sha256": "2c141134c6305e6370f5fd4499f54d4296be8d3736d6a607cc71f1965f4a6b45"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_recovery.py",
+      "kind": "file",
+      "sha256": "cd7b57081ae2684041a1a924923ebb30bf02867effd5e3eecd83877d688a1550"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_stdio.py",
+      "kind": "file",
+      "sha256": "5d56f94c0b1316ca659d2a7db217d966b24d0d7375f974fd7372aa4156747c3d"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_transactions.py",
+      "kind": "file",
+      "sha256": "bcc1b5d2c0842154864ee8722aa157cee2de310e6b585f961082c96ed1db79a3"
+    },
+    {
+      "path": "fusion-runtime/tests/test_ui_workspace.py",
+      "kind": "file",
+      "sha256": "6e075591989d6fb0f90acfe88132a1015fa5a7e568f6255fcb7525615ba63658"
+    },
+    {
+      "path": "fusion-runtime/tests/ui_test_support.py",
+      "kind": "file",
+      "sha256": "4bf4355224a8b96f92abcb519e82fb03881eb48cf9b7bff8998d556f3264424f"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/README.md",
+      "kind": "file",
+      "sha256": "9e6ecfe48a2c4602487f55548272ac995e5cf2dd4f2f145002ad73434e035e4c"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/SOURCES.json",
+      "kind": "file",
+      "sha256": "0a507c30ac3542b4242935033f060478cf231729ffdf8fa260ff029efcdd74eb"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/agent-file-workflow.md",
+      "kind": "file",
+      "sha256": "d05c3fc52b3179c5d8337a9f3454418193f7b02a656bed98dca3557ccdfe782b"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/configure_client.py",
+      "kind": "file",
+      "sha256": "c70403d15705a04e6021d66faee67c74d72106559f536491fafa89bdceb1e28c"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/file_tools/__init__.py",
+      "kind": "file",
+      "sha256": "edcbdcdc286d305612194e67618efffc4c649d39f2ba90c70c3cf3301cf57359"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/file_tools/dependencies.py",
+      "kind": "file",
+      "sha256": "6b277e4ec7e9d796f8c058d521afed0e8bf6e94e866e729817b9b1df33b54117"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/file_tools/solution.py",
+      "kind": "file",
+      "sha256": "8ae7a405e5e67f0a9fafc93fc279df807b4b97f906663f0cd5f6c37f16d5c117"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/mcp_server.py",
+      "kind": "file",
+      "sha256": "0ac05a3793c0619a55fc21e603db0145fd6292acc1e85863726097ab04a2d69d"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/methods/develop-helper",
+      "kind": "symlink",
+      "sha256": "1be5a85dcb3d0ba21afce548bb022b3f9fd70f8de7f9e4631c444b2c3b405d39"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/shared_loader.py",
+      "kind": "file",
+      "sha256": "8dc9406fea33f98c34653913c05e904b57d0eed865cffd55c8324144e3953e99"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/solution-design.md",
+      "kind": "file",
+      "sha256": "c27293fab3ec6933c1e871184100cba9412931cfa7fb1ff41b542cdc6a716cb6"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/templates/research-template.md",
+      "kind": "symlink",
+      "sha256": "c8cc4ca86014f1c4be896c5787920dbdce2930000130a5443e533dd7c1d66bf7"
+    },
+    {
+      "path": "fusion-runtime/workflows/Solution Designer/templates/tech-spec-template.md",
+      "kind": "file",
+      "sha256": "5bbb37eb60266d3ab7cb201b6def58516edfbbc362a306ca7ce79d9d913eea6a"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/README.md",
+      "kind": "file",
+      "sha256": "a1fb07f458f560586b31f1965325d50fe8843ce2324f58fd5ee8353789be73cc"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/SOURCES.json",
+      "kind": "file",
+      "sha256": "f686a8d285c534d01a58dfff360ee1dfc9bc0f339e02397d464f54c6ffd44fe8"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/agent-file-workflow.md",
+      "kind": "file",
+      "sha256": "53e4e9474c4cb7eb3792e2efbb0cda97dfb4ba5ba6a61b583a1cc7e029add603"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/file_tools/__init__.py",
+      "kind": "file",
+      "sha256": "9e6cba607facbb991a58c766371388385481f70d61929240fc37f1ef15a5cba7"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/file_tools/context.py",
+      "kind": "file",
+      "sha256": "1302955037294fcf16f073d4c76b2f6e7a8abd36785adf32320c3ce624199383"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/file_tools/transactions.py",
+      "kind": "file",
+      "sha256": "191d059cfaf5cb9c67d8bd00a6494759332ce49ef1ea6113d384d6a76803e1f1"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/file_tools/versions.py",
+      "kind": "file",
+      "sha256": "8e52b3ce630e300a7657251aa41457da4535aeb0e6c2fe2a226c6e2986a071ed"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/file_tools/workspace.py",
+      "kind": "file",
+      "sha256": "c22e462c1dcd39cfa489d0df346bf3e760f9e7d4261f984b2241bf300cd04b7f"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/mcp_server.py",
+      "kind": "file",
+      "sha256": "f7f238f7e23fefe8a648b85f785004762b234586a709c4e4db4000140689b7b3"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/methods/develop-helper",
+      "kind": "symlink",
+      "sha256": "1be5a85dcb3d0ba21afce548bb022b3f9fd70f8de7f9e4631c444b2c3b405d39"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/shared_loader.py",
+      "kind": "file",
+      "sha256": "c15d0f1e1203482694e2775859b405258bbe0553fd49010f4be5e1b56c24ffaf"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/templates/ui-style-template.md",
+      "kind": "file",
+      "sha256": "6cc415b510f00df55ae2fe09edfa01d50c782749d6a98034418fe1345885d084"
+    },
+    {
+      "path": "fusion-runtime/workflows/UI/ui-design.md",
+      "kind": "file",
+      "sha256": "734c711f8dabc45fd97ba3b205ce45ffd39407b393c38c6c22074635bb72be7a"
+    },
+    {
+      "path": "fusion-runtime/workflows/__init__.py",
+      "kind": "file",
+      "sha256": "af88a7f9588ad89a3c894f827768dc0411079d71df766c9edce2651fa650fed5"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/README.md",
+      "kind": "file",
+      "sha256": "6a5c7842abe1f3195040e07a2fa10c4c1eed5efa4d352f17d8cde98f99090759"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/__init__.py",
+      "kind": "file",
+      "sha256": "456de122cce81bd43e62e9471d6e6cc53743dd100c8792414d6a30d364389a15"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/agent-file-workflow.md",
+      "kind": "file",
+      "sha256": "b2247c9e92ffe65d5761ec05385dbc887181cabc0a09702c98b5e79f9751e355"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/config/local.example.json",
+      "kind": "file",
+      "sha256": "d05d2c7623a5f1a2105305e48802a6cab6aab3208b07294bf8f8a8e327272bba"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/configure_cursor.py",
+      "kind": "file",
+      "sha256": "95c31f835f1e94a4a4f5d89f061143ee24086492a52205505bae18f9167d3294"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/cursor_mcp.py",
+      "kind": "file",
+      "sha256": "cd65968ce510c7a37d95832941b69162810fbf9136a34e4ee9749764f406f33b"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/SOURCES.json",
+      "kind": "file",
+      "sha256": "47ce486fa566aade37c5f9bc5634b5770e19f108be13083076f2266df544d42c"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/__init__.py",
+      "kind": "file",
+      "sha256": "280ecab1b265972ec9b4dd0f3b8a9a698d892f389649ed1526dfd6b6963a5c0a"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/artifact_records.py",
+      "kind": "file",
+      "sha256": "a4fff1ee80244707553f9fefd68cc63a86d441117d55ae68af9bcc245d4b1fb3"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/check_foundation.py",
+      "kind": "file",
+      "sha256": "43ed014b387126328b47d676da0779a5780b3f9038d19ba379ea2df7c2953f7b"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/confirmation_records.py",
+      "kind": "file",
+      "sha256": "7d390ca9ffa7024bbe1909f695c9835181c17b024d556aceb3b468d9fba9d83e"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/project_info.py",
+      "kind": "file",
+      "sha256": "a2891cb7fe4c06d08923b85ef068f9eafab8fcb21728c8e1a968990f3afec9be"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/project_init.py",
+      "kind": "file",
+      "sha256": "1b7470a796fafecbd34ee2c9c5552155dcb2f2429885fc1876b6b82bec35ab14"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/project_state.py",
+      "kind": "file",
+      "sha256": "dbba61ab01f342720116f5a1705f30eaea9ac1b322a077d200014f6d1709defe"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/recovery.py",
+      "kind": "file",
+      "sha256": "2c7dd4b78a7970a2f77423734232982ea15512f80febdb7988d0317816462c86"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/file_tools/requirements.py",
+      "kind": "file",
+      "sha256": "c9b06e2f3fa0e18a903c8d47077538628e151172e97a7698a9c773d3db299af8"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/methods/develop-helper",
+      "kind": "symlink",
+      "sha256": "1be5a85dcb3d0ba21afce548bb022b3f9fd70f8de7f9e4631c444b2c3b405d39"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/requirements.md",
+      "kind": "file",
+      "sha256": "22cd486c52ff146157a70fc8a961ec00de3a82b2810ce1d2975f97b7acc3ce4c"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/templates/prd-template.md",
+      "kind": "file",
+      "sha256": "118f594d9cf1449da6439280e98085af3c56772302591da3e87bb7fe1839bc8f"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/templates/research-template.md",
+      "kind": "symlink",
+      "sha256": "c8cc4ca86014f1c4be896c5787920dbdce2930000130a5443e533dd7c1d66bf7"
+    },
+    {
+      "path": "fusion-runtime/workflows/requirements/upstream-lock.json",
+      "kind": "file",
+      "sha256": "54397bd30e25f74a1801b298d1dca88916c1daa82cc46551f6bcea7f1f430373"
+    }
+  ],
+  "local_config_sha256": "f9c24f3de8bd0639f33503c9b2d17ff8a82f4a7e5054c3a20a91d22eb262a258",
+  "sample": {
+    "path": "/Users/bowen/Desktop/DATA ELEM/process/中航/采购需求预测",
+    "project_id": "req-a0840a287363b99e76f5b4b4",
+    "files": {
+      "project.json": "4d253ab09165ff3f6be58e7768e9190b19acb0dde2b9cd7460fe9f6c88e41891",
+      "docs/requirements.md": "4fcc4aad50b8966589b1f9b797dec4cc8d3e1c13e12d2d2e3f3a4ab39c9c756d",
+      "docs/PRD.md": "b2be3a171fd1dc62b11720e3fa665c5157494f9e8cb82c04e8979b66ec92342b"
+    },
+    "policy": "read-only regression only"
+  },
+  "git": {
+    "parent_head": "f33f9e66b42c70ce3f03b3976a6eebf8995620ab",
+    "parent_index_sha256": "f9d532e1c2fbd3a89dfbe1e5a53dd527814171a9d11604d82947f5739155f623",
+    "remote": "origin\thttps://github.com/Bowen2024/vibe-coding.git (fetch)\norigin\thttps://github.com/Bowen2024/vibe-coding.git (push)"
+  },
+  "test_status": "No tests rerun while writing this plan. Published 350-test result is historical release evidence, not a new local baseline."
+}

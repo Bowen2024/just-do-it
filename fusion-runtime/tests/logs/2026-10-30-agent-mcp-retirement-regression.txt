@@ -1,0 +1,11 @@
+Date: 2026-10-30 (Asia/Shanghai)
+Command: python3 -B -m unittest discover -s fusion-runtime/tests -p 'test_requirements*.py'
+Executable: /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
+
+..................................................................................................................
+----------------------------------------------------------------------
+Ran 114 tests in 9.023s
+
+OK
+
+Exit code: 0

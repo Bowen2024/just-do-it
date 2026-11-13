@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-30",
+  "archive_files_verified": 17,
+  "retired_test_methods": 152,
+  "current_test_methods": {
+    "test_requirements_cursor_tools.py": 24,
+    "test_requirements_file_tools.py": 8,
+    "test_requirements_prd_tools.py": 37,
+    "test_requirements_project_info.py": 24,
+    "test_requirements_recovery.py": 10,
+    "test_requirements_shared_tools.py": 11
+  },
+  "protected_files_unchanged": 30,
+  "active_retired_imports": 0,
+  "local_links_checked": 134,
+  "new_missing_links": [],
+  "preexisting_missing_links": {
+    "fusion-runtime/workflows/requirements/requirements-workflow-plan.md": [
+      "/Users/bowen/Desktop/对话导出-2026-10-29.md"
+    ]
+  },
+  "hardcode_directory_removed": true,
+  "business_test_stage_4": "partially_verified",
+  "regression_log": "fusion-runtime/tests/logs/2026-10-30-agent-mcp-retirement-regression.txt"
+}
